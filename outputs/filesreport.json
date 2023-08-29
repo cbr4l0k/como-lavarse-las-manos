@@ -1,0 +1,22 @@
+[
+  {"type":"directory","name":"/home/dleyvacastro/Documents/devsavant/Langchain/Arquitectura","contents":[
+    {"type":"file","name":"ALU.py"},
+    {"type":"file","name":"calc.py"},
+    {"type":"file","name":"Calculator.py"},
+    {"type":"directory","name":"Operations","contents":[
+      {"type":"file","name":"Divide.py"},
+      {"type":"file","name":"IntDivide.py"},
+      {"type":"file","name":"Multiply.py"},
+      {"type":"file","name":"Operation.py"},
+      {"type":"file","name":"Power.py"},
+      {"type":"file","name":"Subtract.py"},
+      {"type":"file","name":"Sum.py"}
+    ]},
+    {"type":"directory","name":"__pycache__","contents":[
+      {"type":"file","name":"ALU.cpython-311.pyc"}
+    ]},
+    {"type":"directory","name":"venv"}
+  ]}
+,
+  {"type":"report","directories":4,"files":11}
+]

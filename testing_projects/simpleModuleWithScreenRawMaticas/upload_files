@@ -1,0 +1,63 @@
+#!/usr/bin/bash
+
+
+anounce_file_upload(){
+    echo "Uploading file $1 to esp32..."
+}
+
+device=/dev/ttyUSB0
+#device=/dev/ttyACM0 
+
+sudo chmod a+rw $device
+
+
+#-----------------------------------------------------#
+#              Uploads boot and main                  #
+#-----------------------------------------------------#
+
+anounce_file_upload "./boot.py"
+ampy --port $device put ./boot.py
+
+anounce_file_upload "./main.py"
+ampy --port $device put ./main.py
+
+
+#-----------------------------------------------------#
+#              Uploads integration class              #
+#-----------------------------------------------------#
+anounce_file_upload "./scheduler.py"
+ampy --port $device put ./scheduler.py
+
+
+
+#-----------------------------------------------------#
+#              Uploads other base classes             #
+#-----------------------------------------------------#
+anounce_file_upload "./modules/actuators_module.py"
+anounce_file_upload "./modules/sensors_module.py"
+anounce_file_upload "./modules/initialize_modules.py"
+ampy --port $device put modules
+
+
+#-----------------------------------------------------#
+#              Uploads utils                          #
+#-----------------------------------------------------#
+anounce_file_upload "./utils/internet_connection.py"
+anounce_file_upload "./utils/time_management_module.py"
+anounce_file_upload "./utils/urequests.py"
+anounce_file_upload "./utils/config.json"
+ampy --port $device put utils
+
+anounce_file_upload "./html/pages.py"
+anounce_file_upload "./html/parsers.py"
+ampy --port $device put html
+
+
+#-----------------------------------------------------#
+#              Uploads utils                          #
+#-----------------------------------------------------#
+anounce_file_upload "./dependencies/ssd1306.py"
+anounce_file_upload "./dependencies/urequests.py"
+anounce_file_upload "./dependencies/uQR.py"
+ampy --port $device put dependencies
+

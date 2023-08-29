@@ -1,0 +1,26 @@
+{
+	"wifi_ssid": "ArchLinux",
+	"wifi_password": "nuncaheusadoarch",
+	"actuators": {
+		"0": {
+			"name": "Actuador por defecto",
+			"type": "timed",
+			"starttime": [0, 0, 0],
+			"endtime": [23, 0, 0],
+			"minutesoff": 15,
+			"minuteson": 5,
+			"pin": 16
+		}
+	},
+
+    "sensors":{
+		"0": {"name": "Temperatura", "measure_every_some_time": [0, 2, 30]},
+		"1": {"name": "Humedad", "measure_every_some_time": [0, 2, 30]}
+    },
+
+	"screen":{
+		"update_every_some_time": [0, 2, 0],
+		"refresh_screen_every_some_time": [0, 4, 0]
+	}
+}
+

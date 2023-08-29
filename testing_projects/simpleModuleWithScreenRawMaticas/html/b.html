@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <style>
+    html {
+      font-family: Arial;
+      display: inline-block;
+      margin: 0px auto;
+      text-align: center;
+    }
+    h2 {
+      font-size: 3.0rem;
+    }
+    p {
+      font-size: 3.0rem;
+    }
+    .units {
+      font-size: 1.2rem;
+    }
+    .ds-labels {
+      font-size: 1.5rem;
+      vertical-align: middle;
+      padding-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mediciones de variables ambientales</h2>
+  
+  <!-- Loop through measurements and average temperature display -->
+  <p>
+    <i class="fas fa-thermometer-half" style="color:#9c2020;"></i>
+    <span class="ds-labels">Última medición de temperatura</span>
+    <span id="temperature">TEMPERATURE_VALUE_C</span>
+    <sup class="units">&deg;C</sup>
+  </p>
+
+  <p>
+    <i class="fas fa-water" style="color:#1eb8ab;"></i>
+    <span class="ds-labels">Última medición de humedad</span>
+    <span id="humidity">HUMIDITY_VALUE</span>
+    <sup class="units">%</sup>
+  </p>
+  <br>
+
+  <!-- Calculate and display average temperature for different time periods using a loop -->
+  <script>
+    const averageTemperatureData = [
+      { value: 1, label: "Temperatura promedio hace 1h", valueId: "average-last-hour" },
+      { value: 2, label: "Temperatura promedio hace 2h", valueId: "average-penultimate-hour" },
+      { value: 3, label: "Temperatura promedio hace 3h", valueId: "average-previous-hour" },
+    ];
+
+    averageTemperatureData.forEach(data => {
+      document.write(`
+        <p>
+          <i class="fas fa-thermometer-half" style="color:#9c2020a4;"></i>
+          <i class="fas fa-clock" style="color:#9c2020a4;"></i>
+          <span class="ds-labels">${data.label}</span>
+          <span id="${data.valueId}">${data.value}</span>
+          <sup class="units">&deg;C</sup>
+        </p>
+      `);
+    });
+  </script>
+</body>
+</html>

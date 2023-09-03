@@ -1,9 +1,20 @@
-from Sum import Sum
-from Subtract import Subtract
-from Multiply import Multiply
-from Divide import Divide
-from Power import Power
-from IntDivide import IntDivide
+import numpy as np 
+import  pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+import sys
+import json
+import re
+import string
+
+from Operations.Sum import Sum
+from Operations.Subtract import Subtract
+from Operations.Multiply import Multiply
+from Operations.Divide import Divide
+from Operations.Power import Power
+from Operations.IntDivide import IntDivide
+from Puta.mierda import PutaMierda
 
 
 class ALU:  # Arithmetic Logic Unit

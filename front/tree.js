@@ -6,6 +6,7 @@ const DK_BLUE =      '#458588';
 const DK_PURPLE =    '#b16286';
 const DK_AQUA =      '#689d6a';
 const DK_GRAY =      '#928374';
+const DK_ORANGE =    '#d65d0e';
 
 const LG_BG =        '#ebdbb22'
 const LG_RED =       '#fb4934';
@@ -15,6 +16,7 @@ const LG_BLUE =      '#83a598';
 const LG_PURPLE =    '#d3869b';
 const LG_AQUA =      '#8ec07c';
 const LG_GRAY =      '#a89984';
+const LG_ORANGE =    '#fe8019';
 
 const COLOR = (d) => d._children ? LG_GREEN : LG_YELLOW;
 
@@ -32,41 +34,10 @@ function drawChart(data) {
     const tree = d3.tree().nodeSize([dx, dy]);
     const diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x);
 
-    const env = d3.select("body")
-        .append("div")
-        .attr("class", "container_general")
-        .attr("style",  "display: flex;" + 
-                        `background-color: ${DK_BG};` + 
-                        "flex-direction: column;" +
-                        "align-items: center;" + 
-                        `border-top: 2px ${LG_GRAY};` +
-                        `border-bottom: 2px ${LG_GRAY};` +
-                        "padding: 20px;" 
-        );
+    const env = d3.select("div.container_general");
 
-
-    const DESC = d3.select('div.container_general').append("code")
-        .attr('class', 'tooltip_desc_tree')
-        .style("background-color", DK_BG)
-        .style("padding", "10px")
-        .style("opacity", 1)
-        .style("color", LG_GRAY)
-        .attr("style",  "border: 1px solid #ddd;" +
-                        "border-radius: 5px;" + 
-                        "overflow-y: scroll;" +
-                        "height: 9em;" +
-                        "padding: 10px;" + 
-                        "width: 25%;" +
-                        "font-family: 'Courier New', monospace;" +
-                        "font-size: 10px;" 
-        );
-
-    DESC.html(`<b>HOVER OVER THE BRANCHES TO GET THE DESCRIPTION.</b><br><br>Clicking over the green branches will show everything that is inside.`)
-
-    d3.select("div.container_general").append("div")
-        .attr("class", "container_tree")
-        .attr("style",  "height: 400px;" +
-                        "width: 90%;" +
+    env.select("div#container_tree")
+        .attr("style",  "width: 90%;" +
                         "border: 1px solid #ddd;" +
                         "border-radius: 5px;" + 
                         "margin-top: 10px;"  +
@@ -74,11 +45,7 @@ function drawChart(data) {
                         "overflow-y: scroll;"
         );
 
-    const svg = d3.select("div.container_tree")
-        .append("svg")
-        .attr('class', "svg_tree")
-        .attr("width", width)
-        .attr("height", dx)
+    const svg = d3.select("svg#svg_tree")
         .attr("viewBox", [-marginLeft, -marginTop, width, dx])
         .attr("style",  "max-width: 100%;" + 
                         "overflow-y: scroll;" +
@@ -133,13 +100,7 @@ function drawChart(data) {
                 update(event, d);
             })
             .on("mouseover", (event, d) => {
-
-                var desc = d3.select("code.tooltip_desc_tree");
-
-                desc.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                desc.html(`<b style='text-decoration: underline; color: ${COLOR(d)}'>${d.data.name}</b><br><br> ${d.data.description}`)
+                d3.select("code#desc_tree").html(`<b style='text-decoration: underline; color: ${COLOR(d)}'>${d.data.name}</b><br><br> ${d.data.description}`)
             })
         ;
 

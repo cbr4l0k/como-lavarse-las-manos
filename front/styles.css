@@ -1,0 +1,66 @@
+/* CONSTS */
+:root { 
+    --DK_BG:      #282828;   --LG_BG:      #ebdbb2;
+    --DK_RED:     #cc241d;   --LG_RED:     #fb4934;
+    --DK_GREEN:   #98971a;   --LG_GREEN:   #b8bb26;     
+    --DK_YELLOW:  #d79921;   --LG_YELLOW:  #fabd2f;    
+    --DK_BLUE:    #458588;   --LG_BLUE:    #83a598;      
+    --DK_PURPLE:  #b16286;   --LG_PURPLE:  #d3869b;    
+    --DK_AQUA:    #689d6a;   --LG_AQUA:    #8ec07c;      
+    --DK_GRAY:    #928374;   --LG_GRAY:    #a89984;      
+    --DK_ORANGE:  #d65d0e;   --LG_ORANGE:  #fe8019;      
+}
+
+/* GENERAL BLOCKS */
+body {
+    background-color: var(--DK_BG);
+    color: var(--LG_GRAY);
+    font-family: 'Courier New', monospace;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    text-decoration: underline;
+}
+
+code {
+    border: 1px solid var(--LG_GRAY);
+    border-radius: 5px;
+    overflow-y: scroll;
+    padding: 2em;
+    font-size: 10px;
+    display: block;
+}
+
+/* CLASS SPECIFIC BLOCKS */
+div.container_general {
+    border-top: 2px solid var(--LG_GRAY);
+    border-bottom: 2px solid var(--LG_GRAY);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+div.container_vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+div.container_horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
+/* ID SPECIFIC BLOCKS */
+code#desc_tree {
+    margin-right: 2vw;
+    height: 15vw;
+    width: 22vw;
+}
+
+div#container_tree {
+    height: 30vw;
+
+}

@@ -1,18 +1,39 @@
 import os
+from typing import List
 from dotenv import load_dotenv
 from langchain.text_splitter import (RecursiveCharacterTextSplitter, Language)
+from langchain.schema.document import Document
 
 #some important enviroment variables
 load_dotenv()
 MODEL_PATH = os.getenv("MODEL_PATH")
 GRAMMAR_PATH = os.getenv("GRAMMAR_PATH")
 PROJECTS_PATH = os.getenv("PROJECTS_PATH")
+OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
 
 
 class DocumentHandler:
 
     def __init__(self):
         pass
+
+    @staticmethod
+    def save_response_for_file(filename: str, response: str):
+
+        """
+            This function is supposed to save the response of the model for a given file. 
+            As a json file, following the format:
+
+            filename_response.json
+
+            Assuming the filename is a path, it will take the last part of the path, 
+            and use it as the filename for the response.
+        """
+
+        output = OUTPUTS_PATH + filename.split("/")[-1].split(".")[0] + "_response.json"
+        with open(output, "w") as f:
+            f.write(response)
+
 
     @staticmethod
     def from_filename_to_lang(filename: str):
@@ -23,7 +44,7 @@ class DocumentHandler:
         return Language.PYTHON
 
     @staticmethod
-    def chunk_document(filename: str, code: str, chunk_size: int, chunk_overlap: int):
+    def chunk_document(filename: str, code: str, chunk_size: int, chunk_overlap: int = 0) -> List[Document]:
         """
         This function chunks a given block of code taking into account the semantic categories given in a language
         by considering it's syntax, from it recursively tries to divide each chunk into one or many of the desired

@@ -33,7 +33,7 @@ class LLM:
                                  uses and a brief explanation of what the file contains. Assistant must return a json 
                                  with this fields:
                                  "dependencies": [list of dependencies names, this are the external imports or packages 
-                                 the code uses],
+                                 the code uses, any standard library or external library is written as: 'pip#library'],
                                  "explanation": 'short code explanation highlighting main features, key classes and
                                   functions.'"" For this given file generate the json ONLY, File received: {code}"""}
 
@@ -61,7 +61,7 @@ class LLM:
 def main():
 
     average_number_of_tokens_per_sentence = 27
-    desired_number_of_sentences_per_file = 30
+    desired_number_of_sentences_per_file = 20
     max_tokens = desired_number_of_sentences_per_file*average_number_of_tokens_per_sentence
 
     llm = LLM({

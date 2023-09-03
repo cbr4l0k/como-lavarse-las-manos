@@ -4,7 +4,7 @@ import json
 
 objective_folder = "/home/dleyvacastro/Documents/devsavant/Langchain/Arquitectura"
 # execute tree <folder-name> -J --gitignore -o <filename>.json
-os.system(f"tree {objective_folder} -J --gitignore -o filesreport.json")
+os.system(f"tree {objective_folder} -J --gitignore | python3 -m json.tool > filesreport.json")
 
 with open("filesreport.json", "r") as f:
     report = json.load(f)

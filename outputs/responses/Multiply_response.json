@@ -1,0 +1,1 @@
+{"dependencies": ["int#Operation"], "explanation": "The file contains a class named Multiply that inherits from the Operation class. It has an __init__ method that takes two float parameters and a calculate method that returns the product of the two parameters.", "gid": 4}

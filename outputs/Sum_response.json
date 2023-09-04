@@ -1,6 +1,0 @@
-{
-  "dependencies": [
-    "int#Operation"
-  ],
-  "explanation": "The file contains a class called 'Sum' that inherits from the 'Operation' class. It has an initializer method that takes two float parameters and calls the initializer of the parent class. The class also has a 'calculate' method that returns the sum of the two input values."
-}

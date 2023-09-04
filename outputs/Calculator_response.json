@@ -1,6 +1,0 @@
-{
-  "dependencies": [
-    "int#ALU"
-  ],
-  "explanation": "The file contains a class called Calculator that uses an internal library ALU. The Calculator class has methods for initializing the calculator, displaying a menu, and running the main program. The main program creates an instance of the Calculator class and calls the main method to start the calculator."
-}

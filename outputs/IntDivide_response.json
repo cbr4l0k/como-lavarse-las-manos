@@ -1,0 +1,4 @@
+{
+  "dependencies": ["int#Operation"],
+  "explanation": "This file contains a class called IntDivide that inherits from the Operation class. It has an __init__ method that takes two float parameters and a calculate method that performs integer division. If the second parameter is 0, it raises a ValueError."
+}

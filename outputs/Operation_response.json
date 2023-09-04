@@ -1,0 +1,8 @@
+{
+  "dependencies": [
+    "int#abc.ABC",
+    "int#abc.abstractmethod",
+    "int#abc.abstractstaticmethod"
+  ],
+  "explanation": "The file contains a class named 'Operation' that inherits from the 'ABC' class from the 'abc' module. It also imports the 'abstractmethod' and 'abstractstaticmethod' decorators from the 'abc' module. The 'Operation' class has an initializer that takes two float parameters 'a' and 'b'. It also has an abstract method named 'calculate' which needs to be implemented by any subclass of 'Operation'."
+}

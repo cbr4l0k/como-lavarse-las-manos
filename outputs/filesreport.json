@@ -1,15 +1,11 @@
 [
     {
         "type": "directory",
-        "name": "testing_projects/Arquitectura/",
+        "name": "/home/dleyvacastro/Documents/devsavant/Langchain/testing_projects/Arquitectura",
         "contents": [
             {
                 "type": "file",
                 "name": "ALU.py"
-            },
-            {
-                "type": "file",
-                "name": "calc.py"
             },
             {
                 "type": "file",
@@ -54,6 +50,6 @@
     {
         "type": "report",
         "directories": 2,
-        "files": 10
+        "files": 9
     }
 ]

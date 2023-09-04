@@ -1,0 +1,4 @@
+{
+  "dependencies": ["int#Operation"],
+  "explanation": "This file contains a class called Power that inherits from the Operation class. The Power class has an __init__ method that takes two float parameters and calls the __init__ method of the parent class. It also has a calculate method that returns the result of raising the first parameter to the power of the second parameter."
+}

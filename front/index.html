@@ -3,18 +3,19 @@
 
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="stylesheet" type="text/css" href="./styles/styles.css">
     </head>
 
     <body>
         <script src="https://cdn.jsdelivr.net/npm/d3@6"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
-        <script src="tree.js"></script>
+        <script src="./scripts/tree.js"></script>
+        <script src="./scripts/edgebundling.js"></script>
 
         <h1>Project Report</h1>
-        <h2>Index Tree of the Project</h2>
 
-        <div class="container_general">
+        <h2>Index Tree of the Project</h2>
+        <div class="container_general" id="tree">
             <div class="container_vertical">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean faucibus finibus pulvinar. Suspendisse porttitor ac mi mollis pulvinar. Nullam lacinia tincidunt magna eu tempus. Pellentesque congue orci diam, eget finibus augue rutrum nec. Ut cursus dui vitae ligula vestibulum euismod. Vestibulum et erat et massa porta feugiat in ut justo. Sed efficitur tortor id nulla aliquam dictum. Sed fermentum lobortis ligula. Donec faucibus mollis purus, rutrum porttitor augue fermentum eu. Donec pulvinar, tellus id mattis ornare, risus massa facilisis sem, laoreet pellentesque purus sem ac dolor. Quisque faucibus vel purus vitae dignissim.</p>
                 <div class="container_horizontal">
@@ -29,8 +30,13 @@
                 </div>
             </div>
         </div>
-
-
+        <h2>Coupling &amp; Cohesion</h2>
+        <div class="container_general">
+            <div class="container_vertical">
+                <div id="container_tree">
+                    <svg id="svg_eb"></svg>
+                </div>
+            </div> 
+        </div>
     </body>
-
 </html>

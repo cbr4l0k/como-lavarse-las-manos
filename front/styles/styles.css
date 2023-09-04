@@ -36,8 +36,6 @@ code {
 
 /* CLASS SPECIFIC BLOCKS */
 div.container_general {
-    border-top: 2px solid var(--LG_GRAY);
-    border-bottom: 2px solid var(--LG_GRAY);
     padding: 20px;
     display: flex;
     align-items: center;

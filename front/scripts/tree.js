@@ -1,4 +1,5 @@
-const DK_BG =        '#282828'
+
+const DK_BG =        '#282828';
 const DK_RED =       '#cc241d';
 const DK_GREEN =     '#98971a';
 const DK_YELLOW =    '#d79921';
@@ -168,6 +169,6 @@ function drawChart(data) {
 
 }
 
-fetch('data.json')
+fetch('./data/data.json')
     .then(response => response.json())
     .then(data => drawChart(data));

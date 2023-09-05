@@ -102,8 +102,7 @@ function drawChart(data) {
             })
             .on("mouseover", (event, d) => {
                 d3.select("code#desc_tree").html(`<b style='text-decoration: underline; color: ${COLOR(d)}'>${d.data.name}</b><br><br> ${d.data.description}`)
-            })
-        ;
+            });
 
         nodeEnter.append("circle")
             .attr("r", 2.5)

@@ -1,5 +1,5 @@
 /*
-// Color CONSTs
+    // Color CONSTs
 const DK_BG =        '#282828';
 const DK_RED =       '#cc241d';
 const DK_GREEN =     '#98971a';
@@ -103,27 +103,48 @@ function draw_eb(data) {
         .radius(d => d.y)
         .angle(d => d.x);
 
+    const BLEND_IN = "normal";
+    const BLEND_OUT = "normal";
+
     const link = svg.append("g")
         .attr("stroke", DK_GRAY)
         .attr("fill", "none")
         .selectAll()
         .data(root.leaves().flatMap(leaf => leaf.outgoing))
         .join("path")
-        .style("mix-blend-mode", "color")
+        .style("mix-blend-mode", BLEND_OUT)
+        .style("opacity", 0.2)
         .attr("d", ([i, o]) => line(i.path(o)))
         .each(function(d) { d.path = this; });
 
     function overed(event, d) {
-        link.style("mix-blend-mode", null);
+        // when the mouse is over
+
+        link.style("mix-blend-mode", BLEND_IN);
+        link.attr("stroke", LG_GRAY);
         d3.select(this).attr("font-weight", "bold");
-        d3.selectAll(d.incoming.map(d => d.path)).attr("stroke", colorin).raise();
-        d3.selectAll(d.incoming.map(([d]) => d.text)).attr("fill", colorin).attr("font-weight", "bold");
-        d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke", colorout).raise();
-        d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", colorout).attr("font-weight", "bold");
+
+        d3.selectAll(d.incoming.map(d => d.path))
+            .attr("stroke", colorin).raise();
+
+        d3.selectAll(d.incoming.map(([d]) => d.text))
+            .attr("fill", colorin)
+            .attr("font-weight", "bold");
+
+        d3.selectAll(d.outgoing.map(d => d.path))
+            .style("opacity", 1)
+            .attr("stroke", colorout).raise();
+
+        d3.selectAll(d.outgoing.map(([, d]) => d.text))
+            .attr("fill", colorout)
+            .attr("font-weight", "bold");
     }
 
     function outed(event, d) {
-        link.style("mix-blend-mode", "color");
+        // when the mouse leaves the object
+        link.style("mix-blend-mode", BLEND_OUT);
+        link.attr("stroke", DK_GRAY)
+
         d3.select(this).attr("font-weight", null);
         d3.selectAll(d.incoming.map(d => d.path)).attr("stroke", null);
         d3.selectAll(d.incoming.map(([d]) => d.text)).attr("fill", null).attr("font-weight", null);

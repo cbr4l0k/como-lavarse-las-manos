@@ -2,8 +2,11 @@ import os
 from dotenv import load_dotenv
 from langchain.llms.openai import OpenAI
 from langchain import PromptTemplate, LLMChain
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationKGMemory
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+
 
 from document_handler import DocumentHandler
 from prompt_handler import PromptHandler
@@ -14,8 +17,6 @@ PROJECTS_PATH = os.getenv("PROJECTS_PATH")
 OPEN_AI_API_KEY = os.getenv("OPEN_AI_API_KEY")
 OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
 
-
-# https://python.langchain.com/docs/modules/model_io/models/llms/token_usage_tracking
 
 class LLM:
     def __init__(self, options: dict) -> None:
@@ -29,17 +30,19 @@ class LLM:
         model = OpenAI(**self.options)
         self.model = model
 
-    def load_chain(self, template: dict[str, any]) -> None:
+    def load_chain(self, template: dict[str, any], requires_memory: bool = False) -> None:
         self.load_model()
-
         prompt: PromptTemplate = PromptTemplate(
             input_variables=template["input_variables"],
             template=template["template"]
         )
+
         llm_chain: LLMChain = LLMChain(
             llm=self.model,
-            prompt=prompt
+            prompt=prompt,
+            verbose=True,
         )
+
         self.llm_chain = llm_chain
 
 
@@ -61,37 +64,50 @@ def main():
         "verbose": True,
     })
 
+    # get the documents
     dh = DocumentHandler()
-    dh.generate_json_report("/home/dleyvacastro/Documents/devsavant/Langchain/testing_projects/Arquitectura")
+    dh.generate_json_report(f"{PROJECTS_PATH}/simpleModuleWithScreenRawMaticas/dependencies")
     docs_iter = dh.read_files_from_project_tree()
+    
+    #get and load the template
     ph = PromptHandler(model_name=model_name)
 
-    template = ph.get_raw_template(template=0)
-    llm.load_chain(template=template)
-
-    # with open(filename, "r") as f:
-    #
-    #     #get the template size and calculate the code token size to use
-    #     template_size = template["prompt_token_lenght"]
-    #     code_token_size = (context_window_size - template_size)
-    #
-    #     docs = dh.chunk_document(filename, f.read(), code_token_size)
-    #
-    #     for doc in docs:
-    #         response = llm.llm_chain.run(doc)
-    #         dh.save_response_for_file(filename, response)
 
     for file in docs_iter:
-        filename, code, gid = file
-        # get the template size and calculate the code token size to use
-        template_size = template["prompt_token_lenght"]
-        code_token_size = (context_window_size - template_size)
 
+        filename, code, gid = file
+
+        # estimate the number of tokens for the code
+        code_token_size = (context_window_size - ph.longest_prompt_lenght)
+        
+        # chunk the document based on the estimated number of tokens
         docs = dh.chunk_document(filename, code, code_token_size)
 
-        for doc in docs:
-            response = llm.llm_chain.run(doc)
+        # if the document is too small, just run it
+        if len(docs) == 1:
+            template = ph.get_raw_template(template=0)
+            llm.load_chain(template=template)
+            response = llm.llm_chain.run(docs[0].page_content)
             dh.save_response_for_file(filename, response, gid)
+
+        # if the document is too big, chunk it and run it
+        elif len(docs) > 1:
+            template = ph.get_raw_template(template=1)
+            llm.load_chain(template=template, requires_memory=True)
+
+            responses = []
+
+            for doc in docs:
+                response = llm.llm_chain.run(doc.page_content)
+                responses.append(response)
+
+            # combine the responses and save them
+            template = ph.get_raw_template(template=2)
+            llm.load_chain(template=template, requires_memory=True)
+
+            response = llm.llm_chain.run(responses)
+            dh.save_response_for_file(filename, response, gid)
+        
 
 if __name__ == "__main__":
     main()

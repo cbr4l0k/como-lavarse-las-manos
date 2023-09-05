@@ -1,117 +1,41 @@
 [
     {
         "type": "directory",
-        "name": "/home/dleyvacastro/Documents/devsavant/Langchain/testing_projects/Arquitectura",
+        "name": "/home/dave/Documents/local/como-lavarse-las-manos/testing_projects/simpleModuleWithScreenRawMaticas/dependencies",
         "contents": [
             {
                 "type": "file",
-                "name": "ALU.py",
-                "dependencies": [
-                    "ext#numpy",
-                    "ext#pandas",
-                    "ext#matplotlib.pyplot",
-                    "ext#seaborn",
-                    "ext#os",
-                    "ext#sys",
-                    "ext#json",
-                    "ext#re",
-                    "ext#string",
-                    "int#Operations.Sum",
-                    "int#Operations.Subtract",
-                    "int#Operations.Multiply",
-                    "int#Operations.Divide",
-                    "int#Operations.Power",
-                    "int#Operations.IntDivide",
-                    "int#Puta.mierda"
-                ],
-                "explanation": "The file contains an ALU (Arithmetic Logic Unit) class that performs arithmetic operations. It imports various external libraries such as numpy, pandas, matplotlib.pyplot, seaborn, os, sys, json, re, and string. It also imports internal libraries such as Operations.Sum, Operations.Subtract, Operations.Multiply, Operations.Divide, Operations.Power, Operations.IntDivide, and Puta.mierda. The ALU class has methods for initializing the ALU, performing calculations, processing operands, and processing operators.",
+                "name": "font10.py",
+                "dependencies": [],
+                "explanation": "",
                 "gid": 0
             },
             {
                 "type": "file",
-                "name": "Calculator.py",
-                "dependencies": [
-                    "int#ALU"
-                ],
-                "explanation": "The file contains a class called Calculator that uses the ALU class from the internal library ALU. The Calculator class has methods for menu navigation and main execution.",
+                "name": "ssd1306.py",
+                "dependencies": [],
+                "explanation": "",
                 "gid": 1
             },
             {
-                "type": "directory",
-                "name": "Operations",
-                "contents": [
-                    {
-                        "type": "file",
-                        "name": "Divide.py",
-                        "dependencies": [
-                            "int#Operation"
-                        ],
-                        "explanation": "This file contains a class called 'Divide' that inherits from the 'Operation' class. The 'Divide' class has an initializer method that takes two float parameters and calls the initializer of the parent class. It also has a 'calculate' method that checks if the second parameter is zero and raises a ValueError if it is. Otherwise, it returns the result of dividing the first parameter by the second parameter.",
-                        "gid": 2
-                    },
-                    {
-                        "type": "file",
-                        "name": "IntDivide.py",
-                        "dependencies": [
-                            "int#Operation"
-                        ],
-                        "explanation": "This file contains a class called IntDivide that inherits from the Operation class. It has an __init__ method that takes two float parameters and a calculate method that performs integer division. If the second parameter is 0, it raises a ValueError.",
-                        "gid": 3
-                    },
-                    {
-                        "type": "file",
-                        "name": "Multiply.py",
-                        "dependencies": [
-                            "int#Operation"
-                        ],
-                        "explanation": "The file contains a class named Multiply that inherits from the Operation class. It has an __init__ method that takes two float parameters and a calculate method that returns the product of the two parameters.",
-                        "gid": 4
-                    },
-                    {
-                        "type": "file",
-                        "name": "Operation.py",
-                        "dependencies": [
-                            "int#abc.ABC",
-                            "int#abc.abstractmethod",
-                            "int#abc.abstractstaticmethod"
-                        ],
-                        "explanation": "The file contains a class named 'Operation' that inherits from 'ABC' class from the 'abc' module. The class has two attributes 'a' and 'b' which are initialized in the constructor. There is an abstract method 'calculate' which needs to be implemented by any subclass of 'Operation'.",
-                        "gid": 5
-                    },
-                    {
-                        "type": "file",
-                        "name": "Power.py",
-                        "dependencies": [
-                            "int#Operation"
-                        ],
-                        "explanation": "The file contains a class named Power that inherits from the Operation class. It has an __init__ method that takes two float parameters and calls the parent class's __init__ method. The class also has a calculate method that returns the result of raising the first parameter to the power of the second parameter.",
-                        "gid": 6
-                    },
-                    {
-                        "type": "file",
-                        "name": "Subtract.py",
-                        "dependencies": [
-                            "int#Operation"
-                        ],
-                        "explanation": "The file contains a class named Subtract that inherits from the Operation class. It has an __init__ method that takes two float parameters and a calculate method that returns the subtraction of the two parameters.",
-                        "gid": 7
-                    },
-                    {
-                        "type": "file",
-                        "name": "Sum.py",
-                        "dependencies": [
-                            "int#Operation"
-                        ],
-                        "explanation": "The file contains a class named 'Sum' that inherits from the 'Operation' class. It has an initializer method that takes two float parameters and calls the initializer of the parent class. The class also has a 'calculate' method that returns the sum of the two input values.",
-                        "gid": 8
-                    }
-                ]
+                "type": "file",
+                "name": "urequests.py",
+                "dependencies": [],
+                "explanation": "",
+                "gid": 2
+            },
+            {
+                "type": "file",
+                "name": "writer.py",
+                "dependencies": [],
+                "explanation": "",
+                "gid": 3
             }
         ]
     },
     {
         "type": "report",
-        "directories": 2,
-        "files": 9
+        "directories": 1,
+        "files": 4
     }
 ]

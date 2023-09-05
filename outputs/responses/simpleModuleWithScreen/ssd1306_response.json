@@ -1,0 +1,8 @@
+{
+    "dependencies": [
+        "ext.micropython",
+        "ext.framebuf"
+    ],
+    "explanation": "The file contains a class SSD1306 that inherits from framebuf.FrameBuffer. It initializes a display with specified width, height, and external_vcc. It also has methods for initializing the display, powering it on and off, setting contrast and invert, and showing the display. There are two subclasses, SSD1306_I2C and SSD1306_SPI, that inherit from SSD1306 and implement different communication protocols (I2C and SPI) for controlling the display.",
+    "gid": 1
+}

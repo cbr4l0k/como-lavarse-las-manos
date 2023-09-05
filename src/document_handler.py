@@ -9,7 +9,6 @@ from langchain.schema.document import Document
 # some important enviroment variables
 load_dotenv()
 MODEL_PATH = os.getenv("MODEL_PATH")
-GRAMMAR_PATH = os.getenv("GRAMMAR_PATH")
 PROJECTS_PATH = os.getenv("PROJECTS_PATH")
 OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
 
@@ -27,8 +26,8 @@ class DocumentHandler:
         Generates a json report of the project tree.
         """
         os.system(
-            f"tree {objective_folder_path} -J --gitignore | python3 -m json.tool > {OUTPUTS_PATH}filesreport.json")
-        self.load_json_report(f"{OUTPUTS_PATH}filesreport.json")
+            f"tree {objective_folder_path} -J --gitignore | python3 -m json.tool > {OUTPUTS_PATH}/filesreport.json")
+        self.load_json_report(f"{OUTPUTS_PATH}/filesreport.json")
 
     @staticmethod
     def save_response_for_file(filename: str, response: str, gid: int):
@@ -42,7 +41,7 @@ class DocumentHandler:
             and use it as the filename for the response.
         """
 
-        output = OUTPUTS_PATH + filename.split("/")[-1].split(".")[0] + "_response.json"
+        output = f"{OUTPUTS_PATH}/" + filename.split("/")[-1].split(".")[0] + "_response.json"
 
         with open(output, "w") as f:
             f.write(response)
@@ -79,18 +78,19 @@ class DocumentHandler:
 
     def read_files_from_directory(self, directory: list, root: str, counter: int = 0):
         for file in directory:
-            if file["type"] == "file":
-                if file["name"].endswith(".py"):
-                    self.py_files_paths.append((f"{root}/{file['name']}", self.load_file(f"{root}/{file['name']}"), counter))
-                    file["dependencies"] = []
-                    file["explanation"] = ""
-                    file["gid"] = counter
-                    counter += 1
-                # self.py_files_paths.append(f"{root}/{file['name']}")
+
+            if (file["type"] == "file") and (file["name"].endswith(".py")):
+                self.py_files_paths.append((f"{root}/{file['name']}", self.load_file(f"{root}/{file['name']}"), counter))
+                file["dependencies"] = []
+                file["explanation"] = ""
+                file["gid"] = counter
+                counter += 1
+
             elif file["type"] == "directory":
                 self.read_files_from_directory(file["contents"], root + '/' + file["name"], counter)
+
         self.json[0]["contents"] = directory
-        with open(f"{OUTPUTS_PATH}filesreport.json", "w") as f:
+        with open(f"{OUTPUTS_PATH}/filesreport.json", "w") as f:
             json.dump(self.json, f, indent=4)
 
 
@@ -122,7 +122,7 @@ class DocumentHandler:
         This function is supposed to fill the empty fields of the json report with the information of the dependencies and the
         explanation of each file.
         """
-        responses = self.get_responses("/home/dleyvacastro/Documents/devsavant/Langchain/outputs/responses/")
+        responses = self.get_responses(f"{OUTPUTS_PATH}/responses/")
         # print(responses)
         for item in directory:
             if item["type"] == "file":
@@ -147,7 +147,7 @@ class DocumentHandler:
         print(a)
         self.json[0]["contents"] = a
         print(self.json)
-        with open(f"{OUTPUTS_PATH}filesreport.json", "w") as f:
+        with open(f"{OUTPUTS_PATH}/filesreport.json", "w") as f:
             json.dump(self.json, f, indent=4)
 
     def load_json_report(self, json_path):
@@ -161,7 +161,7 @@ class DocumentHandler:
 
 def main():
     dh = DocumentHandler()
-    dh.generate_json_report("/home/dleyvacastro/Documents/devsavant/Langchain/testing_projects/Arquitectura")
+    dh.generate_json_report(f"{PROJECTS_PATH}/Arquitectura")
     dh.read_files_from_project_tree()
     dh.complete_json_report()
 

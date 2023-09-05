@@ -15,21 +15,66 @@ class PromptHandler:
         self.prompts = {0: {"template": """Identify which dependencies the file uses and do a brief explanation of what the file contains.
                                  You must return a json with this fields:
 
-                                 "dependencies": [list of dependencies names, external libraries as 'ext#library' and internal
-                                 libraries as 'int#library' are accepted, for example: 'ext#numpy', 'int#my_library.plotter', 
+                                 "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
+                                 libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
                                  include imports like 'from lib import something',
-                                 if 'from lib import something' write it as '(int or ext)#lib', 
-                                 if 'from lib.sublib import something' write it as '(int or ext)#lib.sublib' and so on],
+                                 if 'from lib import something' write it as '(int or ext).lib', 
+                                 if 'from lib.sublib import something' write it as '(int or ext).lib.sublib' and so on],
                                  "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
-                                 and methods.'""
+                                 and methods. If makes sense infer behavior from method names.'""
 
                                  give me the json ONLY, File received: {code}""", 
-                            "input_variables": ["code"], 
+                            "input_variables": ["code",], 
                             "prompt_token_lenght": -1
-                            }
-                        }
-        self.set_model(model_name=model_name)
+                            }, 
+                        1: {"template": """Given this new fragment of code of a bigger file, identify which dependencies the file uses and do
+                                           a brief explanation of what the file contains. You must return a json with this fields:
+                            
+                                           "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
+                                           libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
+                                           include imports like 'from lib import something',
+                                           if 'from lib import something' write it as '(int or ext).lib', 
+                                           if 'from lib.sublib import something' write it as '(int or ext).lib.sublib' and so on],
+                                           "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
+                                           and methods, if makes sense infer behavior from method names'""
 
+                                           give me the json ONLY, File received: {code}""",
+                            "input_variables": ["code",],
+                            "prompt_token_lenght": -1
+                            },
+                        2: {"template": """Now that you have identified the dependencies and the explanation of the file in different
+                                           json chunks, you must unify the dependencies and explanations in a single json file.
+                                           You are a pro bot developer and can take into account that the dependencies and explanations
+                                           don't have repeated values. You must return a json with this fields:
+                            
+                                           "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
+                                           libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
+                                           include imports like 'from lib import something',
+                                           if 'from lib import something' write it as '(int or ext).lib', 
+                                           if 'from lib.sublib import something' write it as '(int or ext).lib.sublib' and so on],
+                                           "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
+                                           and methods, if makes sense infer behavior from method names. This explaination condenses the
+                                           other explainations and takes the knowledge of all of them.'""
+
+                                            give me the json ONLY, Jsons recieved: {json_reports}""",
+                            "input_variables": ["json_reports",],
+                            "prompt_token_lenght": -1
+                            },
+                        }
+
+
+        self.longest_prompt_lenght = -1
+        self.set_model(model_name=model_name)
+        self.set_largest_prompt_token_lenght()
+
+
+    def set_largest_prompt_token_lenght(self) -> None:
+        """
+            Sets the largest prompt token lenght for all the templates
+        """
+        for template in self.prompts:
+            if self.prompts[template]["prompt_token_lenght"] > self.longest_prompt_lenght:
+                self.longest_prompt_lenght = self.prompts[template]["prompt_token_lenght"]
 
     def set_model(self, model_name: str) -> None:
         """

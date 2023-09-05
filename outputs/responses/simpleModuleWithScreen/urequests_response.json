@@ -1,0 +1,10 @@
+{
+    "dependencies": [
+        "ext.usocket",
+        "ext.ujson",
+        "ext.ubinascii",
+        "ext.ussl"
+    ],
+    "explanation": "The file contains a class 'Response' that represents an HTTP response. It has methods to retrieve the content of the response in different formats (text, json). The file also contains functions for making HTTP requests using different methods (GET, POST, PUT, PATCH, DELETE). The requests are made using the 'usocket' library for socket communication, 'ujson' library for JSON serialization and deserialization, 'ubinascii' library for base64 encoding, and 'ussl' library for secure socket communication (HTTPS).",
+    "gid": 2
+}

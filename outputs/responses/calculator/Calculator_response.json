@@ -1,0 +1,1 @@
+{"dependencies": ["int#ALU"], "explanation": "The file contains a class called Calculator that uses the ALU class from the internal library ALU. The Calculator class has methods for menu navigation and main execution.", "gid": 1}

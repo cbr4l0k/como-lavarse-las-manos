@@ -89,8 +89,7 @@ class Report:
         self.complete_report_helper(self.report[0], '')
         self.add_ext_dependencies_to_report()
         self.remove_py_extension()
-        with open(f"{OUTPUTS_PATH}/filesreport.json", "w") as f:
-            json.dump(self.report, f, indent=4)
+        self.save_report()
 
         # with open(f"{OUTPUTS_PATH}/ext_dependencies.json", "w") as f:
         #     json.dump(self.ext_dependencies, f, indent=4)

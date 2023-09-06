@@ -104,6 +104,8 @@ class Report:
             for child in directory["contents"]:
                 self.remove_py_extension_helper(child)
         elif directory["type"] == "file":
+            if not directory["name"].endswith(".py"):
+                return
             directory["name"] = directory["name"].replace(".py", "")
             directory["full_path"] = directory["full_path"].replace(".py", "")
 

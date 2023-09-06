@@ -9,7 +9,7 @@ PROJECTS_PATH = os.getenv("PROJECTS_PATH")
 
 
 def load_file_content(file_path):
-    with open(PROJECTS_PATH+file_path, "r") as f:
+    with open(PROJECTS_PATH + file_path, "r") as f:
         return f.read()
 
 
@@ -65,12 +65,17 @@ class Report:
                 return
             directory["full_path"] = f"{root}{directory['name']}"
             response = self.LLM.generate_response(directory["full_path"], load_file_content(directory["full_path"]))
-            print("---------------response-----------------")
-            print(response)
+            # print("---------------response-----------------")
+            # print(response)
             # response = {"dependencies": "dependencies", "explanation": "explanation"}
             directory["dependencies"] = response["dependencies"]
             directory["explanation"] = response["explanation"]
             self.ext_dependencies_response_handler(response["dependencies"])
+
+    def remove_py_extension(self):
+        if self.report is None:
+            raise Exception("No report loaded")
+        self.remove_py_extension_helper(self.report[0])
 
     def complete_report(self):
         """
@@ -81,22 +86,26 @@ class Report:
 
         self.complete_report_helper(self.report[0], '')
         self.add_ext_dependencies_to_report()
+        self.remove_py_extension()
         with open(f"{OUTPUTS_PATH}/filesreport.json", "w") as f:
             json.dump(self.report, f, indent=4)
 
         # with open(f"{OUTPUTS_PATH}/ext_dependencies.json", "w") as f:
         #     json.dump(self.ext_dependencies, f, indent=4)
 
-
     def load_json_report(self, json_path):
         with open(json_path, "r") as f:
             self.report = json.load(f)
         self.report[0]["name"] = self.project_path.split("/")[-1]
 
-
-
+    def remove_py_extension_helper(self, directory: dict):
+        if directory["type"] == "directory":
+            for child in directory["contents"]:
+                self.remove_py_extension_helper(child)
+        elif directory["type"] == "file":
+            directory["name"] = directory["name"].replace(".py", "")
 
 
 if __name__ == "__main__":
-    report = Report("/home/dleyvacastro/Documents/devsavant/Langchain/testing_projects/simpleModuleWithScreenRawMaticas")
+    report = Report("/home/dleyvacastro/Documents/devsavant/Langchain/testing_projects/Arquitectura")
     report.complete_report()

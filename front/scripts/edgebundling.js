@@ -52,12 +52,14 @@ function hierarchy(data, delimiter = ".") {
     return root;
 }
 
+
+
 function draw_eb(data) {
-    const colorin = DK_RED;
-    const colorout = DK_BLUE;
+    const colorin = LG_GREEN;
+    const colorout = LG_YELLOW;
     const colornone = LG_GRAY;
 
-    const width = 600;
+    const width = 700;
     const margint_top = 100;
     const margint_right = 10;
     const margint_bottom = 100;
@@ -70,13 +72,20 @@ function draw_eb(data) {
 
     const root = tree(bilink(d3.hierarchy(data)
         .sort((a, b) => d3.ascending(a.height, b.height) || d3.ascending(a.data.name, b.data.name))));
-    console.log(root);
 
     const svg = d3.select("svg#svg_eb")
         .attr("width", width)
         .attr("height", width)
         .attr("viewBox", [-width / 2, -width / 2, width, width])
         .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
+
+    d3.select("div#container_eb")
+        .attr("style",  "width: 100%;" +
+            `border: 1px solid ${LG_GRAY};` +
+            "padding: 10px;" + 
+            "border-radius: 5px;" + 
+            "margin-top: 10px;" 
+        );
 
     const node = svg.append("g")
         .selectAll()
@@ -85,18 +94,23 @@ function draw_eb(data) {
         .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y},0)`)
         .append("text")
         .attr("class", "eb_leave")
+        .attr("font-weight", 300)
+        .attr("style", "font-family: 'Courier New', monospace;")
         .attr("fill", LG_GRAY)
         .attr("dy", "0.31em")
         .attr("x", d => d.x < Math.PI ? 6 : -6)
         .attr("text-anchor", d => d.x < Math.PI ? "start" : "end")
         .attr("transform", d => d.x >= Math.PI ? "rotate(180)" : null)
         .text(d => d.data.name)
+        .attr("style", "font-family: 'Courier New', monospace;")
         .each(function(d) { d.text = this; })
         .on("mouseover", overed)
         .on("mouseout", outed)
-        .call(text => text.append("title").text(d => `${id(d)}
-            ${d.outgoing.length} outgoing
-            ${d.incoming.length} incoming`));
+        .call(text => {
+            text.append("title").text(d => `${d.data.name}
+                ${d.outgoing.length} outgoing
+                ${d.incoming.length} incoming`)
+        });
 
     const line = d3.lineRadial()
         .curve(d3.curveBundle.beta(0.85))
@@ -119,17 +133,20 @@ function draw_eb(data) {
 
     function overed(event, d) {
         // when the mouse is over
+        d3.select(this)
+            .attr("style", "text-decoration: none;")
+            .attr("fill", "white")
+            .attr("font-weight", "bold");
 
         link.style("mix-blend-mode", BLEND_IN);
         link.attr("stroke", LG_GRAY);
-        d3.select(this).attr("font-weight", "bold");
 
         d3.selectAll(d.incoming.map(d => d.path))
             .attr("stroke", colorin).raise();
 
         d3.selectAll(d.incoming.map(([d]) => d.text))
             .attr("fill", colorin)
-            .attr("font-weight", "bold");
+            .attr("font-weight", 900);
 
         d3.selectAll(d.outgoing.map(d => d.path))
             .style("opacity", 1)
@@ -137,19 +154,34 @@ function draw_eb(data) {
 
         d3.selectAll(d.outgoing.map(([, d]) => d.text))
             .attr("fill", colorout)
-            .attr("font-weight", "bold");
+            .attr("font-weight", 900);
     }
 
     function outed(event, d) {
         // when the mouse leaves the object
         link.style("mix-blend-mode", BLEND_OUT);
         link.attr("stroke", DK_GRAY)
+        d3.select(this)
+            .attr("style", "text-decoration: none;")
+            .attr("fill", DK_GRAY)
+            .attr("font-weight", "normal");
 
-        d3.select(this).attr("font-weight", null);
-        d3.selectAll(d.incoming.map(d => d.path)).attr("stroke", null);
-        d3.selectAll(d.incoming.map(([d]) => d.text)).attr("fill", null).attr("font-weight", null);
-        d3.selectAll(d.outgoing.map(d => d.path)).attr("stroke", null);
-        d3.selectAll(d.outgoing.map(([, d]) => d.text)).attr("fill", null).attr("font-weight", null);
+        d3.select(this)
+            .attr("font-weight", null);
+
+        d3.selectAll(d.incoming.map(d => d.path))
+            .attr("stroke", null);
+
+        d3.selectAll(d.incoming.map(([d]) => d.text))
+            .attr("fill", LG_GRAY)
+            .attr("font-weight", 300);
+
+        d3.selectAll(d.outgoing.map(d => d.path))
+            .attr("stroke", null);
+
+        d3.selectAll(d.outgoing.map(([, d]) => d.text))
+            .attr("fill", LG_GRAY)
+            .attr("font-weight", 300);
     }
 
 }

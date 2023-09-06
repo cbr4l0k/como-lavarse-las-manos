@@ -23,7 +23,7 @@ class PromptHandler:
                                  "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
                                  and methods. If makes sense infer behavior from method names.'""
 
-                                 give me the json ONLY, terminate the json, give me a well formated json, File received: {code}""",
+                                 give me the json ONLY, terminate the json, give me a well formated json, be short and concise, File received: {code}""",
                             "input_variables": ["code", ],
                             "prompt_token_lenght": -1
                             },
@@ -38,7 +38,7 @@ class PromptHandler:
                                            "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
                                            and methods, if makes sense infer behavior from method names'""
 
-                                           give me the json ONLY, terminate the json, give me a well formated json, File received: {code}""",
+                                           give me the json ONLY, terminate the json, give me a well formated json, be short and concise, File received: {code}""",
                             "input_variables": ["code", ],
                             "prompt_token_lenght": -1
                             },
@@ -56,7 +56,7 @@ class PromptHandler:
                                            and methods, if makes sense infer behavior from method names. This explaination condenses the
                                            other explainations and takes the knowledge of all of them.'""
 
-                                            give me the json ONLY, terminate the json, give me a well formated json, Jsons recieved: {json_reports}""",
+                                            give me the json ONLY, terminate the json, give me a well formated json, be short and concise, Jsons recieved: {json_reports}""",
                             "input_variables": ["json_reports", ],
                             "prompt_token_lenght": -1
                             },
@@ -70,7 +70,7 @@ class PromptHandler:
                                                           also explain if this is a good thing or a bad thing, and why. '""
 
                                             give me the json ONLY and dont forget to explain your desicion and it's implications, 
-                                            terminate the json, give me a well formated json, File received: {json_reports}""",
+                                            terminate the json, give me a well formated json, be short and concise, File received: {json_reports}""",
                             "input_variables": ["json_reports", ],
                             "prompt_token_lenght": -1
                             }

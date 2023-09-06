@@ -38,6 +38,7 @@ class Report:
 
         os.system(
             f"tree {self.project_path} -J --gitignore | python3 -m json.tool > {OUTPUTS_PATH}/filesreport.json")
+        os.system(f"tree {self.project_path} --gitignore > {OUTPUTS_PATH}/filesreport.txt")
         self.load_json_report(f"{OUTPUTS_PATH}/filesreport.json")
 
     def ext_dependencies_response_handler(self, ext_deps: list):

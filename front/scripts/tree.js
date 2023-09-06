@@ -39,7 +39,7 @@ function drawChart(data) {
 
     env.select("div#container_tree")
         .attr("style",  "width: 90%;" +
-                        "border: 1px solid #ddd;" +
+                        `border: 1px solid ${LG_GRAY};` +
                         "border-radius: 5px;" + 
                         "margin-top: 10px;"  +
                         "overflow-x: scroll;" +

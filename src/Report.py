@@ -106,6 +106,7 @@ class Report:
                 self.remove_py_extension_helper(child)
         elif directory["type"] == "file":
             directory["name"] = directory["name"].replace(".py", "")
+            directory["full_path"] = directory["full_path"].replace(".py", "")
 
     def save_report(self):
         with open(f"{OUTPUTS_PATH}reports/filesreport_{self.project_path.split('/')[-1]}_{datetime.now().strftime('%m_%d_%H_%M')}.json", "w") as f:

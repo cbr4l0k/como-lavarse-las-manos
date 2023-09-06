@@ -60,6 +60,20 @@ class PromptHandler:
                             "input_variables": ["json_reports", ],
                             "prompt_token_lenght": -1
                             },
+                        3: {"template": """Given this python analysis file of a project, identify the level of coupling in the project and
+                                           the level of cohesion in the project. You must explain your answer, the reason why you think
+                                           the project has that level of coupling and cohesion. You must return a json with this fields: 
+                            
+                                           "coupling": 'low, medium or high, and the reason why you think the project has that level of coupling',
+                                           "cohesion": 'low, medium or high, and the reason why you think the project has that level of cohesion'
+                                           "explanation":'short explanation of why you think the project has that level of coupling and cohesion, 
+                                                          also explain if this is a good thing or a bad thing, and why. '""
+
+                                            give me the json ONLY and dont forget to explain your desicion and it's implications, 
+                                            File received: {json_reports}""",
+                            "input_variables": ["json_reports", ],
+                            "prompt_token_lenght": -1
+                            }
                         }
 
         self.longest_prompt_lenght = -1
@@ -95,6 +109,12 @@ class PromptHandler:
             if the template has input variables, they must be passed as kwargs
         """
         return self.prompts[template]["template"].format(**kwargs)
+
+    def get_prompt_token_lenght(self, prompt: str) -> int:
+        """
+            Returns the prompt token lenght for the given prompt
+        """
+        return len(self.encoding.encode(prompt))
 
     def set_token_lenght(self) -> None:
         """

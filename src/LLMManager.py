@@ -24,9 +24,9 @@ class LLM:
         self.llm_chain = None
         self.context_window_size = None
         self.options = options
-        self.load_model()
-
         self.prompt_handler = PromptHandler(model_name=self.options["model_name"])
+
+        self.load_model()
         self.file_handler = FileHandler()
         self.context_window_size = 4e3
 
@@ -36,6 +36,7 @@ class LLM:
     def load_model(self) -> None:
         """Loads LLama model"""
         model = OpenAI(**self.options)
+        self.prompt_handler.set_model(model_name=self.options["model_name"])
         self.model = model
 
     def load_chain(self, template: dict[str, any], requires_memory: bool = False) -> None:
@@ -90,6 +91,47 @@ class LLM:
         response_json = json.loads(response)
 
         return response_json
+    
+    def generate_cohesion_coupling_analysis(self, json_report: str) -> str:
+
+        """
+            Given a json report of a project, with the parcial dependencies and explainations.
+            generate a cohesion and coupling analysis.
+        """
+
+        template = self.prompt_handler.get_raw_template(template=3)
+        prompt = self.prompt_handler.get_prompt(template=3, json_reports=json_report)
+        prompt_len = self.prompt_handler.get_prompt_token_lenght(prompt)
+
+        # if the prompt is really big (bigger than the context window size) then load 
+        # the gpt which has a bigger context window size
+
+        if prompt_len > self.context_window_size:
+            print("prompt is too big, loading gpt-3.5-turbo-16k")
+            self.options["model_name"] = "gpt-3.5-turbo-16k"
+            self.load_model()
+            self.set_context_window_size(16e3)
+
+            self.load_chain(template=template)
+            response = self.llm_chain.run(prompt)
+        
+        else:
+            print("prompt is not too big, loading gpt-3.5-turbo")
+            self.options["model_name"] = "gpt-3.5-turbo-16k"
+            self.load_model()
+            self.set_context_window_size(4e3)
+
+            self.load_chain(template=template)
+            response = self.llm_chain.run(prompt)
+        
+        #before returning the response, go back to the original cheaper model
+        self.options["model_name"] = "gpt-3.5-turbo"
+
+        self.load_model()
+        return response
+        
+
+
 
 
 def default_llm():
@@ -133,11 +175,13 @@ def main():
     # read a document from the project path
     # and test running the process_code function
 
-    file = f"{PROJECTS_PATH}/simpleModuleWithScreenRawMaticas/dependencies/writer.py"
+    #file = f"{PROJECTS_PATH}/simpleModuleWithScreenRawMaticas/dependencies/writer.py"
+    file = f"{OUTPUTS_PATH}/filesreport.json"
 
     with open(file, "r") as f:
         code = f.read()
-        response = llm.process_code(file, code)
+        #response = llm.generate_response(file, code)
+        response = llm.generate_cohesion_coupling_analysis(code)
         print(response)
 
 

@@ -8,7 +8,7 @@ from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
 
-from document_handler import DocumentHandler
+from FileHandler import FileHandler
 from prompt_handler import PromptHandler
 
 # some important enviroment variables
@@ -65,7 +65,7 @@ def main():
     })
 
     # get the documents
-    dh = DocumentHandler()
+    dh = FileHandler()
     dh.generate_json_report(f"{PROJECTS_PATH}/simpleModuleWithScreenRawMaticas/dependencies")
     docs_iter = dh.read_files_from_project_tree()
     

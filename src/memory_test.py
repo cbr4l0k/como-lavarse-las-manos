@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from langchain.llms.openai import OpenAI
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-from document_handler import DocumentHandler
+from FileHandler import FileHandler
 from prompt_handler import PromptHandler
 
 load_dotenv()

@@ -13,7 +13,7 @@ PROJECTS_PATH = os.getenv("PROJECTS_PATH")
 OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
 
 
-class DocumentHandler:
+class FileHandler:
 
     def __init__(self, json_path: str = None) -> None:
         self.py_files_paths = []
@@ -30,7 +30,7 @@ class DocumentHandler:
         self.load_json_report(f"{OUTPUTS_PATH}/filesreport.json")
 
     @staticmethod
-    def save_response_for_file(filename: str, response: str, gid: int):
+    def save_response_for_file(filename: str, response: str, gid: int): # return the response in json format
         """
             This function is supposed to save the response of the model for a given file. 
             As a json file, following the format:
@@ -60,7 +60,7 @@ class DocumentHandler:
         return Language.PYTHON
 
     @staticmethod
-    def chunk_document(filename: str, code: str, chunk_size: int, chunk_overlap: int = 0) -> List[Document]:
+    def chunk_document(filename_full_path: str, code: str, chunk_size: int, chunk_overlap: int = 0) -> List[Document]:
         """
         This function chunks a given block of code taking into account the semantic categories given in a language
         by considering it's syntax, from it recursively tries to divide each chunk into one or many of the desired
@@ -69,14 +69,14 @@ class DocumentHandler:
         Also considers the chunk overlap, which allows to have a bit of the previous information available.
         """
 
-        lang = DocumentHandler.from_filename_to_lang(filename)
+        filename = filename_full_path.split("/")[-1]
+        lang = FileHandler.from_filename_to_lang(filename)
         python_splitter = RecursiveCharacterTextSplitter.from_language(chunk_size=chunk_size,
                                                                        chunk_overlap=chunk_overlap,
                                                                        language=lang, )
         docs = python_splitter.create_documents([code])
         return docs
-
-    def read_files_from_directory(self, directory: list, root: str, counter: int = 0):
+    def read_files_from_directory(self, directory: list, root: str, counter: int = 0): # TODO MIGRAR
         for file in directory:
 
             if (file["type"] == "file") and (file["name"].endswith(".py")):
@@ -95,7 +95,7 @@ class DocumentHandler:
 
 
 
-    def read_files_from_project_tree(self):
+    def read_files_from_project_tree(self): # delete
         """
         Return an iterator which allows reading file by file inside the project tree.
         """
@@ -117,7 +117,7 @@ class DocumentHandler:
                 responses[jdir["gid"]] = jdir
         return responses
 
-    def fill_empty_fields(self, directory: list):
+    def fill_empty_fields(self, directory: list): # delete
         """
         This function is supposed to fill the empty fields of the json report with the information of the dependencies and the
         explanation of each file.
@@ -136,7 +136,7 @@ class DocumentHandler:
 
 
 
-    def complete_json_report(self):
+    def complete_json_report(self): #migrar
         """
         This function is supposed to complete the json report with the information of the dependencies and the
         explanation of each file.
@@ -150,9 +150,7 @@ class DocumentHandler:
         with open(f"{OUTPUTS_PATH}/filesreport.json", "w") as f:
             json.dump(self.json, f, indent=4)
 
-    def load_json_report(self, json_path):
-        with open(json_path, "r") as f:
-            self.json = json.load(f)
+
 
     def load_file(self, file_path: str):
         with open(file_path, "r") as f:
@@ -160,7 +158,7 @@ class DocumentHandler:
 
 
 def main():
-    dh = DocumentHandler()
+    dh = FileHandler()
     dh.generate_json_report(f"{PROJECTS_PATH}/Arquitectura")
     dh.read_files_from_project_tree()
     dh.complete_json_report()

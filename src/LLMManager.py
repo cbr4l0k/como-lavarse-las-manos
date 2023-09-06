@@ -1,88 +1,144 @@
+import json
 import os
 from dotenv import load_dotenv
-from langchain.llms import LlamaCpp
+from langchain.llms.openai import OpenAI
 from langchain import PromptTemplate, LLMChain
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationKGMemory
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
-#some important enviroment variables
+from FileHandler import FileHandler
+from prompt_handler import PromptHandler
+
+# some important enviroment variables
 load_dotenv()
-MODEL_PATH = os.getenv("MODEL_PATH")
-GRAMMAR_PATH = os.getenv("GRAMMAR_PATH")
 PROJECTS_PATH = os.getenv("PROJECTS_PATH")
+OPEN_AI_API_KEY = os.getenv("OPEN_AI_API_KEY")
+OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
 
-#Possible TODO:
-#1. yeah, we split the code into semantically relevant chunks, but then what?
-#what do we do with this chunks, do we ask for a summary of each specific chunk
-#and then join all the summaries and with that we try to build a description?
-#which should also use this approach of chunking beause it can be way too long?
-
-#2. if not (1) what then?
-
-#3. code the document handler, so that the LLM class has noting to do with handling documents, or outputs of
-#the model
-
-#4. join the file manager with the document handler.
 
 class LLM:
     def __init__(self, options: dict) -> None:
-        self.options = options
-        self.Llama_model = None
+        self.model = None
         self.llm_chain = None
-        self.prompts = {"t1": """Assistant is designed to receive a python file, identify which dependencies the file
-                                 uses and a brief explanation of what the file contains. Assistant must return a json 
-                                 with this fields:
-                                 "dependencies": [list of dependencies names, this are the external imports or packages 
-                                 the code uses, any standard library or external library is written as: 'pip#library'],
-                                 "explanation": 'short code explanation highlighting main features, key classes and
-                                  functions.'"" For this given file generate the json ONLY, File received: {code}"""}
+        self.context_window_size = None
+        self.options = options
+        self.load_model()
 
+        self.prompt_handler = PromptHandler(model_name=self.options["model_name"])
+        self.file_handler = FileHandler()
+        self.context_window_size = 4e3
+
+    def set_context_window_size(self, context_window_size: int) -> None:
+        self.context_window_size = context_window_size
 
     def load_model(self) -> None:
         """Loads LLama model"""
-        # callback_manager: CallbackManager = CallbackManager([StreamingStdOutCallbackHandler()])
+        model = OpenAI(**self.options)
+        self.model = model
 
-        Llama_model: LlamaCpp = LlamaCpp(**self.options)
-        self.Llama_model = Llama_model
-
-    def load_chain(self):
+    def load_chain(self, template: dict[str, any], requires_memory: bool = False) -> None:
         self.load_model()
         prompt: PromptTemplate = PromptTemplate(
-            input_variables=["code"],
-            template=self.prompts["t1"]
+            input_variables=template["input_variables"],
+            template=template["template"]
         )
+
         llm_chain: LLMChain = LLMChain(
-            llm=self.Llama_model,
-            prompt=prompt
+            llm=self.model,
+            prompt=prompt,
+            verbose=True,
         )
+
         self.llm_chain = llm_chain
+
+    def generate_response(self, file_full_path: str, code: str) -> str:
+
+        # estimate the number of tokens for the code
+        code_token_size = (self.context_window_size - self.prompt_handler.longest_prompt_lenght)
+
+        # chunk the document based on the estimated number of tokens available for the code
+        docs = self.file_handler.chunk_document(file_full_path, code, code_token_size)
+
+        # define the response
+        response = None
+
+        # if the document is too small, just run it
+        if len(docs) == 1:
+            template = self.prompt_handler.get_raw_template(template=0)
+            self.load_chain(template=template)
+            response = self.llm_chain.run(docs[0].page_content)
+
+        # if the document is too big, chunk it and run it
+        elif len(docs) > 1:
+            template = self.prompt_handler.get_raw_template(template=1)
+            self.load_chain(template=template, requires_memory=True)
+
+            responses = []
+
+            for doc in docs:
+                response = self.llm_chain.run(doc.page_content)
+                responses.append(response)
+
+            # combine the responses and save them
+            template = self.prompt_handler.get_raw_template(template=2)
+            self.load_chain(template=template, requires_memory=True)
+
+            response = self.llm_chain.run(responses)
+
+        response_json = json.loads(response)
+
+        return response_json
+
+
+def default_llm():
+    average_number_of_tokens_per_sentence = 27
+    desired_number_of_sentences_per_file = 15
+    max_tokens = desired_number_of_sentences_per_file * average_number_of_tokens_per_sentence
+    context_window_size = 4e3
+
+    model_name = "gpt-3.5-turbo"
+
+    llm = LLM({
+        "openai_api_key": OPEN_AI_API_KEY,
+        "model_name": model_name,
+        "temperature": 0.1,
+        "max_tokens": max_tokens,
+        "presence_penalty": 0.1,
+        "callback_manager": CallbackManager([StreamingStdOutCallbackHandler()]),
+        "verbose": True,
+    })
+    return llm
 
 
 def main():
-
     average_number_of_tokens_per_sentence = 27
-    desired_number_of_sentences_per_file = 20
-    max_tokens = desired_number_of_sentences_per_file*average_number_of_tokens_per_sentence
+    desired_number_of_sentences_per_file = 15
+    max_tokens = desired_number_of_sentences_per_file * average_number_of_tokens_per_sentence
+    context_window_size = 4e3
+
+    model_name = "gpt-3.5-turbo"
 
     llm = LLM({
-        "model_path": MODEL_PATH,
+        "openai_api_key": OPEN_AI_API_KEY,
+        "model_name": model_name,
         "temperature": 0.1,
         "max_tokens": max_tokens,
-        "n_gpu_layers": 400,
-        "n_batch": 4096,
-        "top_p": 1,
+        "presence_penalty": 0.1,
         "callback_manager": CallbackManager([StreamingStdOutCallbackHandler()]),
         "verbose": True,
-        "grammar_path": GRAMMAR_PATH,
     })
-    llm.load_chain()
 
-    with open("/home/lok/devsavant/langchain/como-lavarse-las-manos-master/Arquitectura/Calculator.py", "r") as f:
+    # read a document from the project path
+    # and test running the process_code function
+
+    file = f"{PROJECTS_PATH}/simpleModuleWithScreenRawMaticas/dependencies/writer.py"
+
+    with open(file, "r") as f:
         code = f.read()
-
-    response = llm.llm_chain.run(code)
-    with open("response.json", "w") as f:
-        f.write(response)
+        response = llm.process_code(file, code)
+        print(response)
 
 
 if __name__ == "__main__":

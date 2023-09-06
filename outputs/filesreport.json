@@ -1,41 +1,115 @@
 [
     {
         "type": "directory",
-        "name": "/home/dave/Documents/local/como-lavarse-las-manos/testing_projects/simpleModuleWithScreenRawMaticas/dependencies",
+        "name": "Arquitectura",
         "contents": [
             {
                 "type": "file",
-                "name": "font10.py",
-                "dependencies": [],
-                "explanation": "",
-                "gid": 0
+                "name": "ALU.py",
+                "full_path": "Arquitectura/ALU.py",
+                "dependencies": [
+                    "ext.numpy",
+                    "ext.math",
+                    "int.Arquitectura.ALU"
+                ],
+                "explanation": "The ALU.py file is a module that implements an Arithmetic Logic Unit (ALU) for a computer architecture. It relies on the external libraries numpy and math for mathematical operations. The ALU module, located in the internal library Arquitectura, contains the main functionality of the ALU. It includes classes and functions for performing arithmetic and logical operations, such as addition, subtraction, multiplication, division, bitwise AND, bitwise OR, etc. The module provides methods that handle the input and output of data, as well as methods for setting and retrieving the ALU's internal state. Overall, the ALU.py file serves as a crucial component for executing arithmetic and logical operations in a computer system."
             },
             {
                 "type": "file",
-                "name": "ssd1306.py",
-                "dependencies": [],
-                "explanation": "",
-                "gid": 1
+                "name": "Calculator.py",
+                "full_path": "Arquitectura/Calculator.py",
+                "dependencies": [
+                    "ext.math",
+                    "ext.sys",
+                    "ext.os",
+                    "int.Arquitectura.Calculator"
+                ],
+                "explanation": "This file contains a calculator implementation. It uses the math, sys, and os libraries for various operations. The main functionality is provided by the Calculator class in the Arquitectura.Calculator module. It includes key methods for performing arithmetic operations such as addition, subtraction, multiplication, and division."
             },
             {
-                "type": "file",
-                "name": "urequests.py",
-                "dependencies": [],
-                "explanation": "",
-                "gid": 2
-            },
-            {
-                "type": "file",
-                "name": "writer.py",
-                "dependencies": [],
-                "explanation": "",
-                "gid": 3
+                "type": "directory",
+                "name": "Operations",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "Divide.py",
+                        "full_path": "Arquitectura/Operations/Divide.py",
+                        "dependencies": [
+                            "ext.numpy",
+                            "ext.math",
+                            "int.Arquitectura.Operations.Add"
+                        ],
+                        "explanation": "This file contains the implementation of the divide operation. It uses the external libraries numpy and math for mathematical calculations. It also imports the internal library Arquitectura.Operations.Add, which suggests that it might use the add operation for some calculations."
+                    },
+                    {
+                        "type": "file",
+                        "name": "IntDivide.py",
+                        "full_path": "Arquitectura/Operations/IntDivide.py",
+                        "dependencies": [
+                            "int.Arquitectura.Operations.Divide",
+                            "int.Arquitectura.Operations.Subtract"
+                        ],
+                        "explanation": "This file contains the implementation of integer division operation. It depends on the 'int.Arquitectura.Operations.Divide' and 'int.Arquitectura.Operations.Subtract' libraries. The main feature of this file is the 'int_divide' function which performs integer division by using the 'divide' and 'subtract' functions from the respective libraries."
+                    },
+                    {
+                        "type": "file",
+                        "name": "Multiply.py",
+                        "full_path": "Arquitectura/Operations/Multiply.py",
+                        "dependencies": [
+                            "ext.numpy",
+                            "int.Arquitectura.Operations.Add"
+                        ],
+                        "explanation": "This file contains the implementation of the Multiply operation. It depends on the external library numpy for mathematical calculations. It also imports the internal library Arquitectura.Operations.Add, which suggests that it uses the Add operation from that library. The file likely defines a function or method for multiplying numbers or arrays using the imported dependencies."
+                    },
+                    {
+                        "type": "file",
+                        "name": "Operation.py",
+                        "full_path": "Arquitectura/Operations/Operation.py",
+                        "dependencies": [
+                            "ext.numpy",
+                            "int.Arquitectura.Operations.OperationBase",
+                            "int.Arquitectura.Operations.OperationResult"
+                        ],
+                        "explanation": "This file contains the implementation of the Operation class, which serves as a base class for various operations in the architecture. It imports the 'numpy' external library for mathematical computations. The class inherits from the 'OperationBase' internal library, which provides common functionality for operations. It also imports the 'OperationResult' internal library, which represents the result of an operation. The file defines the main features and key methods of the Operation class, including methods for performing the operation and returning the result."
+                    },
+                    {
+                        "type": "file",
+                        "name": "Power.py",
+                        "full_path": "Arquitectura/Operations/Power.py",
+                        "dependencies": [
+                            "ext.math",
+                            "ext.numpy",
+                            "int.Arquitectura.Operations.BaseOperation"
+                        ],
+                        "explanation": "This file contains the implementation of the power operation. It imports the math and numpy libraries for mathematical calculations. It also imports the BaseOperation class from the internal Arquitectura.Operations.BaseOperation module, which provides the base functionality for all operations. The power operation is performed using the power method, which takes two operands and returns the result of raising the first operand to the power of the second operand."
+                    },
+                    {
+                        "type": "file",
+                        "name": "Subtract.py",
+                        "full_path": "Arquitectura/Operations/Subtract.py",
+                        "dependencies": [
+                            "int.Arquitectura.Operations.Add",
+                            "int.Arquitectura.Operations.Multiply"
+                        ],
+                        "explanation": "This file contains the implementation of the 'Subtract' operation. It imports the 'Add' and 'Multiply' modules from the 'Arquitectura.Operations' package. The main feature of this file is the 'subtract' function, which performs subtraction of two numbers. It takes two operands as input and returns the result of their subtraction."
+                    },
+                    {
+                        "type": "file",
+                        "name": "Sum.py",
+                        "full_path": "Arquitectura/Operations/Sum.py",
+                        "dependencies": [
+                            "ext.numpy",
+                            "ext.random"
+                        ],
+                        "explanation": "This file contains a function called 'sum_arrays' that takes two arrays as input and returns their element-wise sum. It uses the 'numpy' library for efficient array operations and the 'random' library for generating random arrays."
+                    }
+                ]
             }
         ]
     },
     {
         "type": "report",
-        "directories": 1,
-        "files": 4
+        "directories": 2,
+        "files": 9
     }
 ]

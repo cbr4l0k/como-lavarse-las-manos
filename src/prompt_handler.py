@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 load_dotenv()
 CONFIG_PATH = os.getenv("CONFIG_PATH")
 
+
 class PromptHandler:
-        
 
     def __init__(self, model_name: str):
 
@@ -23,13 +23,13 @@ class PromptHandler:
                                  "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
                                  and methods. If makes sense infer behavior from method names.'""
 
-                                 give me the json ONLY, File received: {code}""", 
-                            "input_variables": ["code",], 
+                                 give me the json ONLY, File received: {code}""",
+                            "input_variables": ["code", ],
                             "prompt_token_lenght": -1
-                            }, 
+                            },
                         1: {"template": """Given this new fragment of code of a bigger file, identify which dependencies the file uses and do
                                            a brief explanation of what the file contains. You must return a json with this fields:
-                            
+
                                            "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
                                            libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
                                            include imports like 'from lib import something',
@@ -39,14 +39,14 @@ class PromptHandler:
                                            and methods, if makes sense infer behavior from method names'""
 
                                            give me the json ONLY, File received: {code}""",
-                            "input_variables": ["code",],
+                            "input_variables": ["code", ],
                             "prompt_token_lenght": -1
                             },
                         2: {"template": """Now that you have identified the dependencies and the explanation of the file in different
                                            json chunks, you must unify the dependencies and explanations in a single json file.
                                            You are a pro bot developer and can take into account that the dependencies and explanations
                                            don't have repeated values. You must return a json with this fields:
-                            
+
                                            "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
                                            libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
                                            include imports like 'from lib import something',
@@ -57,16 +57,14 @@ class PromptHandler:
                                            other explainations and takes the knowledge of all of them.'""
 
                                             give me the json ONLY, Jsons recieved: {json_reports}""",
-                            "input_variables": ["json_reports",],
+                            "input_variables": ["json_reports", ],
                             "prompt_token_lenght": -1
                             },
                         }
 
-
         self.longest_prompt_lenght = -1
         self.set_model(model_name=model_name)
         self.set_largest_prompt_token_lenght()
-
 
     def set_largest_prompt_token_lenght(self) -> None:
         """
@@ -84,16 +82,16 @@ class PromptHandler:
         self.model_name = model_name
         self.encoding = tiktoken.encoding_for_model(self.model_name)
         self.set_token_lenght()
-    
+
     def get_raw_template(self, template: int = 0) -> dict:
         """
             Returns the raw prompt for the given template
         """
         return self.prompts[template]
-    
+
     def get_prompt(self, template: int = 0, **kwargs) -> str:
         """
-            Returns the prompt for the given template, 
+            Returns the prompt for the given template,
             if the template has input variables, they must be passed as kwargs
         """
         return self.prompts[template]["template"].format(**kwargs)
@@ -107,10 +105,9 @@ class PromptHandler:
             white_spaced_template = self.white_spaced_template(template=template)
             self.prompts[template]["prompt_token_lenght"] = len(self.encoding.encode(white_spaced_template))
 
-
     def white_spaced_template(self, template: int = 0) -> str:
         """
             Returns the template with all the input variables replaced by an empty string
         """
-        dict_vars = { var: "" for var in self.prompts[template]["input_variables"] }
+        dict_vars = {var: "" for var in self.prompts[template]["input_variables"]}
         return self.prompts[template]["template"].format(**dict_vars)

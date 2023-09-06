@@ -119,7 +119,11 @@ function drawCircle(data){
 	}
 }
 
-fetch('./data/data.json')
-    .then(response => response.json())
-    .then(data => drawCircle(data));
+function lol(){
+	fetch('../data/data.json')
+		.then(response => response.json())
+		.then(data => drawCircle(data));
+}
+
+lol()
 

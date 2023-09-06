@@ -1,5 +1,6 @@
 import json
 import os
+from datetime import datetime
 from LLMManager import LLM, default_llm
 from dotenv import load_dotenv
 
@@ -17,11 +18,11 @@ class Report:
     def __init__(self, project_path, force_generate_report=False) -> None:
         self.project_path = project_path
         self.report = None
-        self.load_report()
+        self.generate_initial_report()
         self.ext_dependencies = []
         self.LLM = default_llm()
 
-    def load_report(self):
+    def load_report(self): # delete
         # check if the file named "filesreport.json" exists
         # if it does, load it
         # if it doesn't, generate it
@@ -105,6 +106,10 @@ class Report:
                 self.remove_py_extension_helper(child)
         elif directory["type"] == "file":
             directory["name"] = directory["name"].replace(".py", "")
+
+    def save_report(self):
+        with open(f"{OUTPUTS_PATH}reports/filesreport_{self.project_path.split('/')[-1]}_{datetime.now().strftime('%m_%d_%H_%M')}.json", "w") as f:
+            json.dump(self.report, f, indent=4)
 
 
 if __name__ == "__main__":

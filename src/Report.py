@@ -37,8 +37,7 @@ class Report:
             Generates a json report of the project tree.
         """
 
-        os.system(
-            f"tree {self.project_path} -J --gitignore | python3 -m json.tool > {OUTPUTS_PATH}/filesreport.json")
+        os.system(f"tree {self.project_path} -J --gitignore | python3 -m json.tool > {OUTPUTS_PATH}/filesreport.json")
         os.system(f"tree {self.project_path} --gitignore > {OUTPUTS_PATH}/filesreport.txt")
         self.load_json_report(f"{OUTPUTS_PATH}/filesreport.json")
 
@@ -67,8 +66,8 @@ class Report:
                 return
             directory["full_path"] = f"{root}{directory['name']}"
             response = self.LLM.generate_response(directory["full_path"], load_file_content(directory["full_path"]))
-            # print("---------------response-----------------")
-            # print(response)
+            #print("---------------response-----------------")
+            #print(response)
             # response = {"dependencies": "dependencies", "explanation": "explanation"}
             directory["dependencies"] = response["dependencies"]
             directory["explanation"] = response["explanation"]
@@ -115,5 +114,5 @@ class Report:
 
 
 if __name__ == "__main__":
-    report = Report("/home/dleyvacastro/Documents/devsavant/Langchain/testing_projects/Arquitectura")
+    report = Report(f"{PROJECTS_PATH}simpleModuleWithScreenRawMaticas")
     report.complete_report()

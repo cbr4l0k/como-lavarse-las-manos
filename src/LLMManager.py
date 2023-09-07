@@ -16,6 +16,7 @@ load_dotenv()
 PROJECTS_PATH = os.getenv("PROJECTS_PATH")
 OPEN_AI_API_KEY = os.getenv("OPEN_AI_API_KEY")
 OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
+DEFAULT_LLM = os.getenv("DEFAULT_LLM")
 
 
 class LLM:
@@ -28,7 +29,7 @@ class LLM:
 
         self.load_model()
         self.file_handler = FileHandler()
-        self.context_window_size = 4e3
+        self.context_window_size = 16e3
 
     def set_context_window_size(self, context_window_size: int) -> None:
         self.context_window_size = context_window_size
@@ -88,8 +89,8 @@ class LLM:
 
             response = self.llm_chain.run(responses)
 
+        print(response)
         response_json = json.loads(response)
-
         return response_json
     
     def generate_cohesion_coupling_analysis(self, json_report: str) -> str:
@@ -117,7 +118,7 @@ class LLM:
         
         else:
             print("prompt is not too big, loading gpt-3.5-turbo")
-            self.options["model_name"] = "gpt-3.5-turbo-16k"
+            self.options["model_name"] = "gpt-3.5-turbo"
             self.load_model()
             self.set_context_window_size(4e3)
 
@@ -126,21 +127,20 @@ class LLM:
         
         #before returning the response, go back to the original cheaper model
         self.options["model_name"] = "gpt-3.5-turbo"
+        self.set_context_window_size(4e3)
 
         self.load_model()
         return response
         
 
 
-
-
 def default_llm():
     average_number_of_tokens_per_sentence = 27
-    desired_number_of_sentences_per_file = 15
+    desired_number_of_sentences_per_file = 30
     max_tokens = desired_number_of_sentences_per_file * average_number_of_tokens_per_sentence
     context_window_size = 4e3
 
-    model_name = "gpt-3.5-turbo"
+    model_name = DEFAULT_LLM
 
     llm = LLM({
         "openai_api_key": OPEN_AI_API_KEY,
@@ -156,16 +156,16 @@ def default_llm():
 
 def main():
     average_number_of_tokens_per_sentence = 27
-    desired_number_of_sentences_per_file = 15
+    desired_number_of_sentences_per_file = 30
     max_tokens = desired_number_of_sentences_per_file * average_number_of_tokens_per_sentence
-    context_window_size = 4e3
+    context_window_size = 16e3
 
-    model_name = "gpt-3.5-turbo"
+    model_name = DEFAULT_LLM
 
     llm = LLM({
         "openai_api_key": OPEN_AI_API_KEY,
         "model_name": model_name,
-        "temperature": 0.1,
+        "temperature": 0.0,
         "max_tokens": max_tokens,
         "presence_penalty": 0.1,
         "callback_manager": CallbackManager([StreamingStdOutCallbackHandler()]),
@@ -175,13 +175,13 @@ def main():
     # read a document from the project path
     # and test running the process_code function
 
-    #file = f"{PROJECTS_PATH}/simpleModuleWithScreenRawMaticas/dependencies/writer.py"
-    file = f"{OUTPUTS_PATH}/filesreport.json"
+    file = f"{PROJECTS_PATH}/simpleModuleWithScreenRawMaticas/dependencies/writer.py"
+    #file = f"{OUTPUTS_PATH}/filesreport.json"
 
     with open(file, "r") as f:
         code = f.read()
-        #response = llm.generate_response(file, code)
-        response = llm.generate_cohesion_coupling_analysis(code)
+        response = llm.generate_response(file, code)
+        #response = llm.generate_cohesion_coupling_analysis(code)
         print(response)
 
 

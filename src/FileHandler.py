@@ -18,16 +18,9 @@ class FileHandler:
     def __init__(self, json_path: str = None) -> None:
         self.py_files_paths = []
         self.json = None
+
         if json_path is not None:
             self.load_json_report(json_path)
-
-    def generate_json_report(self, objective_folder_path: str):
-        """
-        Generates a json report of the project tree.
-        """
-        os.system(
-            f"tree {objective_folder_path} -J --gitignore | python3 -m json.tool > {OUTPUTS_PATH}/filesreport.json")
-        self.load_json_report(f"{OUTPUTS_PATH}/filesreport.json")
 
     @staticmethod
     def save_response_for_file(filename: str, response: str, gid: int): # return the response in json format
@@ -76,35 +69,7 @@ class FileHandler:
                                                                        language=lang, )
         docs = python_splitter.create_documents([code])
         return docs
-    def read_files_from_directory(self, directory: list, root: str, counter: int = 0): # TODO MIGRAR
-        for file in directory:
 
-            if (file["type"] == "file") and (file["name"].endswith(".py")):
-                self.py_files_paths.append((f"{root}/{file['name']}", self.load_file(f"{root}/{file['name']}"), counter))
-                file["dependencies"] = []
-                file["explanation"] = ""
-                file["gid"] = counter
-                counter += 1
-
-            elif file["type"] == "directory":
-                self.read_files_from_directory(file["contents"], root + '/' + file["name"], counter)
-
-        self.json[0]["contents"] = directory
-        with open(f"{OUTPUTS_PATH}/filesreport.json", "w") as f:
-            json.dump(self.json, f, indent=4)
-
-
-
-    def read_files_from_project_tree(self): # delete
-        """
-        Return an iterator which allows reading file by file inside the project tree.
-        """
-
-        if self.json is None:
-            raise Exception("No json report loaded")
-
-        self.read_files_from_directory(self.json[0]["contents"], self.json[0]["name"])
-        return iter(self.py_files_paths)
 
     def get_responses(self, responses_dir_path: str):
         """
@@ -116,41 +81,6 @@ class FileHandler:
                 jdir = json.load(f)
                 responses[jdir["gid"]] = jdir
         return responses
-
-    def fill_empty_fields(self, directory: list): # delete
-        """
-        This function is supposed to fill the empty fields of the json report with the information of the dependencies and the
-        explanation of each file.
-        """
-        responses = self.get_responses(f"{OUTPUTS_PATH}/responses/")
-        # print(responses)
-        for item in directory:
-            if item["type"] == "file":
-                if "gid" in item.keys():
-
-                    item["dependencies"] = responses[item["gid"]]["dependencies"]
-                    item["explanation"] = responses[item["gid"]]["explanation"]
-            elif item["type"] == "directory":
-                self.fill_empty_fields(item["contents"])
-        return directory
-
-
-
-    def complete_json_report(self): #migrar
-        """
-        This function is supposed to complete the json report with the information of the dependencies and the
-        explanation of each file.
-        """
-        if self.json is None:
-            raise Exception("No json report loaded")
-        a = self.fill_empty_fields(self.json[0]["contents"])
-        print(a)
-        self.json[0]["contents"] = a
-        print(self.json)
-        with open(f"{OUTPUTS_PATH}/filesreport.json", "w") as f:
-            json.dump(self.json, f, indent=4)
-
-
 
     def load_file(self, file_path: str):
         with open(file_path, "r") as f:

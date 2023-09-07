@@ -1,0 +1,492 @@
+[
+    {
+        "type": "directory",
+        "name": "simpleModuleWithScreenRawMaticas",
+        "contents": [
+            {
+                "type": "file",
+                "name": "boot",
+                "full_path": "simpleModuleWithScreenRawMaticas/boot",
+                "dependencies": [
+                    "int.gc",
+                    "int.time.sleep",
+                    "ext.utils.internet_connection.connect2",
+                    "ext.utils.json_related.update_json_field"
+                ],
+                "explanation": "The file imports the 'gc' module from the internal library, and the 'sleep' function from the 'time' module. It also imports the 'connect2' function from the external library 'utils.internet_connection', and the 'update_json_field' function from the external library 'utils.json_related'. The code collects garbage using 'gc.collect()', sleeps for 1 second, connects to the internet using the 'connect2' function, updates a field in a JSON config file using 'update_json_field', and then sleeps for another second."
+            },
+            {
+                "type": "directory",
+                "name": "dependencies",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "font10",
+                        "full_path": "simpleModuleWithScreenRawMaticas/dependencies/font10",
+                        "dependencies": [
+                            "int.font10",
+                            "int.ssd1306",
+                            "int.urequests",
+                            "int.writer"
+                        ],
+                        "explanation": "The file contains a font definition and functions for retrieving character data from the font. The 'height' function returns the height of the characters, the 'max_width' function returns the maximum width of the characters, and the 'get_ch' function retrieves the character data based on its ASCII value."
+                    },
+                    {
+                        "type": "file",
+                        "name": "ssd1306",
+                        "full_path": "simpleModuleWithScreenRawMaticas/dependencies/ssd1306",
+                        "dependencies": [
+                            "ext.micropython",
+                            "int.framebuf"
+                        ],
+                        "explanation": "The file contains a class SSD1306 that inherits from framebuf.FrameBuffer. It initializes and controls an OLED display using the SSD1306 driver chip. The class has methods for initializing the display, setting power on/off, adjusting contrast, inverting colors, and showing data on the display. There are also two subclasses, SSD1306_I2C and SSD1306_SPI, which implement communication with the display over I2C and SPI interfaces respectively."
+                    },
+                    {
+                        "type": "file",
+                        "name": "urequests",
+                        "full_path": "simpleModuleWithScreenRawMaticas/dependencies/urequests",
+                        "dependencies": [
+                            "ext.usocket",
+                            "int.ujson",
+                            "int.ubinascii",
+                            "int.usocket",
+                            "int.ussl"
+                        ],
+                        "explanation": "This file contains a class 'Response' with methods for handling HTTP responses. It also includes functions for making different types of HTTP requests such as GET, POST, PUT, PATCH, and DELETE. The file uses external dependencies like 'usocket' and internal dependencies like 'ujson', 'ubinascii', 'usocket', and 'ussl'."
+                    },
+                    {
+                        "type": "file",
+                        "name": "writer",
+                        "full_path": "simpleModuleWithScreenRawMaticas/dependencies/writer",
+                        "dependencies": [
+                            "ext.framebuf",
+                            "ext.uctypes",
+                            "int.sys"
+                        ],
+                        "explanation": "The file contains a class called Writer that is used to write text on a display device. It has methods for setting the text position, printing strings, and setting colors. The class uses dependencies such as framebuf and uctypes for working with the display device, and sys for accessing implementation information."
+                    }
+                ]
+            },
+            {
+                "type": "directory",
+                "name": "html",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "a.html"
+                    },
+                    {
+                        "type": "file",
+                        "name": "albahaca_maticas_v3_heavy_v2_adobe_express.bin"
+                    },
+                    {
+                        "type": "file",
+                        "name": "b.html"
+                    },
+                    {
+                        "type": "file",
+                        "name": "pages",
+                        "full_path": "simpleModuleWithScreenRawMaticas/html/pages",
+                        "dependencies": [
+                            "int.gc",
+                            "ext.ujson",
+                            "int.utils.metrics.Metrics",
+                            "int.modules.initialize_database.db_mod",
+                            "int.utils.time_management_module.Time"
+                        ],
+                        "explanation": "The file contains functions to get and show configurations, as well as measurements. It imports dependencies such as 'gc', 'ujson', 'Metrics' from the internal library 'utils.metrics', 'db_mod' from the internal library 'modules.initialize_database', and 'Time' from the internal library 'utils.time_management_module'. The functions parse HTML templates and retrieve data from a database."
+                    },
+                    {
+                        "type": "file",
+                        "name": "parsers",
+                        "full_path": "simpleModuleWithScreenRawMaticas/html/parsers",
+                        "dependencies": [
+                            "int.utils.time_management_module",
+                            "int.utils.json_related"
+                        ],
+                        "explanation": "The file contains two functions. 'unquote_to_str' decodes a URL-encoded string and returns the decoded string. 'parse_update_response' parses a response string and returns a dictionary with specific values extracted from the response."
+                    }
+                ]
+            },
+            {
+                "type": "file",
+                "name": "main",
+                "full_path": "simpleModuleWithScreenRawMaticas/main",
+                "dependencies": [
+                    "int.gc",
+                    "ext.scheduler",
+                    "int.modules.initialize_modules.act_mod",
+                    "int.scheduler.Scheduler",
+                    "int.modules.initialize_modules.sen_mod",
+                    "int.modules.initialize_modules.screen_mod",
+                    "int.modules.initialize_modules.web_mod"
+                ],
+                "explanation": "The code imports the 'gc' module for garbage collection, 'scheduler' from an external library, and modules from the internal 'initialize_modules'. It initializes the actuator module, creates a scheduler object with modules as parameters, and runs the scheduler loop."
+            },
+            {
+                "type": "directory",
+                "name": "modules",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "actuators_module",
+                        "full_path": "simpleModuleWithScreenRawMaticas/modules/actuators_module",
+                        "dependencies": [
+                            "int.utils.time_management_module.Time",
+                            "ext.ujson.load",
+                            "ext.machine.Pin"
+                        ],
+                        "explanation": "The file contains two classes: ActuatorWrapper and ActuatorsModule. ActuatorWrapper is a class that represents an actuator with timed or on/off functionality. It has methods to turn the actuator on, off, and handle timed or on/off behavior based on current time. ActuatorsModule is a class that initializes and controls multiple actuators based on a configuration file. It has methods to startup all actuators as off and control them based on current time."
+                    },
+                    {
+                        "type": "file",
+                        "name": "database",
+                        "full_path": "simpleModuleWithScreenRawMaticas/modules/database",
+                        "dependencies": [
+                            "int.utils.time_management_module",
+                            "ext.ujson"
+                        ],
+                        "explanation": "The file contains two classes: MeasurementList and Database. MeasurementList is a class that stores measurements in a list with a maximum length. It has methods to append new measurements, get the latest measurement, and generate measurements for a specific hour. Database is a class that manages registers of MeasurementLists based on a config file. It has methods to get a register, add a register, and add a measurement to a register."
+                    },
+                    {
+                        "type": "file",
+                        "name": "initialize_database",
+                        "full_path": "simpleModuleWithScreenRawMaticas/modules/initialize_database",
+                        "dependencies": [
+                            "int.modules.database",
+                            "int.utils.config"
+                        ],
+                        "explanation": "The file uses the 'Database' class from the internal module 'modules.database'. It also imports the 'config.json' file from the internal module 'utils.config'. The code initializes an instance of the 'Database' class with the provided config file and adds two registers to the database."
+                    },
+                    {
+                        "type": "file",
+                        "name": "initialize_modules",
+                        "full_path": "simpleModuleWithScreenRawMaticas/modules/initialize_modules",
+                        "dependencies": [
+                            "ext.dht",
+                            "int.time",
+                            "int.machine.Pin",
+                            "int.machine.I2C",
+                            "int.machine.ADC",
+                            "int.modules.actuators_module",
+                            "int.modules.sensors_module",
+                            "int.utils.config.json",
+                            "int.gc.collect",
+                            "int.modules.screen_module",
+                            "int.modules.web_module"
+                        ],
+                        "explanation": "The file imports dependencies such as DHT11 from ext.dht, sleep from int.time, Pin, I2C, and ADC from int.machine, ActuatorsModule and SensorsModule from int.modules, config_file from int.utils.config.json, collect from int.gc, ScreenModule from int.modules.screen_module, and WebModule from int.modules.web_module. The code measures temperature and humidity using the DHT11 sensor and sets measurement functions for each sensor. It also initializes screen_mod and web_mod modules."
+                    },
+                    {
+                        "type": "file",
+                        "name": "screen_module",
+                        "full_path": "simpleModuleWithScreenRawMaticas/modules/screen_module",
+                        "dependencies": [
+                            "ext.framebuf",
+                            "ext.machine.Pin",
+                            "ext.machine.I2C",
+                            "ext.time.sleep",
+                            "ext.ujson.load",
+                            "int.dependencies.font10",
+                            "int.dependencies.writer.Writer",
+                            "int.dependencies.ssd1306.SSD1306_I2C",
+                            "int.utils.internet_connection.connect2",
+                            "int.utils.json_related.update_json_field",
+                            "int.utils.time_management_module.Time"
+                        ],
+                        "explanation": "This file contains the ScreenModule class, which initializes a screen module with specified dimensions and pins. It has methods to refresh the screen, display logos and text, update the IP address, and handle different screen states such as overflow or no connection. The dependencies include external libraries for frame buffer, Pin, I2C, sleep, and load, as well as internal libraries for font10, Writer, SSD1306_I2C, connect2, update_json_field, and Time."
+                    },
+                    {
+                        "type": "file",
+                        "name": "sensors_module",
+                        "full_path": "simpleModuleWithScreenRawMaticas/modules/sensors_module",
+                        "dependencies": [
+                            "int.gc",
+                            "ext.json.load",
+                            "utils.time_management_module"
+                        ],
+                        "explanation": "The file contains a class called SensorWrapper that represents a sensor. It has methods to set the measurement function, measure the sensor value, and add the measurement to a database. The SensorsModule class manages multiple sensors and allows setting the measurement function for each sensor. It also has a method to perform timed measurements for all sensors."
+                    },
+                    {
+                        "type": "file",
+                        "name": "web_module",
+                        "full_path": "simpleModuleWithScreenRawMaticas/modules/web_module",
+                        "dependencies": [
+                            "int.usocket",
+                            "ext.socket",
+                            "ext.network",
+                            "int.html.parsers",
+                            "int.utils.time_management_module"
+                        ],
+                        "explanation": "The file is a web module that handles HTTP requests. It imports the necessary dependencies for socket communication, network connection, parsing HTML responses, and time management. The main features include starting a web server, serving incoming connections, and answering different types of requests such as updating configurations or displaying measurements."
+                    }
+                ]
+            },
+            {
+                "type": "file",
+                "name": "scheduler",
+                "full_path": "simpleModuleWithScreenRawMaticas/scheduler",
+                "dependencies": [
+                    "int.gc",
+                    "int.time.sleep",
+                    "int.time.ticks_ms",
+                    "int.time.ticks_diff",
+                    "int.machine.reset",
+                    "ext.utils.json_related.log_error",
+                    "ext.utils.time_management_module.Time",
+                    "ext.utils.time_management_module.get_current_time",
+                    "ext.modules.actuators_module.ActuatorsModule",
+                    "ext.modules.sensors_module.SensorsModule",
+                    "ext.modules.screen_module.ScreenModule",
+                    "ext.modules.web_module.WebModule"
+                ],
+                "explanation": "The file contains a class called Scheduler that handles the scheduling and execution of various modules. It initializes with instances of ActuatorsModule, SensorsModule, ScreenModule, and WebModule. The main loop method updates the current time, handles memory management, and executes the modules based on specific time intervals. If there are any errors or exceptions, it logs them and resets the system."
+            },
+            {
+                "type": "file",
+                "name": "upload_files"
+            },
+            {
+                "type": "directory",
+                "name": "utils",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "a2.pbm"
+                    },
+                    {
+                        "type": "file",
+                        "name": "config.json"
+                    },
+                    {
+                        "type": "file",
+                        "name": "internet_connection",
+                        "full_path": "simpleModuleWithScreenRawMaticas/utils/internet_connection",
+                        "dependencies": [
+                            "int.network",
+                            "int.utime",
+                            "ext.json"
+                        ],
+                        "explanation": "The file uses the internal libraries 'network' and 'utime', as well as the external library 'json'. The code defines a function 'connect2' that connects to a WiFi hotspot using the configuration from a JSON file. If not already connected, it attempts to connect for up to 10 minutes. It also includes a 'reconnect' function to disconnect from the network and reconnect if needed."
+                    },
+                    {
+                        "type": "file",
+                        "name": "json_related",
+                        "full_path": "simpleModuleWithScreenRawMaticas/utils/json_related",
+                        "dependencies": [
+                            "ext.ujson"
+                        ],
+                        "explanation": "This file contains four functions: update_json_field, update_json_actuator, log_error. These functions are used to update fields in a JSON file, update settings for an actuator in the JSON file, and log errors in the JSON file. The file uses the ujson library for JSON parsing and manipulation."
+                    },
+                    {
+                        "type": "file",
+                        "name": "metrics",
+                        "full_path": "simpleModuleWithScreenRawMaticas/utils/metrics",
+                        "dependencies": [],
+                        "explanation": "The Metrics class contains a static method called get_average that calculates the average of non-negative numbers in an iterator. It ignores None values and negative numbers. The method returns the average as a float rounded to two decimal places."
+                    },
+                    {
+                        "type": "file",
+                        "name": "time_management_module",
+                        "full_path": "simpleModuleWithScreenRawMaticas/utils/time_management_module",
+                        "dependencies": [
+                            "ext.requests",
+                            "int.time"
+                        ],
+                        "explanation": "The file imports the 'requests' module from the external library 'dependencies.urequests'. It also imports the 'sleep' function from the 'time' module. The file contains a function to get the current time from different providers, parse the datetime string, and perform various operations on time objects using the 'Time' class."
+                    }
+                ]
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.utils.internet_connection.connect2",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.utils.internet_connection.connect2",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.utils.json_related.update_json_field",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.utils.json_related.update_json_field",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.micropython",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.micropython",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.usocket",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.usocket",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.framebuf",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.framebuf",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.uctypes",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.uctypes",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.ujson",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.ujson",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.scheduler",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.scheduler",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.ujson.load",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.ujson.load",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.machine.Pin",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.machine.Pin",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.dht",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.dht",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.machine.I2C",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.machine.I2C",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.time.sleep",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.time.sleep",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.json.load",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.json.load",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "utils.time_management_module",
+                "full_path": "simpleModuleWithScreenRawMaticas/utils.time_management_module",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.socket",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.socket",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.network",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.network",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.utils.json_related.log_error",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.utils.json_related.log_error",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.utils.time_management_module.Time",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.utils.time_management_module.Time",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.utils.time_management_module.get_current_time",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.utils.time_management_module.get_current_time",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.modules.actuators_module.ActuatorsModule",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.modules.actuators_module.ActuatorsModule",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.modules.sensors_module.SensorsModule",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.modules.sensors_module.SensorsModule",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.modules.screen_module.ScreenModule",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.modules.screen_module.ScreenModule",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.modules.web_module.WebModule",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.modules.web_module.WebModule",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.json",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.json",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext.requests",
+                "full_path": "simpleModuleWithScreenRawMaticas/ext.requests",
+                "dependencies": [],
+                "explanation": ""
+            }
+        ]
+    },
+    {
+        "type": "report",
+        "directories": 5,
+        "files": 26,
+        "coupling": "medium",
+        "cohesion": "high",
+        "explanation": "The project has a medium level of coupling because there are multiple dependencies between different modules and files. For example, the 'main' file depends on modules from the 'initialize_modules' directory, which in turn depend on external libraries and other internal modules. This indicates that there is some interdependence between components. However, the project also exhibits a high level of cohesion because each module or file focuses on a specific functionality or task. The modules within the 'modules' directory, for instance, handle different aspects such as actuators, sensors, screen, and web functionalities. This promotes modular design and separation of concerns, leading to better maintainability and reusability of code."
+    }
+]

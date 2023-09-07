@@ -5,15 +5,22 @@ from hashlib import sha256
 from dotenv import load_dotenv
 
 load_dotenv()
-CONFIG_PATH = os.getenv("CONFIG_PATH")
+OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
 
 
 class PromptHandler:
 
     def __init__(self, model_name: str):
+        self.initial_files_report = None
+        self.load_initial_filesreport()
 
         self.prompts = {0: {"template": """Identify which dependencies the file uses and do a brief explanation of what the file contains.
                                  You must return a json with this fields:
+                                 
+                                Context we have this tree files:
+                                {}
+                                """.format(self.initial_files_report) +
+                                """
 
                                  "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
                                  libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
@@ -23,22 +30,33 @@ class PromptHandler:
                                  "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
                                  and methods. If makes sense infer behavior from method names.'""
 
-                                 give me the json ONLY, terminate the json, give me a well formated json, be short and concise, File received: {code}""",
+                                 give me the json only, give me a well formated json, be short and concise, don't forget,
+                                 the (int or ext).lib structure, use the file tree as context. Maximum of 60 words as explaination.
+                                 file received: {code}
+
+                                 JSON GOES HERE: """,
                             "input_variables": ["code", ],
                             "prompt_token_lenght": -1
                             },
                         1: {"template": """Given this new fragment of code of a bigger file, identify which dependencies the file uses and do
                                            a brief explanation of what the file contains. You must return a json with this fields:
+                                           Context we have this tree files:
+                                           {}
+                                """.format(self.initial_files_report) +
+                                """
+                                            "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
+                                            libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
+                                            include imports like 'from lib import something',
+                                            if 'from lib import something' write it as '(int or ext).lib', 
+                                            if 'from lib.sublib import something' write it as '(int or ext).lib.sublib' and so on],
+                                            "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
+                                            and methods, if makes sense infer behavior from method names'""
 
-                                           "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
-                                           libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
-                                           include imports like 'from lib import something',
-                                           if 'from lib import something' write it as '(int or ext).lib', 
-                                           if 'from lib.sublib import something' write it as '(int or ext).lib.sublib' and so on],
-                                           "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
-                                           and methods, if makes sense infer behavior from method names'""
-
-                                           give me the json ONLY, terminate the json, give me a well formated json, be short and concise, File received: {code}""",
+                                            give me the json only, give me a well formated json, be short and concise, don't forget,
+                                            the (int or ext).lib structure, use the file tree as context. Maximum of 60 words as explaination.
+                                            file received: {code}
+                                            
+                                            JSON GOES HERE:""",
                             "input_variables": ["code", ],
                             "prompt_token_lenght": -1
                             },
@@ -46,6 +64,9 @@ class PromptHandler:
                                            json chunks, you must unify the dependencies and explanations in a single json file.
                                            You are a pro bot developer and can take into account that the dependencies and explanations
                                            don't have repeated values. You must return a json with this fields:
+                                           {}
+                                """.format(self.initial_files_report) +
+                                """
 
                                            "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
                                            libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
@@ -56,7 +77,11 @@ class PromptHandler:
                                            and methods, if makes sense infer behavior from method names. This explaination condenses the
                                            other explainations and takes the knowledge of all of them.'""
 
-                                            give me the json ONLY, terminate the json, give me a well formated json, be short and concise, Jsons recieved: {json_reports}""",
+                                            give me the json only, give me a well formated json, be short and concise, don't forget,
+                                            the (int or ext).lib structure, use the file tree as context. Maximum of 60 words as explaination.
+                                            file received: {json_reports}
+                                            
+                                            JSON GOES HERE: """,
                             "input_variables": ["json_reports", ],
                             "prompt_token_lenght": -1
                             },
@@ -70,7 +95,9 @@ class PromptHandler:
                                                           also explain if this is a good thing or a bad thing, and why. '""
 
                                             give me the json ONLY and dont forget to explain your desicion and it's implications, 
-                                            terminate the json, give me a well formated json, be short and concise, File received: {json_reports}""",
+                                            terminate the json, give me a well formated json, be short and concise, File received: {json_reports}.
+
+                                            JSON GOES HERE: """,
                             "input_variables": ["json_reports", ],
                             "prompt_token_lenght": -1
                             }
@@ -79,6 +106,14 @@ class PromptHandler:
         self.longest_prompt_lenght = -1
         self.set_model(model_name=model_name)
         self.set_largest_prompt_token_lenght()
+
+
+    def load_initial_filesreport(self) -> None:
+        """
+            Loads the initial files report
+        """
+        with open(f"{OUTPUTS_PATH}filesreport.txt", "r") as f:
+            self.initial_files_report = f.read()
 
     def set_largest_prompt_token_lenght(self) -> None:
         """

@@ -21,7 +21,7 @@ const LG_ORANGE =    '#fe8019';
 
 const COLOR = (d) => d._children ? LG_GREEN : LG_YELLOW;
 
-function drawChart(data) {
+function draw_tree(data) {
     const width = 928;
     const marginTop = 100;
     const marginRight = 10;
@@ -170,4 +170,4 @@ function drawChart(data) {
 
 fetch('./data/data.json')
     .then(response => response.json())
-    .then(data => drawChart(data));
+    .then(data => draw_tree(data));

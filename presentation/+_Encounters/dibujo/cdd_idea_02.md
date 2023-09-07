@@ -1,0 +1,3 @@
+Recuerdo tiempos en los que mis padres solo necesitaban los tres números, que usualmente conforman una dirección, para poder llegar a cualquier lugar en esta Bogotá. Y esta habilidad no solo consistía en tener la capacidad transitoria que posibilitaba llegar al destino; sino que además,contaban con conocimientos que solo la experiencia les podía otorgar: conocían que calles eran mejores a ciertas horas, los mejores lugares para comer en el camino, los baños, y hasta que carril evitar por los tan prominentes huecos de esta ciudad.
+
+Pero la ciudad se llenó de personas, los edificios de locales y restaurantes, y las calles de carros. Con el tiempo la labor de entender el ecosistema citadino adquirió niveles desproporcionados de complejidad; dejando 

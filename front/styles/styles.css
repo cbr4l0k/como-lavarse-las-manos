@@ -62,3 +62,10 @@ div#container_tree {
     height: 30vw;
 
 }
+
+div#container_sb {
+        width: 100%;
+        border: 1px solid var(--LG_GRAY);
+        padding: 10px;
+        border-radius: 5px;
+}

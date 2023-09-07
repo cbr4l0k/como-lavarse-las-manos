@@ -22,16 +22,16 @@ class PromptHandler:
                                 """.format(self.initial_files_report) +
                                 """
 
-                                 "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
-                                 libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
+                                 "dependencies": [list of dependencies names, external libraries as 'ext/library' and internal
+                                 libraries as 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter', 
                                  include imports like 'from lib import something',
-                                 if 'from lib import something' write it as '(int or ext).lib', 
-                                 if 'from lib.sublib import something' write it as '(int or ext).lib.sublib' and so on],
+                                 if 'from lib import something' write it as '(int or ext)/lib', 
+                                 if 'from lib.sublib import something' write it as '(int or ext)/lib/sublib' and so on],
                                  "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
                                  and methods. If makes sense infer behavior from method names.'""
 
                                  give me the json only, give me a well formated json, be short and concise, don't forget,
-                                 the (int or ext).lib structure, use the file tree as context. Maximum of 60 words as explaination.
+                                 the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.
                                  file received: {code}
 
                                  JSON GOES HERE: """,
@@ -44,16 +44,16 @@ class PromptHandler:
                                            {}
                                 """.format(self.initial_files_report) +
                                 """
-                                            "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
-                                            libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
+                                            "dependencies": [list of dependencies names, external libraries as 'ext/library' and internal
+                                            libraries as 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter', 
                                             include imports like 'from lib import something',
-                                            if 'from lib import something' write it as '(int or ext).lib', 
-                                            if 'from lib.sublib import something' write it as '(int or ext).lib.sublib' and so on],
+                                            if 'from lib import something' write it as '(int or ext)/lib', 
+                                            if 'from lib.sublib import something' write it as '(int or ext)/lib/sublib' and so on],
                                             "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
                                             and methods, if makes sense infer behavior from method names'""
 
                                             give me the json only, give me a well formated json, be short and concise, don't forget,
-                                            the (int or ext).lib structure, use the file tree as context. Maximum of 60 words as explaination.
+                                            the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.
                                             file received: {code}
                                             
                                             JSON GOES HERE:""",
@@ -68,17 +68,17 @@ class PromptHandler:
                                 """.format(self.initial_files_report) +
                                 """
 
-                                           "dependencies": [list of dependencies names, external libraries as 'ext.library' and internal
-                                           libraries as 'int.library' are accepted, for example: 'ext.numpy', 'int.my_library.plotter', 
+                                           "dependencies": [list of dependencies names, external libraries as 'ext/library' and internal
+                                           libraries as 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter', 
                                            include imports like 'from lib import something',
-                                           if 'from lib import something' write it as '(int or ext).lib', 
-                                           if 'from lib.sublib import something' write it as '(int or ext).lib.sublib' and so on],
+                                           if 'from lib import something' write it as '(int or ext)/lib', 
+                                           if 'from lib.sublib import something' write it as '(int or ext)/lib.sublib' and so on],
                                            "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
                                            and methods, if makes sense infer behavior from method names. This explaination condenses the
                                            other explainations and takes the knowledge of all of them.'""
 
                                             give me the json only, give me a well formated json, be short and concise, don't forget,
-                                            the (int or ext).lib structure, use the file tree as context. Maximum of 60 words as explaination.
+                                            the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.
                                             file received: {json_reports}
                                             
                                             JSON GOES HERE: """,

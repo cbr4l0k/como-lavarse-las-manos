@@ -22,7 +22,7 @@ class Report:
         self.ext_dependencies = []
         self.LLM = default_llm()
 
-    def load_report(self): # delete
+    def load_report(self):  # delete
         # check if the file named "filesreport.json" exists
         # if it does, load it
         # if it doesn't, generate it
@@ -66,8 +66,8 @@ class Report:
                 return
             directory["full_path"] = f"{root}{directory['name']}"
             response = self.LLM.generate_response(directory["full_path"], load_file_content(directory["full_path"]))
-            #print("---------------response-----------------")
-            #print(response)
+            # print("---------------response-----------------")
+            # print(response)
             # response = {"dependencies": "dependencies", "explanation": "explanation"}
             directory["dependencies"] = response["dependencies"]
             directory["explanation"] = response["explanation"]
@@ -88,6 +88,7 @@ class Report:
         self.complete_report_helper(self.report[0], '')
         self.add_ext_dependencies_to_report()
         self.remove_py_extension()
+        self.add_aditional_info()
         self.save_report()
 
         # with open(f"{OUTPUTS_PATH}/ext_dependencies.json", "w") as f:
@@ -108,11 +109,22 @@ class Report:
             directory["name"] = directory["name"].replace(".py", "")
             directory["full_path"] = directory["full_path"].replace(".py", "")
 
+    def add_aditional_info(self):
+        response = self.LLM.generate_cohesion_coupling_analysis(self.report)
+        self.report[1]["coupling"] = response["coupling"]
+        self.report[1]["cohesion"] = response["cohesion"]
+        self.report[1]["explanation"] = response["explanation"]
+
     def save_report(self):
-        with open(f"{OUTPUTS_PATH}reports/filesreport_{self.project_path.split('/')[-1]}_{datetime.now().strftime('%m_%d_%H_%M')}.json", "w") as f:
+        with open(
+                f"{OUTPUTS_PATH}reports/filesreport_{self.project_path.split('/')[-1]}_{datetime.now().strftime('%m_%d_%H_%M')}.json",
+                "w") as f:
             json.dump(self.report, f, indent=4)
 
 
 if __name__ == "__main__":
     report = Report(f"{PROJECTS_PATH}simpleModuleWithScreenRawMaticas")
     report.complete_report()
+
+
+

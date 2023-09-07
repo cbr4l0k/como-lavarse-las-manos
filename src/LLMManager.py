@@ -117,20 +117,23 @@ class LLM:
             response = self.llm_chain.run(prompt)
         
         else:
-            print("prompt is not too big, loading gpt-3.5-turbo")
-            self.options["model_name"] = "gpt-3.5-turbo"
+            print("prompt is not too big, loading gpt-3.5-turbo-16k")
+            self.options["model_name"] = "gpt-3.5-turbo-16k"
             self.load_model()
-            self.set_context_window_size(4e3)
+            self.set_context_window_size(16e3)
 
             self.load_chain(template=template)
             response = self.llm_chain.run(prompt)
         
         #before returning the response, go back to the original cheaper model
-        self.options["model_name"] = "gpt-3.5-turbo"
-        self.set_context_window_size(4e3)
+        self.options["model_name"] = "gpt-3.5-turbo-16k"
+        self.set_context_window_size(16e3)
 
         self.load_model()
-        return response
+
+        response_json = json.loads(response)
+
+        return response_json
         
 
 
@@ -147,7 +150,7 @@ def default_llm():
         "model_name": model_name,
         "temperature": 0.1,
         "max_tokens": max_tokens,
-        "presence_penalty": 0.1,
+        "presence_penalty": 2,
         "callback_manager": CallbackManager([StreamingStdOutCallbackHandler()]),
         "verbose": True,
     })
@@ -167,7 +170,7 @@ def main():
         "model_name": model_name,
         "temperature": 0.0,
         "max_tokens": max_tokens,
-        "presence_penalty": 0.1,
+        "presence_penalty": 2,
         "callback_manager": CallbackManager([StreamingStdOutCallbackHandler()]),
         "verbose": True,
     })

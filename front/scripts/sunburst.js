@@ -5,7 +5,7 @@ function draw_sun(data) {
     const height = 600;
 
     // Create the color scale.
-    const color = d3.scaleOrdinal(d3.quantize(d3.interpolate(LG_GREEN, LG_YELLOW), data.children.length + 1));
+    const color = d3.scaleOrdinal(d3.quantize(d3.interpolate(LG_YELLOW, LG_GREEN), data.children.length + 1));
 
     // Compute the layout.
     const hierarchy = d3.hierarchy(data)
@@ -38,7 +38,7 @@ function draw_sun(data) {
         .attr("height", d => rectHeight(d))
         .attr("fill-opacity", 1)
         .attr("fill", d => {
-            if (!d.depth) return DK_GREEN;
+            if (!d.depth) return DK_YELLOW;
             while (d.depth > 1) d = d.parent;
             return color(d.data.name);
         })

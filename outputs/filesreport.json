@@ -1,133 +1,47 @@
 [
     {
         "type": "directory",
-        "name": "/home/dave/Documents/projects/devsavanto/como-lavarse-las-manos/testing_projects/simpleModuleWithScreenRawMaticas",
+        "name": "/home/dave/Documents/projects/devsavanto/como-lavarse-las-manos/testing_projects/Arquitectura",
         "contents": [
             {
                 "type": "file",
-                "name": "boot.py"
-            },
-            {
-                "type": "directory",
-                "name": "dependencies",
-                "contents": [
-                    {
-                        "type": "file",
-                        "name": "font10.py"
-                    },
-                    {
-                        "type": "file",
-                        "name": "ssd1306.py"
-                    },
-                    {
-                        "type": "file",
-                        "name": "urequests.py"
-                    },
-                    {
-                        "type": "file",
-                        "name": "writer.py"
-                    }
-                ]
-            },
-            {
-                "type": "directory",
-                "name": "html",
-                "contents": [
-                    {
-                        "type": "file",
-                        "name": "a.html"
-                    },
-                    {
-                        "type": "file",
-                        "name": "albahaca_maticas_v3_heavy_v2_adobe_express.bin"
-                    },
-                    {
-                        "type": "file",
-                        "name": "b.html"
-                    },
-                    {
-                        "type": "file",
-                        "name": "pages.py"
-                    },
-                    {
-                        "type": "file",
-                        "name": "parsers.py"
-                    }
-                ]
+                "name": "ALU.py"
             },
             {
                 "type": "file",
-                "name": "main.py"
+                "name": "Calculator.py"
             },
             {
                 "type": "directory",
-                "name": "modules",
+                "name": "Operations",
                 "contents": [
                     {
                         "type": "file",
-                        "name": "actuators_module.py"
+                        "name": "Divide.py"
                     },
                     {
                         "type": "file",
-                        "name": "database.py"
+                        "name": "IntDivide.py"
                     },
                     {
                         "type": "file",
-                        "name": "initialize_database.py"
+                        "name": "Multiply.py"
                     },
                     {
                         "type": "file",
-                        "name": "initialize_modules.py"
+                        "name": "Operation.py"
                     },
                     {
                         "type": "file",
-                        "name": "screen_module.py"
+                        "name": "Power.py"
                     },
                     {
                         "type": "file",
-                        "name": "sensors_module.py"
+                        "name": "Subtract.py"
                     },
                     {
                         "type": "file",
-                        "name": "web_module.py"
-                    }
-                ]
-            },
-            {
-                "type": "file",
-                "name": "scheduler.py"
-            },
-            {
-                "type": "file",
-                "name": "upload_files"
-            },
-            {
-                "type": "directory",
-                "name": "utils",
-                "contents": [
-                    {
-                        "type": "file",
-                        "name": "a2.pbm"
-                    },
-                    {
-                        "type": "file",
-                        "name": "config.json"
-                    },
-                    {
-                        "type": "file",
-                        "name": "internet_connection.py"
-                    },
-                    {
-                        "type": "file",
-                        "name": "json_related.py"
-                    },
-                    {
-                        "type": "file",
-                        "name": "metrics.py"
-                    },
-                    {
-                        "type": "file",
-                        "name": "time_management_module.py"
+                        "name": "Sum.py"
                     }
                 ]
             }
@@ -135,7 +49,7 @@
     },
     {
         "type": "report",
-        "directories": 5,
-        "files": 26
+        "directories": 2,
+        "files": 9
     }
 ]

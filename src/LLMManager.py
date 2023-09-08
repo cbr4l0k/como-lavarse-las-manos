@@ -112,8 +112,7 @@ class LLM:
         response = self.llm_chain.run(directory_contents)
 
         print(response)
-        response_json = json.loads(response)
-        return response_json
+        return response
 
     
     def generate_cohesion_coupling_analysis(self, json_report: str) -> str:

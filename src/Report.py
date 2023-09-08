@@ -92,9 +92,9 @@ class Report:
                     })
                     self.add_directory_information_helper(i)
 
-            # response = self.LLM.generate_directory_description(current_directory_dict, directory["name"])
-            response = "generic description"
-            directory["description"] = response
+            response = self.LLM.generate_explaination_for_directory(current_directory_list)
+            # response = "generic description"
+            directory["explanation"] = response
 
     def complete_report(self):
 
@@ -121,7 +121,9 @@ class Report:
 
     def remove_py_extension_helper(self, directory: dict):
         if directory["type"] == "directory":
-            for child in directory["contents"]:
+            directory["children"] = directory["contents"]
+            del directory["contents"]
+            for child in directory["children"]:
                 self.remove_py_extension_helper(child)
         elif directory["type"] == "file":
             if not directory["name"].endswith(".py"):

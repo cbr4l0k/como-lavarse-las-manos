@@ -20,6 +20,39 @@ class FileHandler:
         It will be in charge of reading the files, chunking them, and retrieving the chunks.
 
 
+        Attributes:
+        ----------
+
+        - py_files_paths: List[str]
+            The list of paths to the python files.
+        - json: dict
+            The json report of the files, containing the information about the files, and the chunks.
+        
+        Methods:
+        ----------
+        - load_json_report(json_path: str)
+            Loads the json report from the given path.
+        
+        - generate_json_report(project_path: str)
+            Generates the json report for the given project path.
+
+        - complete_json_report()
+            Completes the json report by adding the chunks to the files.
+        
+        - read_files_from_project_tree()
+            Reads the files from the project tree.
+
+        - save_response_for_file(filename: str, response: str, gid: int)
+            Saves the response for the given file, in the given path.
+
+        - from_filename_to_lang(filename: str)
+            Infers the language from the filename.
+
+        - chunk_document(filename_full_path: str, code: str, chunk_size: int, chunk_overlap: int = 0)
+            Chunks the given document into the given chunk size, with the given overlap.
+
+        - get_responses(responses_dir_path: str)
+            Returns an iterator for the responses directory.
     """
 
     def __init__(self, json_path: str = None) -> None:

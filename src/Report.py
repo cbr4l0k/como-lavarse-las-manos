@@ -37,9 +37,9 @@ class Report:
             Generates a json report of the project tree.
         """
 
-        os.system(f"tree {self.project_path} -J --gitignore | python3 -m json.tool > {OUTPUTS_PATH}/filesreport.json")
-        os.system(f"tree {self.project_path} --gitignore > {OUTPUTS_PATH}/filesreport.txt")
-        self.load_json_report(f"{OUTPUTS_PATH}/filesreport.json")
+        os.system(f"tree {self.project_path} -J --gitignore | python3 -m json.tool > {OUTPUTS_PATH}filesreport.json")
+        os.system(f"tree {self.project_path} --gitignore > {OUTPUTS_PATH}filesreport.txt")
+        self.load_json_report(f"{OUTPUTS_PATH}filesreport.json")
 
     def ext_dependencies_response_handler(self, ext_deps: list):
         for dep in ext_deps:
@@ -78,7 +78,26 @@ class Report:
             raise Exception("No report loaded")
         self.remove_py_extension_helper(self.report[0])
 
+    def add_directory_information_helper(self, directory):
+        if directory["type"] == "directory":
+
+            current_directory_list: list = []
+            for i in directory["contents"]:
+                if i["type"] == "file":
+                    current_directory_list.append(i)
+                else:
+                    current_directory_list.append({
+                        "name": i["name"],
+                        "type": "directory"
+                    })
+                    self.add_directory_information_helper(i)
+
+            # response = self.LLM.generate_directory_description(current_directory_dict, directory["name"])
+            response = "generic description"
+            directory["description"] = response
+
     def complete_report(self):
+
         """
             This function is supposed to take the report and complete it with the response of the model.
         """
@@ -86,6 +105,7 @@ class Report:
             raise Exception("No report loaded")
 
         self.complete_report_helper(self.report[0], '')
+        self.add_directory_information_helper(self.report[0])
         self.add_ext_dependencies_to_report()
         self.remove_py_extension()
         self.add_aditional_info()
@@ -123,8 +143,5 @@ class Report:
 
 
 if __name__ == "__main__":
-    report = Report(f"{PROJECTS_PATH}simpleModuleWithScreenRawMaticas")
+    report = Report(f"{PROJECTS_PATH}Arquitectura")
     report.complete_report()
-
-
-

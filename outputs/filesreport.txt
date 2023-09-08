@@ -1,4 +1,4 @@
-/home/dave/Documents/projects/devsavanto/como-lavarse-las-manos/testing_projects/Arquitectura
+/home/lok/Documents/GitHub/como-lavarse-las-manos/testing_projects/Arquitectura
 ├── ALU.py
 ├── Calculator.py
 └── Operations

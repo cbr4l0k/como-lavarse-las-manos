@@ -9,44 +9,85 @@ OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
 PROJECTS_PATH = os.getenv("PROJECTS_PATH")
 
 
-def load_file_content(file_path):
+def load_file_content(file_path: str) -> str:
+    """
+        Loads the content of a file.
+
+        Args:
+        ------
+            file_path: str
+
+        Returns:
+        --------
+            str
+    """
     with open(PROJECTS_PATH + file_path, "r") as f:
         return f.read()
 
 
 class Report:
-    def __init__(self, project_path, force_generate_report=False) -> None:
-        self.project_path = project_path
-        self.report = None
+    def __init__(self, project_path) -> None:
+        """
+            Constructor of the Report class.
+
+            Args:
+            ------
+                project_path: str
+
+            Returns:
+            --------
+                None
+        """
+        self.project_path: str = project_path
+        self.report: dict = {}
         self.generate_initial_report()
-        self.ext_dependencies = []
+        self.ext_dependencies: list = []
         self.LLM = default_llm()
 
-    def load_report(self):  # delete
-        # check if the file named "filesreport.json" exists
-        # if it does, load it
-        # if it doesn't, generate it
-        if os.path.exists(f"{OUTPUTS_PATH}/filesreport.json"):
-            with open(f"{OUTPUTS_PATH}/filesreport.json", "r") as f:
-                self.report = json.load(f)
-        else:
-            self.generate_initial_report()
-
-    def generate_initial_report(self):
+    def generate_initial_report(self) -> None:
         """
             Generates a json report of the project tree.
+
+            Args:
+            ------
+                None
+            Returns:
+            --------
+                None
         """
 
         os.system(f"tree {self.project_path} -J --gitignore | python3 -m json.tool > {OUTPUTS_PATH}filesreport.json")
         os.system(f"tree {self.project_path} --gitignore > {OUTPUTS_PATH}filesreport.txt")
         self.load_json_report(f"{OUTPUTS_PATH}filesreport.json")
 
-    def ext_dependencies_response_handler(self, ext_deps: list):
+    def ext_dependencies_response_handler(self, ext_deps: list) -> None:
+        """
+            Identifies the external dependencies
+
+            Args:
+            ------
+                ext_deps: list
+
+            Returns:
+            --------
+                None
+        """
         for dep in ext_deps:
             if dep not in self.ext_dependencies and not dep.startswith("int."):
                 self.ext_dependencies.append(dep)
 
-    def add_ext_dependencies_to_report(self):
+    def add_ext_dependencies_to_report(self) -> None:
+        """
+            Adds the external dependencies to the report
+
+            Args:
+            ------
+                None
+
+            Returns:
+            --------
+                None
+        """
         root_directory = self.project_path.split("/")[-1]
         for dep in self.ext_dependencies:
             self.report[0]["contents"].append({
@@ -58,6 +99,18 @@ class Report:
             })
 
     def complete_report_helper(self, directory: dict, root: str):
+        """
+            This function is supposed to take the report and complete it with the response of the model.
+
+            Args:
+            ------
+                directory: dict
+                root: str
+
+            Returns:
+            --------
+                None
+        """
         if directory["type"] == "directory":
             for child in directory["contents"]:
                 self.complete_report_helper(child, f"{root}{directory['name']}/")
@@ -74,11 +127,33 @@ class Report:
             self.ext_dependencies_response_handler(response["dependencies"])
 
     def remove_py_extension(self):
+        """
+            This function is supposed to take the report and complete it with the response of the model.
+
+            Args:
+            ------
+                None
+
+            Returns:
+            --------
+                None
+        """
         if self.report is None:
             raise Exception("No report loaded")
         self.remove_py_extension_helper(self.report[0])
 
     def add_directory_information_helper(self, directory):
+        """
+            This function is supposed to take the report and complete it with the response of the model.
+
+            Args:
+            ------
+                directory: dict
+
+            Returns:
+            --------
+                None
+        """
         if directory["type"] == "directory":
 
             current_directory_list: list = []
@@ -100,6 +175,14 @@ class Report:
 
         """
             This function is supposed to take the report and complete it with the response of the model.
+
+            Args:
+            ------
+                None
+
+            Returns:
+            --------
+                None
         """
         if self.report is None:
             raise Exception("No report loaded")
@@ -115,11 +198,33 @@ class Report:
         #     json.dump(self.ext_dependencies, f, indent=4)
 
     def load_json_report(self, json_path):
+        """
+            Loads the json report into the report attribute.
+
+            Args:
+            ------
+                json_path: str
+
+            Returns:
+            --------
+                None
+        """
         with open(json_path, "r") as f:
             self.report = json.load(f)
         self.report[0]["name"] = self.project_path.split("/")[-1]
 
     def remove_py_extension_helper(self, directory: dict):
+        """
+            Removes the .py extension from the files in the report.
+
+            Args:
+            ------
+                directory: dict
+
+            Returns:
+            --------
+                None
+        """
         if directory["type"] == "directory":
             directory["children"] = directory["contents"]
             del directory["contents"]
@@ -132,12 +237,34 @@ class Report:
             directory["full_path"] = directory["full_path"].replace(".py", "")
 
     def add_aditional_info(self):
+        """
+            Adds the cohesion and coupling analysis to the report.
+
+            Args:
+            ------
+                None
+
+            Returns:
+            --------
+                None
+        """
         response = self.LLM.generate_cohesion_coupling_analysis(self.report)
         self.report[1]["coupling"] = response["coupling"]
         self.report[1]["cohesion"] = response["cohesion"]
         self.report[1]["explanation"] = response["explanation"]
 
     def save_report(self):
+        """
+            Saves the report in the outputs folder.
+
+            Args:
+            ------
+                None
+
+            Returns:
+            --------
+                None
+        """
         with open(
                 f"{OUTPUTS_PATH}reports/filesreport_{self.project_path.split('/')[-1]}_{datetime.now().strftime('%m_%d_%H_%M')}.json",
                 "w") as f:

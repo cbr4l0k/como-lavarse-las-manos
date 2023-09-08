@@ -22,6 +22,7 @@ const LG_ORANGE =    '#fe8019';
 const COLOR = (d) => d._children ? LG_GREEN : LG_YELLOW;
 
 function draw_tree(data) {
+    console.log(data);
     const width = 928;
     const marginTop = 100;
     const marginRight = 10;
@@ -168,6 +169,6 @@ function draw_tree(data) {
 
 }
 
-fetch('./data/data.json')
+fetch('./data/arc.json')
     .then(response => response.json())
-    .then(data => draw_tree(data));
+    .then(data => draw_tree(data[0]));

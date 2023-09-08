@@ -15,6 +15,13 @@ OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
 
 class FileHandler:
 
+    """
+        This class is supposed to handle the files, individually.
+        It will be in charge of reading the files, chunking them, and retrieving the chunks.
+
+
+    """
+
     def __init__(self, json_path: str = None) -> None:
         self.py_files_paths = []
         self.json = None
@@ -47,19 +54,45 @@ class FileHandler:
     @staticmethod
     def from_filename_to_lang(filename: str):
         """
-        This function is supposed to take the filename and infer the language by taking the last part of the name
-        and then return the Language it corresponds to if any (in the dict of supported LangChain languages)
+            This function is supposed to take the filename and infer the language by taking the last part of the name
+            and then return the Language it corresponds to if any (in the dict of supported LangChain languages)
+            If it does not find it, it will return None
+
+            Args:
+            ----------
+            filename: str
+                The filename to infer the language from
+            
+            Returns:
+            ----------
+            Language
+                The language that corresponds to the filename, if any.
         """
         return Language.PYTHON
 
     @staticmethod
     def chunk_document(filename_full_path: str, code: str, chunk_size: int, chunk_overlap: int = 0) -> List[Document]:
         """
-        This function chunks a given block of code taking into account the semantic categories given in a language
-        by considering it's syntax, from it recursively tries to divide each chunk into one or many of the desired
-        chunk size, this does not guarantee that they all have the same size, but they should be close.
+            This function chunks a given block of code taking into account the semantic categories given in a language
+            by considering it's syntax, from it recursively tries to divide each chunk into one or many of the desired
+            chunk size, this does not guarantee that they all have the same size, but they should be close.
+            Also considers the chunk overlap, which allows to have a bit of the previous information available.
 
-        Also considers the chunk overlap, which allows to have a bit of the previous information available.
+            Args:
+            ----------
+            filename_full_path: str
+                The full path to the file, including the filename and extension.
+            code: str
+                The code to chunk.
+            chunk_size: int
+                The size of the chunks to create.
+            chunk_overlap: int
+                The overlap between chunks.
+            
+            Returns:
+            ----------
+            List[Document]
+                The list of documents created from the chunking.
         """
 
         filename = filename_full_path.split("/")[-1]
@@ -73,7 +106,18 @@ class FileHandler:
 
     def get_responses(self, responses_dir_path: str):
         """
-        This function is supposed to return an iterator which allows reading file by file inside the responses directory.
+            This function returns an iterator which allows reading file by file inside the responses directory.
+            This is useful for aboiding loading all the responses into memory at once, saving memory.
+
+            Args:
+            ----------
+            responses_dir_path: str
+                The path to the responses directory.
+            
+            Returns:
+            ----------
+            Iterator
+                The iterator for the responses directory.
         """
         responses = {}
         for file in os.listdir(responses_dir_path):
@@ -83,6 +127,9 @@ class FileHandler:
         return responses
 
     def load_file(self, file_path: str):
+        """
+            This function loads a file from the given path and returns it's contents.
+        """
         with open(file_path, "r") as f:
             return f.read()
 

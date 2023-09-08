@@ -1,3 +1,4 @@
+// es.colorlitelens.com/images/tesztek/huetest/Farnsworth100.html 
 
 const DK_BG =        '#282828';
 const DK_RED =       '#cc241d';
@@ -22,7 +23,9 @@ const LG_ORANGE =    '#fe8019';
 const COLOR = (d) => d._children ? LG_GREEN : LG_YELLOW;
 
 function draw_tree(data) {
-    console.log(data);
+
+    data.children = data.children.filter((c)=> c.type != 'External dependency');
+
     const width = 928;
     const marginTop = 100;
     const marginRight = 10;
@@ -102,7 +105,7 @@ function draw_tree(data) {
                 update(event, d);
             })
             .on("mouseover", (event, d) => {
-                d3.select("code#desc_tree").html(`<b style='text-decoration: underline; color: ${COLOR(d)}'>${d.data.name}</b><br><br> ${d.data.description}`)
+                d3.select("code#desc_tree").html(`<b style='text-decoration: underline; color: ${COLOR(d)}'>${d.data.name}</b><br><br> ${d.data.explanation}`)
             });
 
         nodeEnter.append("circle")

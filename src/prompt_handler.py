@@ -9,6 +9,26 @@ OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
 
 
 class PromptHandler:
+    """
+        Class for handling the prompts for the LLM.
+
+        Attributes:
+            model_name (str): The model name.
+            encoding (tiktoken.Encoding): The encoding for the model.
+            prompts (dict): The prompts for the LLM.
+            longest_prompt_lenght (int): The longest prompt lenght for all the prompts.
+
+        Methods:
+
+            - load_initial_filesreport: Loads the initial files report.
+            - set_largest_prompt_token_lenght: Sets the largest prompt token lenght for all the templates.
+            - set_model: Sets the model name and encoding for the prompt handler.
+            - get_raw_template: Returns the raw prompt for the given template.
+            - get_prompt: Returns the prompt for the given template, if the template has input variables, they must be passed as kwargs.
+            - get_prompt_token_lenght: Returns the prompt token lenght for the given prompt.
+            - set_token_lenght: Sets the token lenght for all the templates using the current model encoding.
+            - white_spaced_template: Returns the template with all the input variables replaced by an empty string.
+    """
 
     def __init__(self, model_name: str):
         self.initial_files_report = None
@@ -181,14 +201,36 @@ class PromptHandler:
 
     def load_initial_filesreport(self) -> None:
         """
-            Loads the initial files report
+            Loads the initial files report. This filesreport.txt is the initial files report.
+            The 'filesreport.txt' contains the tree output of the 'tree' command runned over
+            the folder of interest.
+
+            Args:
+            ---------
+                None
+
+            Returns:
+            ---------
+                None
         """
         with open(f"{OUTPUTS_PATH}filesreport.txt", "r") as f:
             self.initial_files_report = f.read()
 
     def set_largest_prompt_token_lenght(self) -> None:
         """
-            Sets the largest prompt token lenght for all the templates
+            This method gets the longest prompt token lenght among all the templates.
+            And sets the class attribute 'longest_prompt_lenght' to that value.
+
+            For that the function assumes that the inputs needed for the templates are
+            empty strings.
+
+            Args:
+            ---------
+                None
+
+            Returns:
+            ---------
+                None
         """
         for template in self.prompts:
             if self.prompts[template]["prompt_token_lenght"] > self.longest_prompt_lenght:
@@ -196,8 +238,16 @@ class PromptHandler:
 
     def set_model(self, model_name: str) -> None:
         """
-            Sets the model name and encoding for the prompt handler.
-            And with that it gets the prompt token lenght for each template.
+            Sets the model name and encoding for the prompt handler, 
+            with that encoding then it goes on to set the token lenght for all the templates.
+
+            Args:
+            ---------
+                model_name (str): The model name.
+
+            Returns:
+            ---------
+                None
         """
         self.model_name = model_name
         self.encoding = tiktoken.encoding_for_model(self.model_name)
@@ -205,26 +255,64 @@ class PromptHandler:
 
     def get_raw_template(self, template: int = 0) -> dict:
         """
-            Returns the raw prompt for the given template
+            Returns the raw prompt for the given template, if 
+            the template doesn't exist returns None.
+
+            Args:
+            ---------
+                template (int): The template number.
+            
+            Returns:
+            ---------
+                dict: The raw template for the given template number. This dict contains the template, the input variables, and the prompt token lenght.
         """
-        return self.prompts[template]
+        return self.prompts.get(template, None)
 
     def get_prompt(self, template: int = 0, **kwargs) -> str:
         """
             Returns the prompt for the given template,
-            if the template has input variables, they must be passed as kwargs
+            if the template has input variables, they must be passed as kwargs, in 
+            order to replace the input variables in the template.
+
+            Args:
+            ---------
+                template (int): The template number.
+                **kwargs: The input variables for the template.
+            
+            Returns:
+            ---------
+                str: The prompt for the given template number.
         """
         return self.prompts[template]["template"].format(**kwargs)
 
     def get_prompt_token_lenght(self, prompt: str) -> int:
         """
-            Returns the prompt token lenght for the given prompt
+            Returns the prompt token lenght for the given prompt.
+            For this it uses the current model encoding.
+
+            Args:
+            ---------
+                prompt (str): The prompt.
+            
+            Returns:
+            ---------
+                int: The prompt token lenght.
         """
         return len(self.encoding.encode(prompt))
 
     def set_token_lenght(self) -> None:
         """
-            Sets the token lenght for all the templates using the current model encoding
+            Sets the token lenght for all the templates using the current model encoding.
+            For that the function assumes that the inputs needed for the templates are
+            empty strings.
+
+            Args:
+            ---------
+                None
+            
+            Returns:
+            ---------
+                None
         """
 
         for template in self.prompts:
@@ -233,7 +321,17 @@ class PromptHandler:
 
     def white_spaced_template(self, template: int = 0) -> str:
         """
-            Returns the template with all the input variables replaced by an empty string
+            Returns the template with all the input variables replaced by an empty string.
+
+            Args:
+            ---------
+                template (int): The template number.
+            
+            Returns:
+            ---------
+                str: The template with all the input variables replaced by an empty string.
         """
-        dict_vars = {var: "" for var in self.prompts[template]["input_variables"]}
-        return self.prompts[template]["template"].format(**dict_vars)
+        template = self.get_raw_template(template=template)
+        dict_vars = {var: "" for var in template["input_variables"]}
+
+        return template["template"].format(**dict_vars)

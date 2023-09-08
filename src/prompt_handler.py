@@ -155,6 +155,26 @@ class PromptHandler:
                                             JSON GOES HERE: \n {json_reports}""",
                                             "input_variables": ["json_reports", ],
                                             "prompt_token_lenght": -1
+                         },
+                         5: {"template": """You've been given a json file with fields 'dependencies' and 'explaination' for a folder in a project,
+                                            your task is to add an explaination field for the folders inside the json file. If a folder already has an
+                                            explaination field, you must not change it. This is what the 'explaination' field should look like:
+                             
+                                            "explanation": 'short folder explaination condensing the logic, purpose and explainations of the 
+                                            files inside the folder, if the folder already has an explaination, don't change it.'""
+
+                                            You can identify a folder by the 'type' field, if the type is 'directory' then it's a folder, 
+                                            and also if the folder has the 'contents' or 'children' field, it's a folder.
+                                            This is the Json file you've been given:
+
+                                            {json_reports} 
+                             
+                                            Remember to add only the 'explaination' field to the folders, without changing the 'dependencies' field, 
+                                            and the other existing fields. End the json properly, with good formatting.
+                                            YOUR JSON RESPONSE GOES HERE:
+                                            """,    
+                             "input_variables": ["json_reports", ],
+                             "prompt_token_lenght": -1
                          }
                         }
 

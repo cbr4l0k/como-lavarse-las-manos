@@ -102,6 +102,19 @@ class LLM:
         response_json = json.loads(response)
         return response_json
 
+
+    def generate_explaination_for_directory(self, directory_contents: str) -> str:
+        """
+            Given a directory with it's contents, generate an explaination for it.
+        """
+        template = self.prompt_handler.get_raw_template(template=5)
+        self.load_chain(template=template)
+        response = self.llm_chain.run(directory_contents)
+
+        print(response)
+        response_json = json.loads(response)
+        return response_json
+
     
     def generate_cohesion_coupling_analysis(self, json_report: str) -> str:
 
@@ -142,7 +155,6 @@ class LLM:
         self.load_model()
 
         response_json = json.loads(response)
-
         return response_json
         
 
@@ -169,7 +181,7 @@ def default_llm():
 
 def main():
     average_number_of_tokens_per_sentence = 27
-    desired_number_of_sentences_per_file = 30
+    desired_number_of_sentences_per_file = 50
     max_tokens = desired_number_of_sentences_per_file * average_number_of_tokens_per_sentence
     context_window_size = 16e3
 
@@ -188,15 +200,21 @@ def main():
     # read a document from the project path
     # and test running the process_code function
 
-    file = f"{PROJECTS_PATH}/simpleModuleWithScreenRawMaticas/dependencies/writer.py"
+    #file = f"{PROJECTS_PATH}/simpleModuleWithScreenRawMaticas/dependencies/writer.py"
     #file = f"{OUTPUTS_PATH}/filesreport.json"
+    file = f"{OUTPUTS_PATH}/reports/filesreport_Arquitectura_09_07_19_21.json"
 
     with open(file, "r") as f:
         code = f.read()
-        response = llm.generate_response(file, code)
+        #response = llm.generate_response(file, code)
         #response = llm.generate_cohesion_coupling_analysis(code)
-        print(response)
+        response = llm.generate_explaination_for_directory(code)
 
+        #save response as json
+        with open(f"{OUTPUTS_PATH}/output_test.json", "w") as f:
+            json.dump(response, f, indent=4)
+
+        print(response)
 
 if __name__ == "__main__":
     main()

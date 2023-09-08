@@ -15,58 +15,78 @@ class PromptHandler:
         self.load_initial_filesreport()
 
         self.prompts = {0: {"template": """Identify which dependencies the file uses and do a brief explanation of what the file contains.
-                                 You must return a json with this fields:
-                                 
-                                Context we have this tree files:
-                                {}
+                                           Context we have this tree files:
+                                            {}
                                 """.format(self.initial_files_report) +
-                                """
+                                """                          
+                                You must return a json with this fields:
+                                    "dependencies": [list of dependencies names, external libraries as 'ext/library' and internal
+                                    libraries as 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter'],
+                                    "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
+                                    and methods, if makes sense infer behavior from method names'""
 
-                                 "dependencies": [list of dependencies names, external libraries as 'ext/library' and internal
-                                 libraries as 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter', 
-                                 include imports like 'from lib import something',
-                                 if 'from lib import something' write it as '(int or ext)/lib', 
-                                 if 'from lib.sublib import something' write it as '(int or ext)/lib/sublib' and so on],
-                                 "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
-                                 and methods. If makes sense infer behavior from method names.'""
+                                For identifying the dependencies you must:
+                                    1. Look at the context of the file tree.
+                                    2. Idenfitify the dependencies of the file.
+                                    3. Check if any identified dependency in the code is or not in the file tree. 
+                                       A dependency is internal if for example the code says: 'from my_library.sub_lib import module' 
+                                       and there is a folder named 'my_library' in the file tree and a folder or file named 'sub_lib'.
+                                    4. If the dependency is not in the file tree, it's external and shuld be written as 'ext/library'
+                                       or 'ext/library/sublibrary' and so on. 
+                                    5. If the dependency is in the file tree, it's internal and should be written as 'int/library'
+                                       or 'int/library/sublibrary' and so on.
 
                                  give me the json only, give me a well formated json, be short and concise, don't forget,
                                  the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.
-                                 file received: {code}
+                                 Code received: 
+                                 
+                                 {code}
 
-                                 JSON GOES HERE: """,
+                                 Think on your response, if for example you have 'from yada.yada.yodo import yuda' don't write
+                                 'yada.yada.yodo' as dependency, write 'yada/yada/yodo', 'yada.yada.yodo' is wrong. 
+                                 YOUR JSON RESPONSE GOES HERE:""",
                             "input_variables": ["code", ],
                             "prompt_token_lenght": -1
                             },
                         1: {"template": """Given this new fragment of code of a bigger file, identify which dependencies the file uses and do
-                                           a brief explanation of what the file contains. You must return a json with this fields:
+                                           a brief explanation of what the file contains. 
                                            Context we have this tree files:
                                            {}
                                 """.format(self.initial_files_report) +
                                 """
-                                            "dependencies": [list of dependencies names, external libraries as 'ext/library' and internal
-                                            libraries as 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter', 
-                                            include imports like 'from lib import something',
-                                            if 'from lib import something' write it as '(int or ext)/lib', 
-                                            if 'from lib.sublib import something' write it as '(int or ext)/lib/sublib' and so on],
-                                            "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
-                                            and methods, if makes sense infer behavior from method names'""
+                                    You must return a json with this fields:
+                                        "dependencies": [list of dependencies names, external libraries as 'ext/library' and internal
+                                        libraries as 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter'],
+                                        "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
+                                        and methods, if makes sense infer behavior from method names'""
 
-                                            give me the json only, give me a well formated json, be short and concise, don't forget,
-                                            the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.
-                                            file received: {code}
+                                    For identifying the dependencies you must:
+                                        1. Look at the context of the file tree.
+                                        2. Idenfitify the dependencies of the file.
+                                        3. Check if any identified dependency in the code is or not in the file tree. 
+                                        A dependency is internal if for example the code says: 'from my_library.sub_lib import module' 
+                                        and there is a folder named 'my_library' in the file tree and a folder or file named 'sub_lib'.
+                                        4. If the dependency is not in the file tree, it's external and shuld be written as 'ext/library'
+                                        or 'ext/library/sublibrary' and so on. 
+                                        5. If the dependency is in the file tree, it's internal and should be written as 'int/library'
+                                        or 'int/library/sublibrary' and so on.
+
+                                    give me the json only, give me a well formated json, be short and concise, don't forget,
+                                    the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.
+                                    Code received: 
+
+                                    {code}
                                             
-                                            JSON GOES HERE:""",
+                                    YOUR JSON RESPONSE GOES HERE:""",
                             "input_variables": ["code", ],
                             "prompt_token_lenght": -1
                             },
                         2: {"template": """Now that you have identified the dependencies and the explanation of the file in different
                                            json chunks, you must unify the dependencies and explanations in a single json file.
                                            You are a pro bot developer and can take into account that the dependencies and explanations
-                                           don't have repeated values. You must return a json with this fields:
-                                           {}
-                                """.format(self.initial_files_report) +
-                                """
+                                           don't have repeated values. 
+                                           
+                                           You must return a json with this fields:
 
                                            "dependencies": [list of dependencies names, external libraries as 'ext/library' and internal
                                            libraries as 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter', 
@@ -77,11 +97,13 @@ class PromptHandler:
                                            and methods, if makes sense infer behavior from method names. This explaination condenses the
                                            other explainations and takes the knowledge of all of them.'""
 
-                                            give me the json only, give me a well formated json, be short and concise, don't forget,
-                                            the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.
-                                            file received: {json_reports}
+                                           Make sure to give the dependencies in the desired form '(int or ext)/dependency'.
+                                           Check for errors and fix them. Maximum of 60 words as explaination.
+                                           Jsons reports received: 
+                                           
+                                           {json_reports}
                                             
-                                            JSON GOES HERE: """,
+                                           YOUR JSON RESPONSE GOES HERE: """,
                             "input_variables": ["json_reports", ],
                             "prompt_token_lenght": -1
                             },
@@ -100,7 +122,40 @@ class PromptHandler:
                                             JSON GOES HERE: """,
                             "input_variables": ["json_reports", ],
                             "prompt_token_lenght": -1
-                            }
+                            }, 
+                         4: {"template": """You've been given a json with the fields 'dependencies' and 'explaination', your
+                                            work is to correct the json response if needed and return it, you only have to change
+                                            the 'dependencies' field, the 'explaination' field is correct.
+                             
+                                            You must return a json with this fields:
+
+                                            For checking the dependencies you must:
+                                                1. Look at the context of the file tree.
+                                                2. Idenfitify the dependencies of the file.
+                                                3. Check if any identified dependency in the code is or not in the file tree. 
+                                                A dependency is internal if for example the code says: 'from my_library.sub_lib import module' 
+                                                and there is a folder named 'my_library' in the file tree and a folder or file named 'sub_lib'.
+                                                4. If the dependency is not in the file tree, it's external and shuld be written as 'ext/library'
+                                                or 'ext/library/sublibrary' and so on. 
+                                                5. If the dependency is in the file tree, it's internal and should be written as 'int/library'
+                                                or 'int/library/sublibrary' and so on.
+
+                                            The file tree is:
+                                            {}""".format(self.initial_files_report) + """
+
+                                            Think on your response, if for example you have 'from yada.yada.yodo import yuda' don't write
+                                            'yada.yada.yodo' as dependency, write 'yada/yada/yodo', 'yada.yada.yodo' is wrong. 
+                                            Adding the file extension is wrong, for example 'yada/yada/yodo.py' is wrong,
+                                            'yada/yada/yodo' is correct. 
+
+                                            Give me the json only, give me a well formated json, be short and concise, don't forget to leave
+                                            the 'explaination' field as it is. Change the dependencies which end with '.file_extension' 
+                                            to the correct form, delete the '.file_extension' part. 
+
+                                            JSON GOES HERE: \n {json_reports}""",
+                                            "input_variables": ["json_reports", ],
+                                            "prompt_token_lenght": -1
+                         }
                         }
 
         self.longest_prompt_lenght = -1

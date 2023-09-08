@@ -90,8 +90,18 @@ class LLM:
             response = self.llm_chain.run(responses)
 
         print(response)
+        
+        return self._check_response(response)
+    
+    def _check_response(self, response: str) -> str:
+
+        template = self.prompt_handler.get_raw_template(template=4)
+        self.load_chain(template=template)
+        response = self.llm_chain.run(response)
+
         response_json = json.loads(response)
         return response_json
+
     
     def generate_cohesion_coupling_analysis(self, json_report: str) -> str:
 

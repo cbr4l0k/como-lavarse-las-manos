@@ -157,8 +157,7 @@ class PromptHandler:
                                             "prompt_token_lenght": -1
                          },
                          5: {"template": """You've been given a json file with fields 'dependencies' and 'explaination' for a folder in a project,
-                                            your task is to retrieve a json with an 'explaination' field this is what the 'explaination' field 
-                                            should look like:
+                                            your task is to retrieve an explaination this is what the 'explaination' should look like:
                              
                                             "explanation": 'short folder explaination condensing the logic, purpose and explainations of all the 
                                             files inside the folder, including other folders inside the json. Infer behavior from file names and
@@ -166,9 +165,9 @@ class PromptHandler:
 
                                             {json_reports} 
                              
-                                            Remember to give back a json with one only field, the 'explaination' field, and the other existing fields.
-                                            End the json properly, with good formatting. Maximum of 90 words as explaination.
-                                            YOUR JSON RESPONSE GOES HERE:
+                                            Remember to give back an explaination only, and the other existing fields.
+                                            Maximum of 90 words as explaination. Give it as raw text.
+                                            'explaination':
                                             """,    
                              "input_variables": ["json_reports", ],
                              "prompt_token_lenght": -1

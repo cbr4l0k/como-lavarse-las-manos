@@ -41,7 +41,8 @@ class Report:
         self.project_path: str = project_path
         self.report: dict = {}
         self.generate_initial_report()
-        self.ext_dependencies: list = []
+        self.ext_dependencies: dict = {}
+        self.int_dependencies: dict = {}
         self.LLM = default_llm()
 
     def generate_initial_report(self) -> None:
@@ -60,7 +61,7 @@ class Report:
         os.system(f"tree {self.project_path} --gitignore > {OUTPUTS_PATH}filesreport.txt")
         self.load_json_report(f"{OUTPUTS_PATH}filesreport.json")
 
-    def ext_dependencies_response_handler(self, ext_deps: list) -> None:
+    def dependencies_response_handler(self, deps: list) -> None:
         """
             Identifies the external dependencies
 
@@ -72,9 +73,54 @@ class Report:
             --------
                 None
         """
-        for dep in ext_deps:
-            if dep not in self.ext_dependencies and not dep.startswith("int/"):
-                self.ext_dependencies.append(dep)
+        for dep in deps:
+            # if dep not in self.ext_dependencies and not dep.startswith("int/"):
+            #     self.ext_dependencies.append(dep)
+            if dep.startswith("int/"):  # internal dependency
+                if dep not in self.int_dependencies.keys():
+                    dep = dep.replace(".py", "")
+                    self.int_dependencies[dep] = 1
+                else:
+                    self.int_dependencies[dep] += 1
+            elif dep.startswith("ext/"):
+                if dep not in self.ext_dependencies.keys():
+                    dep = dep.replace(".py", "")
+                    self.ext_dependencies[dep] = 1
+                else:
+                    self.ext_dependencies[dep] += 1
+
+    def add_internal_dependencies_to_report_helper(self, directory):
+        """
+            Adds the internal dependencies to the report
+
+            Args:
+            ------
+                directory: dict
+
+            Returns:
+            --------
+                None
+        """
+        if directory["type"] == "directory":
+            for child in directory["contents"]:
+                self.add_internal_dependencies_to_report_helper(child)
+        elif directory["type"] == "file":
+            if not directory["name"].endswith(".py"):
+                return
+            # directory["times_called"] = self.int_dependencies[directory["full_path"]]
+            full_path_list = directory["full_path"].split("/")
+            full_path_list.pop(0)
+            full_path_list.insert(0, "int")
+            name = "/".join(full_path_list)
+
+            if name in self.int_dependencies.keys():
+                directory["times_called"] = self.int_dependencies[name]
+            elif name+".py" in self.int_dependencies.keys():
+                directory["times_called"] = self.int_dependencies[name+".py"]
+            elif name[:-3] in self.int_dependencies.keys():
+                directory["times_called"] = self.int_dependencies[name[:-3]]
+
+
 
     def add_ext_dependencies_to_report(self) -> None:
         """
@@ -93,6 +139,7 @@ class Report:
             self.report[0]["contents"].append({
                 "type": "External dependency",
                 "name": dep,
+                "times_called": self.ext_dependencies[dep],
                 "full_path": f"{root_directory}/{dep}",
                 "dependencies": [],
                 "explanation": ""
@@ -122,9 +169,11 @@ class Report:
             # print("---------------response-----------------")
             # print(response)
             # response = {"dependencies": "dependencies", "explanation": "explanation"}
+            for dep in response["dependencies"]:
+                dep.replace(".py", "")
             directory["dependencies"] = response["dependencies"]
             directory["explanation"] = response["explanation"]
-            self.ext_dependencies_response_handler(response["dependencies"])
+            self.dependencies_response_handler(response["dependencies"])
 
     def remove_py_extension(self):
         """
@@ -189,6 +238,7 @@ class Report:
 
         self.complete_report_helper(self.report[0], '')
         self.add_directory_information_helper(self.report[0])
+        self.add_internal_dependencies_to_report_helper(self.report[0])
         self.add_ext_dependencies_to_report()
         self.remove_py_extension()
         self.add_aditional_info()

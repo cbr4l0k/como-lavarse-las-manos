@@ -73,7 +73,7 @@ class Report:
                 None
         """
         for dep in ext_deps:
-            if dep not in self.ext_dependencies and not dep.startswith("int."):
+            if dep not in self.ext_dependencies and not dep.startswith("int/"):
                 self.ext_dependencies.append(dep)
 
     def add_ext_dependencies_to_report(self) -> None:

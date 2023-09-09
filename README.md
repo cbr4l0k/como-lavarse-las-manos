@@ -4,7 +4,7 @@
 ## Requirements
 - Python 3.11 or higher.
 - Nodejs.
-- JavaScript D3.
+- JavaScript D3 (version 7.85).
 - tree.
 
 ## Insallation and setup

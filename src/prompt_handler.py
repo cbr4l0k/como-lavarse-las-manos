@@ -36,7 +36,7 @@ class PromptHandler:
     projects_path = ''
 
     def __init__(self, model_name: str):
-        self.initial_files_report = None
+        self.initial_files_report: str = None
         self.load_initial_filesreport()
 
         self.prompts = {0: {"template": """Identify which dependencies the file uses and do a brief explanation of what the file contains.

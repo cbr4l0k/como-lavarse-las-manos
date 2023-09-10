@@ -1,741 +1,131 @@
 [
     {
         "type": "directory",
-        "name": "Whitehat",
-        "explanation": "\"This folder contains the 'whitehat' package setup script, which is responsible for importing external libraries like 'setuptools' and internal modules such as '__init__' and 'requirements.txt'. The script reads the 'README.md' file for a detailed description, extracts the version number from '__init__.py', and includes the contents of 'requirements.txt' as installation requirements. It also specifies metadata for the package including author, license, keywords, and classifiers.\"",
+        "name": "src",
+        "explanation": "The folder contains several files, each with their own explanations. The 'FileHandler.py' file handles individual files and imports various external libraries such as json, os, logging, typing.List, and dotenv.load_dotenv. It also imports internal libraries from langchain.text_splitter (RecursiveCharacterTextSplitter, Language) and langchain.schema.document (Document). The 'LLMManager.py' file is a wrapper for the langchain library and has methods for loading the langchain model and chain, generating responses and explanations, and checking the response of the langchain model. The 'prompt_handler.py' file handles prompts for generating code using the GPT-3 model and includes methods for setting output paths, loading initial files reports, and getting prompts. The 'Report.py' file generates a report of the project tree and imports modules such as json, os, datetime, LLMManager, and dotenv. Finally, the 'soo.py' file imports dependencies such as shutil, Report, sys, os, load_dotenv, http.server, and socketserver, and starts a server on port 8004.",
         "children": [
             {
-                "type": "directory",
-                "name": "examples",
-                "explanation": "\"The folder 'examples' in the 'Whitehat' project contains various Python files that demonstrate different functionalities related to cryptography, brute force attacks, browser history retrieval, IP address information, image manipulation, keylogging, WiFi password retrieval, phone number operations, and port scanning. Each file imports relevant classes or modules from internal libraries within the 'whitehat' package and uses them to perform specific tasks. The explanations for each file provide a brief overview of their purpose and functionality.\"",
-                "children": [
-                    {
-                        "type": "file",
-                        "name": "Arithmos_cipher",
-                        "full_path": "Whitehat/examples/Arithmos_cipher",
-                        "id": "int/examples/Arithmos_cipher",
-                        "dependencies": [
-                            "int/whitehat/cryptography_functions/arithmos_cipher"
-                        ],
-                        "explanation": "The code imports the 'ArithmosCipher' class from the internal library 'Cryptography' in the 'whitehat' package. It uses the 'encrypt' and 'decrypt' methods of the 'ArithmosCipher' class to encrypt and decrypt a string."
-                    },
-                    {
-                        "type": "file",
-                        "name": "binary",
-                        "full_path": "Whitehat/examples/binary",
-                        "id": "int/examples/binary",
-                        "dependencies": [
-                            "int/whitehat/cryptography_functions/binary"
-                        ],
-                        "explanation": "The code imports the 'Binary' module from the internal library 'Cryptography' in the 'whitehat' package. It uses the 'encrypt' and 'decrypt' methods from the 'Binary' module to encrypt and decrypt the string 'LyQuid'."
-                    },
-                    {
-                        "type": "file",
-                        "name": "bruteforce_zip",
-                        "full_path": "Whitehat/examples/bruteforce_zip",
-                        "id": "int/examples/bruteforce_zip",
-                        "dependencies": [
-                            "int/whitehat/bruteforce"
-                        ],
-                        "explanation": "The code imports the 'BruteForce' class from the internal library 'whitehat/bruteforce'. It creates an instance of the class and uses it to perform a brute force attack on a zip file."
-                    },
-                    {
-                        "type": "file",
-                        "name": "caesar_cipher",
-                        "full_path": "Whitehat/examples/caesar_cipher",
-                        "id": "int/examples/caesar_cipher",
-                        "dependencies": [
-                            "int/whitehat/cryptography_functions/caesar_cipher"
-                        ],
-                        "explanation": "The code imports the 'CaesarCipher' class from the internal library 'cryptography_functions' in the 'whitehat' package. It uses this class to encrypt and decrypt a text using the Caesar cipher algorithm."
-                    },
-                    {
-                        "type": "file",
-                        "name": "ddos",
-                        "full_path": "Whitehat/examples/ddos",
-                        "id": "int/examples/ddos",
-                        "dependencies": [
-                            "int/whitehat/ddos"
-                        ],
-                        "explanation": "The code imports the 'DDoS' class from the internal library 'whitehat.ddos'. It creates an instance of the 'DDoS' class with specified IP and PORT, and starts the DDoS attack for a duration of 120 seconds."
-                    },
-                    {
-                        "type": "file",
-                        "name": "get_chrome_history",
-                        "full_path": "Whitehat/examples/get_chrome_history",
-                        "id": "int/examples/get_chrome_history",
-                        "dependencies": [
-                            "int/whitehat/browser"
-                        ],
-                        "explanation": "The code imports the 'Browser' class from the internal library 'whitehat'. It creates an instance of the 'Browser' class and uses it to get the browsing history from the Chrome browser."
-                    },
-                    {
-                        "type": "file",
-                        "name": "ip",
-                        "full_path": "Whitehat/examples/ip",
-                        "id": "int/examples/ip",
-                        "dependencies": [
-                            "int/whitehat/ip"
-                        ],
-                        "explanation": "The code imports the 'IP' class from the internal library 'whitehat'. It creates an instance of the 'IP' class and uses it to get information about a specified IP address. The code also calls the 'get_ip' method of the 'IP' class to get the IP address of 'github.com'. Finally, it prints the obtained IP addresses."
-                    },
-                    {
-                        "type": "file",
-                        "name": "jpg",
-                        "full_path": "Whitehat/examples/jpg",
-                        "id": "int/examples/jpg",
-                        "dependencies": [
-                            "int/whitehat/images"
-                        ],
-                        "explanation": "The code imports the 'images' module from the internal library. It uses the 'JPG' class from the 'images' module to hide and reveal secret messages in a JPG image file. It also uses the 'hide_program' and 'reveal_program' methods from the 'JPG' class to hide and reveal a program in a JPG image file."
-                    },
-                    {
-                        "type": "file",
-                        "name": "keylogger",
-                        "full_path": "Whitehat/examples/keylogger",
-                        "id": "int/examples/keylogger",
-                        "dependencies": [
-                            "int/whitehat/keylogger"
-                        ],
-                        "explanation": "The code imports the 'Keylogger' class from the 'whitehat' internal library. It then calls the 'start' method of the 'Keylogger' class, passing in the path to a log file and setting the 'allow_print' parameter to False."
-                    },
-                    {
-                        "type": "file",
-                        "name": "morse",
-                        "full_path": "Whitehat/examples/morse",
-                        "id": "int/examples/morse",
-                        "dependencies": [
-                            "int/whitehat/cryptography_functions/morse"
-                        ],
-                        "explanation": "The code imports the 'Morse' module from the internal library 'Cryptography' in the 'whitehat' package. It uses the 'encrypt' and 'decrypt' methods of the 'Morse' class to encrypt and decrypt a string using Morse code."
-                    },
-                    {
-                        "type": "file",
-                        "name": "my_wifi",
-                        "full_path": "Whitehat/examples/my_wifi",
-                        "id": "int/examples/my_wifi",
-                        "dependencies": [
-                            "int/whitehat/wifi"
-                        ],
-                        "explanation": "The code imports the 'Wifi' class from the internal library 'whitehat'. It then calls the 'get_all_saved_pw()' method of the 'Wifi' class to print all the wifi names and passwords that have been connected to the device."
-                    },
-                    {
-                        "type": "file",
-                        "name": "phonenumber",
-                        "full_path": "Whitehat/examples/phonenumber",
-                        "id": "int/examples/phonenumber",
-                        "dependencies": [
-                            "int/whitehat/phonenumber"
-                        ],
-                        "explanation": "The code imports the 'Phonenumber' class from the internal library 'whitehat'. It creates an instance of the 'Phonenumber' class and performs various operations on it, such as getting the timezone, carrier, region, and checking if the phone number is valid. The 'get_all_info' method is used to retrieve all information about the phone number in JSON format."
-                    },
-                    {
-                        "type": "file",
-                        "name": "png_and_jpg.md"
-                    },
-                    {
-                        "type": "file",
-                        "name": "png",
-                        "full_path": "Whitehat/examples/png",
-                        "id": "int/examples/png",
-                        "dependencies": [
-                            "int/examples/png"
-                        ],
-                        "explanation": "The code imports the 'whitehat' module from the internal library. It uses the 'PNG' class from the 'whitehat' module to hide and reveal secret messages in a PNG image file, as well as hide and reveal a program in the same PNG image file."
-                    },
-                    {
-                        "type": "file",
-                        "name": "port_scanner",
-                        "full_path": "Whitehat/examples/port_scanner",
-                        "id": "int/examples/port_scanner",
-                        "dependencies": [
-                            "int/whitehat/port"
-                        ],
-                        "explanation": "The code imports the 'Port' class from the internal library 'whitehat'. It creates an instance of the 'Port' class with IP address '127.0.0.1' and port number '80', then calls the 'scan()' method on the instance to perform a port scan."
-                    },
-                    {
-                        "type": "file",
-                        "name": "reverse_shell",
-                        "full_path": "Whitehat/examples/reverse_shell",
-                        "id": "int/examples/reverse_shell",
-                        "dependencies": [
-                            "int/whitehat/reverse_shell"
-                        ],
-                        "explanation": "The code imports the 'reverse_shell' module from the internal library. It uses the 'ReverseShell' class from the 'reverse_shell' module to create a reverse shell connection between an attacker and victim. The 'attacker' method is used by the attacker to initiate the reverse shell, specifying the port to listen on. The 'victim' method is used by the victim to connect to the attacker's IP address and specified port."
-                    },
-                    {
-                        "type": "file",
-                        "name": "vigenere_cipher",
-                        "full_path": "Whitehat/examples/vigenere_cipher",
-                        "id": "int/examples/vigenere_cipher",
-                        "dependencies": [
-                            "int/whitehat/cryptography_functions/vigenere_cipher"
-                        ],
-                        "explanation": "The code imports the 'VigenereCipher' class from the internal library 'Cryptography' in the 'whitehat' package. It uses the 'encrypt' and 'decrypt' methods of the 'VigenereCipher' class to encrypt and decrypt a message using the Vigenere cipher algorithm."
-                    }
-                ]
-            },
-            {
                 "type": "file",
-                "name": "LICENSE"
-            },
-            {
-                "type": "file",
-                "name": "README.md"
-            },
-            {
-                "type": "file",
-                "name": "requirements.txt"
-            },
-            {
-                "type": "file",
-                "name": "setup",
-                "full_path": "Whitehat/setup",
-                "id": "int/setup",
+                "name": "FileHandler",
+                "full_path": "src/FileHandler",
+                "id": "int/FileHandler",
                 "dependencies": [
-                    "ext/setuptools",
-                    "int/whitehat/__init__",
-                    "ext/requirements.txt"
+                    "ext/json",
+                    "ext/os",
+                    "ext/logging",
+                    "ext/typing/List",
+                    "ext/dotenv/load_dotenv",
+                    "ext/langchain/text_splitter/RecursiveCharacterTextSplitter",
+                    "ext/langchain/text_splitter/Language",
+                    "ext/langchain/schema/document/Document"
                 ],
-                "explanation": "This file is a setup script for the 'whitehat' package. It imports modules from external libraries such as 'setuptools' and internal modules like '__init__' and 'requirements.txt'. The script reads the 'README.md' file for the long description, extracts the version number from '__init__.py', and includes the contents of 'requirements.txt' as install requirements. It also specifies metadata for the package including author, license, keywords, and classifiers."
+                "explanation": "This file contains the FileHandler class, which is responsible for handling individual files. It imports various external libraries such as json, os, logging, typing.List, and dotenv.load_dotenv. Additionally, it imports internal libraries from langchain.text_splitter (RecursiveCharacterTextSplitter, Language) and langchain.schema.document (Document). The class has methods for loading a JSON report, generating a JSON report, reading files from a project tree, saving responses for files, inferring language from filenames, chunking documents, and getting responses from a directory.",
+                "times_called": 3
             },
             {
-                "type": "directory",
-                "name": "whitehat",
-                "explanation": "\"The code in this folder includes various files that implement different functionalities for the Whitehat project. These functionalities include browser automation, brute force password cracking, cryptography methods, DDoS attacks, custom error handling, image processing, IP address manipulation, keylogging, phone number analysis, port scanning, reverse shell creation, and WiFi operations. Each file imports specific dependencies from internal and external libraries to support its functionality. The code is organized into classes and modules, with nested classes used for encryption methods in the cryptography file.\"",
-                "children": [
-                    {
-                        "type": "file",
-                        "name": "browser",
-                        "full_path": "Whitehat/whitehat/browser",
-                        "id": "int/whitehat/browser",
-                        "dependencies": [
-                            "int/whitehat/errors",
-                            "ext/os",
-                            "ext/sqlite3",
-                            "ext/platform",
-                            "ext/shutil"
-                        ],
-                        "explanation": "The code imports the following dependencies: 'os', 'sqlite3', 'platform', and 'shutil' from external libraries. It also imports the 'errors' module from the internal library 'whitehat'. The code is a class called 'Browser' that implements browser functions, specifically getting the history of a browser. It supports the Chrome browser on Windows and Linux operating systems.",
-                        "times_called": 3
-                    },
-                    {
-                        "type": "file",
-                        "name": "bruteforce",
-                        "full_path": "Whitehat/whitehat/bruteforce",
-                        "id": "int/whitehat/bruteforce",
-                        "dependencies": [
-                            "ext/lib/sub_lib/module",
-                            "ext/tqdm",
-                            "ext/.errors"
-                        ],
-                        "explanation": "This code imports the 'zipfile' module from the internal library, the 'tqdm' module from an external library, and the '.errors' module from the internal library. The code defines a class called 'BruteForce' that implements a brute force function for cracking passwords in a zip file. It has an initializer method that takes a wordlist as a parameter and a 'zip' method that performs the brute force attack on the specified zip file.",
-                        "times_called": 3
-                    },
-                    {
-                        "type": "directory",
-                        "name": "cryptography_functions",
-                        "explanation": "The folder \"cryptography_functions\" contains several files that implement different encryption and decryption algorithms. The \"arithmos_cipher.py\" file uses the \"arithmos\" module from the internal library and imports the \"CannotNone\" class from the \"errors\" module. It provides methods for encrypting and decrypting text using the Arithmos cipher algorithm. The \"binary.py\" file converts text into binary representation and vice versa. The \"caesar_cipher.py\" file implements the Caesar cipher algorithm and imports the \"errors\" module and the \"string\" module. The \"__init__.py\" file is responsible for managing dependencies within the folder. Finally, the \"morse.py\" file converts text to Morse code and back, while the \"vigenere_cipher.py\" file implements the Vigenere cipher algorithm.",
-                        "children": [
-                            {
-                                "type": "file",
-                                "name": "arithmos_cipher",
-                                "full_path": "Whitehat/whitehat/cryptography_functions/arithmos_cipher",
-                                "id": "int/whitehat/cryptography_functions/arithmos_cipher",
-                                "dependencies": [
-                                    "int/whitehat/cryptography_functions/arithmos_cipher",
-                                    "int/whitehat/errors"
-                                ],
-                                "explanation": "This code uses the 'arithmos' module from the internal library and imports the 'CannotNone' class from the 'errors' module in the internal library. The 'ArithmosCipher_function' class has two methods, 'encrypt' and 'decrypt', which use the 'arithmos.encrypt' and 'arithmos.decrypt' functions respectively to perform encryption and decryption operations.",
-                                "times_called": 4
-                            },
-                            {
-                                "type": "file",
-                                "name": "binary",
-                                "full_path": "Whitehat/whitehat/cryptography_functions/binary",
-                                "id": "int/whitehat/cryptography_functions/binary",
-                                "dependencies": [
-                                    "int/whitehat/cryptography_functions/binary",
-                                    "int/whitehat/cryptography_functions/__init__"
-                                ],
-                                "explanation": "The code contains a class called binary_function with two methods: encrypt and decrypt. The encrypt method converts text into binary representation, while the decrypt method converts binary back into text.",
-                                "times_called": 4
-                            },
-                            {
-                                "type": "file",
-                                "name": "caesar_cipher",
-                                "full_path": "Whitehat/whitehat/cryptography_functions/caesar_cipher",
-                                "id": "int/whitehat/cryptography_functions/caesar_cipher",
-                                "dependencies": [
-                                    "int/whitehat/errors",
-                                    "ext/string"
-                                ],
-                                "explanation": "The code contains a class called CaesarCipher_function that provides methods for encrypting and decrypting text using the Caesar cipher algorithm. The code imports the 'errors' module from the internal library and the 'string' module from an external library to access string-related functions and constants.",
-                                "times_called": 4
-                            },
-                            {
-                                "type": "file",
-                                "name": "__init__",
-                                "full_path": "Whitehat/whitehat/cryptography_functions/__init__",
-                                "id": "int/whitehat/cryptography_functions/__init__",
-                                "dependencies": [
-                                    "int/whitehat/browser",
-                                    "int/whitehat/bruteforce",
-                                    "int/whitehat/cryptography_functions/arithmos_cipher",
-                                    "int/whitehat/cryptography_functions/binary",
-                                    "int/whitehat/cryptography_functions/caesar_cipher",
-                                    "int/whitehat/cryptography_functions/morse",
-                                    "int/whitehat/cryptography_functions/vigenere_cipher",
-                                    "int/whitehat/cryptography",
-                                    "int/whitehat/ddos",
-                                    "int/whitehat/errors",
-                                    "int/whitehat/images",
-                                    "int/whitehat/ip",
-                                    "int/whitehat/keylogger",
-                                    "int/whitehat/phonenumber",
-                                    "int/whitehat/port",
-                                    "int/whitehat/reverse_shell",
-                                    "int/whitehat/utilities/ddos_utils",
-                                    "int/whitehat/wifi"
-                                ],
-                                "explanation": "The dependencies have been checked and corrected.",
-                                "times_called": 2
-                            },
-                            {
-                                "type": "file",
-                                "name": "morse",
-                                "full_path": "Whitehat/whitehat/cryptography_functions/morse",
-                                "id": "int/whitehat/cryptography_functions/morse",
-                                "dependencies": [
-                                    "int/whitehat/cryptography_functions/morse"
-                                ],
-                                "explanation": "The code contains a class called 'morse_function' which has two methods: 'encrypt' and 'decrypt'. The 'encrypt' method takes a text as input and converts it into Morse code using the MORSE_CODE_DICT dictionary. The 'decrypt' method takes Morse code as input and converts it back into text. The code depends on the internal library 'whitehat.cryptography_functions.morse'.",
-                                "times_called": 4
-                            },
-                            {
-                                "type": "file",
-                                "name": "vigenere_cipher",
-                                "full_path": "Whitehat/whitehat/cryptography_functions/vigenere_cipher",
-                                "id": "int/whitehat/cryptography_functions/vigenere_cipher",
-                                "dependencies": [
-                                    "int/whitehat/cryptography_functions/vigenere_cipher",
-                                    "int/whitehat/cryptography_functions/__init__"
-                                ],
-                                "explanation": "The code contains a class called vigenerecipher_function that provides methods for encrypting and decrypting text using the Vigenere cipher. The class imports the 'generate_key' function from the internal library 'cryptography_functions.vigenere_cipher'. The 'encrypt' method takes a string and a key as input, generates a key using the 'generate_key' function, and returns the encrypted text. The 'decrypt' method takes a cipher and a key as input, generates a key using the 'generate_key' function, and returns the decrypted text.",
-                                "times_called": 4
-                            }
-                        ]
-                    },
-                    {
-                        "type": "file",
-                        "name": "cryptography",
-                        "full_path": "Whitehat/whitehat/cryptography",
-                        "id": "int/whitehat/cryptography",
-                        "dependencies": [
-                            "int/whitehat/cryptography_functions/caesar_cipher",
-                            "int/whitehat/cryptography_functions/morse",
-                            "int/whitehat/cryptography_functions/binary",
-                            "int/whitehat/cryptography_functions/vigenere_cipher",
-                            "int/whitehat/cryptography_functions/arithmos_cipher"
-                        ],
-                        "explanation": "The code contains a class called Cryptography that implements various encryption methods such as Caesar Cipher, Morse code, Binary code, Vigenere Cipher, and Arithmos Cipher. Each encryption method is implemented as a nested class within the Cryptography class. The code imports functions from internal modules in the 'cryptography_functions' package.",
-                        "times_called": 2
-                    },
-                    {
-                        "type": "file",
-                        "name": "ddos",
-                        "full_path": "Whitehat/whitehat/ddos",
-                        "id": "int/whitehat/ddos",
-                        "dependencies": [
-                            "int/whitehat/utilities/ddos_utils",
-                            "int/whitehat/errors"
-                        ],
-                        "explanation": "The code imports the 'ddos_util' function from the internal module 'utilities.ddos_utils' and the 'InvalidIP' exception from the internal module 'errors'. The DDoS class implements a DDoS function with parameters for target IP, port, and duration. It generates a fake IP address and starts the DDoS attack by calling the 'ddos_util' function in a loop.",
-                        "times_called": 3
-                    },
-                    {
-                        "type": "file",
-                        "name": "errors",
-                        "full_path": "Whitehat/whitehat/errors",
-                        "id": "int/whitehat/errors",
-                        "dependencies": [
-                            "int/whitehat/errors"
-                        ],
-                        "explanation": "The code contains a set of custom error classes that inherit from the WhitehatErrors class. These classes handle specific error scenarios within the Whitehat application. The main features of the code are the different error classes and their respective error messages.",
-                        "times_called": 11
-                    },
-                    {
-                        "type": "file",
-                        "name": "images",
-                        "full_path": "Whitehat/whitehat/images",
-                        "id": "int/whitehat/images",
-                        "dependencies": [
-                            "ext/whitehat.errors"
-                        ],
-                        "explanation": "The code imports the 'errors' module from the internal library 'whitehat'. The 'PNG' and 'JPG' classes provide methods for hiding and revealing messages and programs in PNG and JPG files. The methods include hiding a message or program, revealing a hidden message or program, and creating a new file from a hidden program.",
-                        "times_called": 3
-                    },
-                    {
-                        "type": "file",
-                        "name": "__init__",
-                        "full_path": "Whitehat/whitehat/__init__",
-                        "id": "int/whitehat/__init__",
-                        "dependencies": [
-                            "ext/whitehat.ddos",
-                            "ext/whitehat.phonenumber",
-                            "ext/whitehat.wifi",
-                            "ext/whitehat.ip",
-                            "ext/whitehat.keylogger",
-                            "ext/whitehat.port",
-                            "ext/whitehat.reverse_shell",
-                            "ext/whitehat.browser",
-                            "ext/whitehat.bruteforce",
-                            "ext/whitehat.cryptography",
-                            "ext/whitehat.images.PNG",
-                            "ext/whitehat.images.JPEG"
-                        ],
-                        "explanation": "The code imports various modules and scripts from the 'whitehat' package. It includes functionalities for DDoS attacks, phone number manipulation, WiFi operations, IP address handling, keylogging, port scanning, reverse shell creation, browser automation, brute force techniques, cryptography, and image processing (specifically PNG and JPEG formats).",
-                        "times_called": 1
-                    },
-                    {
-                        "type": "file",
-                        "name": "ip",
-                        "full_path": "Whitehat/whitehat/ip",
-                        "id": "int/whitehat/ip",
-                        "dependencies": [
-                            "ext/json",
-                            "ext/typing",
-                            "ext/urllib/request",
-                            "ext/socket",
-                            "int/whitehat/errors"
-                        ],
-                        "explanation": "A class that implements IP function. It uses the 'json' library for loading JSON data, the 'typing' module for type hints, the 'urllib.request' module for making HTTP requests, the 'socket' module for getting the IP address from a URL, and the 'errors' module for handling custom exceptions.",
-                        "times_called": 3
-                    },
-                    {
-                        "type": "file",
-                        "name": "keylogger",
-                        "full_path": "Whitehat/whitehat/keylogger",
-                        "id": "int/whitehat/keylogger",
-                        "dependencies": [
-                            "int/whitehat/errors",
-                            "ext/logging",
-                            "ext/pynput/keyboard"
-                        ],
-                        "explanation": "The code imports the 'errors' module from the internal library, and the 'logging' and 'pynput.keyboard' modules from external libraries. The Keylogger class has a start method that takes in a logfile_path parameter and an allow_print parameter. It initializes the logging module with the specified logfile path and defines an on_press function to log key presses. The start method creates a listener using the pynput.keyboard module and joins it to capture key events.",
-                        "times_called": 3
-                    },
-                    {
-                        "type": "file",
-                        "name": "phonenumber",
-                        "full_path": "Whitehat/whitehat/phonenumber",
-                        "id": "int/whitehat/phonenumber",
-                        "dependencies": [
-                            "ext/phonenumbers",
-                            "int/whitehat/errors"
-                        ],
-                        "explanation": "The code imports the 'phonenumbers' module from the external library 'phonenumbers'. It also imports specific functions and classes from the internal 'whitehat.errors' module. The 'Phonenumber' class implements various methods to retrieve information about a phone number, such as its timezone, carrier, region, and validity. The 'get_all_info' method returns all the available information in either JSON or list format.",
-                        "times_called": 3
-                    },
-                    {
-                        "type": "file",
-                        "name": "port",
-                        "full_path": "Whitehat/whitehat/port",
-                        "id": "int/whitehat/port",
-                        "dependencies": [
-                            "int/whitehat/errors"
-                        ],
-                        "explanation": "The code imports the 'InvalidIP' class from the internal library 'whitehat.errors'. The Port class initializes with an IP and PORT, checks if the IP is valid, and then scans the specified IP and PORT to determine if it is open or closed.",
-                        "times_called": 3
-                    },
-                    {
-                        "type": "file",
-                        "name": "reverse_shell",
-                        "full_path": "Whitehat/whitehat/reverse_shell",
-                        "id": "int/whitehat/reverse_shell",
-                        "dependencies": [
-                            "ext/socket",
-                            "ext/sys",
-                            "ext/subprocess",
-                            "ext/os"
-                        ],
-                        "explanation": "The code contains a class called ReverseShell that implements a reverse shell function. It has two class methods: attacker and victim. The attacker method sets up the attacker side of the reverse shell, while the victim method sets up the victim side. The code imports the socket, sys, subprocess, and os modules for network communication and system operations.",
-                        "times_called": 3
-                    },
-                    {
-                        "type": "directory",
-                        "name": "utilities",
-                        "explanation": "\"The folder 'utilities' contains two files. The file 'ddos_utils.py' imports the 'socket' module for network communication and performs a DDoS attack by sending multiple GET requests to a specified IP address using a fake IP address. The file '__init__.py' serves as an initialization script for the utilities folder and has dependencies on various other modules within the project, which have been checked and corrected.\"",
-                        "children": [
-                            {
-                                "type": "file",
-                                "name": "ddos_utils",
-                                "full_path": "Whitehat/whitehat/utilities/ddos_utils",
-                                "id": "int/whitehat/utilities/ddos_utils",
-                                "dependencies": [
-                                    "ext/socket"
-                                ],
-                                "explanation": "The code imports the 'socket' module, which is an external library used for network communication. It does not import any other dependencies. The code contains a function for performing a DDoS attack. It sends multiple GET requests to a specified IP address and port using a fake IP address.",
-                                "times_called": 3
-                            },
-                            {
-                                "type": "file",
-                                "name": "__init__",
-                                "full_path": "Whitehat/whitehat/utilities/__init__",
-                                "id": "int/whitehat/utilities/__init__",
-                                "dependencies": [
-                                    "int/whitehat/browser",
-                                    "int/whitehat/bruteforce",
-                                    "int/whitehat/cryptography_functions/arithmos_cipher",
-                                    "int/whitehat/cryptography_functions/binary",
-                                    "int/whitehat/cryptography_functions/caesar_cipher",
-                                    "int/whitehat/cryptography_functions/morse",
-                                    "int/whitehat/cryptography_functions/vigenere_cipher",
-                                    "int/whitehat/cryptography",
-                                    "int/whitehat/ddos",
-                                    "int/whitehat/errors",
-                                    "int/whitehat/images",
-                                    "int/whitehat/ip",
-                                    "int/whitehat/keylogger",
-                                    "int/whitehat/phonenumber",
-                                    "int/whitehat/port",
-                                    "int/whitehat/reverse_shell",
-                                    "int/whitehat/utilities/ddos_utils",
-                                    "int/whitehat/wifi"
-                                ],
-                                "explanation": "The dependencies have been checked and corrected."
-                            }
-                        ]
-                    },
-                    {
-                        "type": "file",
-                        "name": "wifi",
-                        "full_path": "Whitehat/whitehat/wifi",
-                        "id": "int/whitehat/wifi",
-                        "dependencies": [
-                            "int/whitehat/errors",
-                            "ext/subprocess",
-                            "ext/re",
-                            "ext/platform"
-                        ],
-                        "explanation": "The code imports the 'subprocess', 're', and 'platform' modules from external libraries. It also imports the 'UnsupportedOS' class from the internal library 'whitehat.errors'. The 'Wifi' class has a class method called 'get_all_saved_pw' which retrieves all saved passwords on a Windows computer using the 'netsh' command-line tool.",
-                        "times_called": 3
-                    }
-                ]
+                "type": "file",
+                "name": "LLMManager",
+                "full_path": "src/LLMManager",
+                "id": "int/LLMManager",
+                "dependencies": [
+                    "ext/json",
+                    "ext/os",
+                    "ext/dotenv",
+                    "ext/langchain/llms/openai",
+                    "ext/langchain",
+                    "ext/langchain/chains",
+                    "ext/langchain/memory",
+                    "ext/langchain/callbacks/manager",
+                    "ext/langchain/callbacks/streaming_stdout",
+                    "int/FileHandler",
+                    "int/prompt_handler"
+                ],
+                "explanation": "This file contains a class called LLM, which is a wrapper for the langchain library. It uses the langchain library to generate explanations for code and perform cohesion and coupling analysis on projects. The class has methods for loading the langchain model and chain, generating responses and explanations, setting the context window size, and checking the response of the langchain model.",
+                "times_called": 2
+            },
+            {
+                "type": "file",
+                "name": "prompt_handler",
+                "full_path": "src/prompt_handler",
+                "id": "int/prompt_handler",
+                "dependencies": [
+                    "ext/os",
+                    "ext/json",
+                    "ext/tiktoken",
+                    "ext/hashlib",
+                    "ext/dotenv",
+                    "ext/tiktoken",
+                    "int/FileHandler",
+                    "int/LLMManager",
+                    "int/prompt_handler",
+                    "int/Report"
+                ],
+                "explanation": "The code imports the 'os', 'json', 'tiktoken', 'hashlib', and 'dotenv' external libraries. It also imports the 'load_dotenv' function from the 'dotenv' library. The code then uses the 'load_dotenv' function to load environment variables and assigns the value of the 'OUTPUTS_PATH' variable from the loaded environment variables. The file contains a class called 'PromptHandler' that handles prompts for generating code using the GPT-3 model. It has methods to set the output path, load the initial files report, set the largest prompt token length, set the model name and encoding, get raw templates, get prompts, get prompt token length, and set token length. The file also contains helper methods for setting the projects path and getting the white-spaced template.",
+                "times_called": 3
+            },
+            {
+                "type": "file",
+                "name": "Report",
+                "full_path": "src/Report",
+                "id": "int/Report",
+                "dependencies": [
+                    "ext/json",
+                    "ext/os",
+                    "ext/datetime",
+                    "int/LLMManager",
+                    "ext/dotenv"
+                ],
+                "explanation": "This file contains the Report class, which is responsible for generating a report of the project tree. It imports modules such as json, os, datetime, LLMManager (internal), and dotenv (external). The Report class has methods for loading file content, finding all files in the project tree, generating an initial report, handling dependencies, adding internal and external dependencies to the report, completing the report with additional information, and saving the report.",
+                "times_called": 2
+            },
+            {
+                "type": "file",
+                "name": "soo",
+                "full_path": "src/soo",
+                "id": "int/soo",
+                "dependencies": [
+                    "ext/shutil",
+                    "int/Report",
+                    "ext/sys",
+                    "ext/os",
+                    "ext/dotenv",
+                    "ext/http.server",
+                    "ext/socketserver"
+                ],
+                "explanation": "The code imports the following dependencies: shutil, Report from the internal library 'Report', sys, os, load_dotenv from the external library 'dotenv', http.server, and socketserver. The main function checks if the 'tree' command is installed, takes a project name as an argument, creates a report using the Report class, and starts a server on port 8004."
+            },
+            {
+                "type": "file",
+                "name": "test",
+                "full_path": "src/test",
+                "id": "int/test",
+                "dependencies": [
+                    "ext/os",
+                    "ext/dotenv",
+                    "ext/langchain/llms/openai",
+                    "ext/langchain",
+                    "ext/langchain/chains",
+                    "ext/langchain/memory",
+                    "ext/langchain/callbacks/manager",
+                    "ext/langchain/callbacks/streaming_stdout",
+                    "int/FileHandler",
+                    "int/prompt_handler"
+                ],
+                "explanation": "The code imports modules and scripts from both external libraries (such as os and dotenv) and internal libraries (langchain, langchain.chains, langchain.memory, langchain.callbacks.manager, langchain.callbacks.streaming_stdout, FileHandler, prompt_handler). The main features of the code include loading an LLama model, loading a chain with a template, chunking documents based on token size, running the LLama chain on the documents, and saving the responses."
             },
             {
                 "type": "External dependency",
-                "name": "ext/setuptools",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/setuptools",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/requirements.txt",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/requirements.txt",
+                "name": "ext/json",
+                "times_called": 4,
+                "full_path": "src/ext/json",
                 "dependencies": [],
                 "explanation": ""
             },
             {
                 "type": "External dependency",
                 "name": "ext/os",
-                "times_called": 2,
-                "full_path": "Whitehat/ext/os",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/sqlite3",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/sqlite3",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/platform",
-                "times_called": 2,
-                "full_path": "Whitehat/ext/platform",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/shutil",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/shutil",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/lib/sub_lib/module",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/lib/sub_lib/module",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/tqdm",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/tqdm",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/.errors",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/.errors",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/string",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/string",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.errors",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.errors",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.ddos",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.ddos",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.phonenumber",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.phonenumber",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.wifi",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.wifi",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.ip",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.ip",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.keylogger",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.keylogger",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.port",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.port",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.reverse_shell",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.reverse_shell",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.browser",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.browser",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.bruteforce",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.bruteforce",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.cryptography",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.cryptography",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.images.PNG",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.images.PNG",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/whitehat.images.JPEG",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/whitehat.images.JPEG",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/json",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/json",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/typing",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/typing",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/urllib/request",
-                "times_called": 1,
-                "full_path": "Whitehat/ext/urllib/request",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/socket",
-                "times_called": 3,
-                "full_path": "Whitehat/ext/socket",
+                "times_called": 6,
+                "full_path": "src/ext/os",
                 "dependencies": [],
                 "explanation": ""
             },
@@ -743,23 +133,135 @@
                 "type": "External dependency",
                 "name": "ext/logging",
                 "times_called": 1,
-                "full_path": "Whitehat/ext/logging",
+                "full_path": "src/ext/logging",
                 "dependencies": [],
                 "explanation": ""
             },
             {
                 "type": "External dependency",
-                "name": "ext/pynput/keyboard",
+                "name": "ext/typing/List",
                 "times_called": 1,
-                "full_path": "Whitehat/ext/pynput/keyboard",
+                "full_path": "src/ext/typing/List",
                 "dependencies": [],
                 "explanation": ""
             },
             {
                 "type": "External dependency",
-                "name": "ext/phonenumbers",
+                "name": "ext/dotenv/load_dotenv",
                 "times_called": 1,
-                "full_path": "Whitehat/ext/phonenumbers",
+                "full_path": "src/ext/dotenv/load_dotenv",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/text_splitter/RecursiveCharacterTextSplitter",
+                "times_called": 1,
+                "full_path": "src/ext/langchain/text_splitter/RecursiveCharacterTextSplitter",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/text_splitter/Language",
+                "times_called": 1,
+                "full_path": "src/ext/langchain/text_splitter/Language",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/schema/document/Document",
+                "times_called": 1,
+                "full_path": "src/ext/langchain/schema/document/Document",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/dotenv",
+                "times_called": 5,
+                "full_path": "src/ext/dotenv",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/llms/openai",
+                "times_called": 2,
+                "full_path": "src/ext/langchain/llms/openai",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain",
+                "times_called": 2,
+                "full_path": "src/ext/langchain",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/chains",
+                "times_called": 2,
+                "full_path": "src/ext/langchain/chains",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/memory",
+                "times_called": 2,
+                "full_path": "src/ext/langchain/memory",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/callbacks/manager",
+                "times_called": 2,
+                "full_path": "src/ext/langchain/callbacks/manager",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/callbacks/streaming_stdout",
+                "times_called": 2,
+                "full_path": "src/ext/langchain/callbacks/streaming_stdout",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/tiktoken",
+                "times_called": 2,
+                "full_path": "src/ext/tiktoken",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/hashlib",
+                "times_called": 1,
+                "full_path": "src/ext/hashlib",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/datetime",
+                "times_called": 1,
+                "full_path": "src/ext/datetime",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/shutil",
+                "times_called": 1,
+                "full_path": "src/ext/shutil",
                 "dependencies": [],
                 "explanation": ""
             },
@@ -767,23 +269,23 @@
                 "type": "External dependency",
                 "name": "ext/sys",
                 "times_called": 1,
-                "full_path": "Whitehat/ext/sys",
+                "full_path": "src/ext/sys",
                 "dependencies": [],
                 "explanation": ""
             },
             {
                 "type": "External dependency",
-                "name": "ext/subprocess",
-                "times_called": 2,
-                "full_path": "Whitehat/ext/subprocess",
-                "dependencies": [],
-                "explanation": ""
-            },
-            {
-                "type": "External dependency",
-                "name": "ext/re",
+                "name": "ext/http.server",
                 "times_called": 1,
-                "full_path": "Whitehat/ext/re",
+                "full_path": "src/ext/http.server",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/socketserver",
+                "times_called": 1,
+                "full_path": "src/ext/socketserver",
                 "dependencies": [],
                 "explanation": ""
             }
@@ -791,10 +293,10 @@
     },
     {
         "type": "report",
-        "directories": 5,
-        "files": 42,
+        "directories": 1,
+        "files": 6,
         "coupling": "medium",
         "cohesion": "high",
-        "explanation": "The project has a medium level of coupling because there are dependencies between different modules and classes within the project. For example, the 'examples' directory imports various classes and modules from internal libraries in the 'whitehat' package to perform specific tasks. However, the project also demonstrates a high level of cohesion because each file or module within the project focuses on a specific functionality related to cybersecurity. This is a good thing as it promotes modularization and maintainability of the codebase."
+        "explanation": "The project has a medium level of coupling because there are multiple files that import external libraries and internal libraries from different modules. This indicates some interdependence between the files. The project has a high level of cohesion because each file has a clear purpose and handles specific tasks related to the overall functionality of the project. This is a good thing as it promotes modular design and maintainability."
     }
 ]

@@ -38,12 +38,32 @@ class Report:
             --------
                 None
         """
+        self.files = None
         self.project_path: str = project_path
         self.report: dict = {}
+        self.find_all_files()
         self.generate_initial_report()
         self.ext_dependencies: dict = {}
         self.int_dependencies: dict = {}
         self.LLM = default_llm()
+
+    def find_all_files(self):
+        """
+            Finds all the files in the project tree.
+
+            Args:
+            ------
+                None
+
+            Returns:
+            --------
+                None
+        """
+        files = []
+        for root, _, filenames in os.walk(self.project_path):
+            for filename in filenames:
+                files.append(filename)
+        self.files = files
 
     def generate_initial_report(self) -> None:
         """
@@ -159,6 +179,8 @@ class Report:
                 None
         """
         if directory["type"] == "directory":
+            if "contents" not in directory.keys():
+                directory["contents"] = []
             for child in directory["contents"]:
                 self.complete_report_helper(child, f"{root}{directory['name']}/")
         elif directory["type"] == "file":
@@ -176,6 +198,9 @@ class Report:
             for i in range(len(response["dependencies"])):
                 # remove the .py extension
                 response["dependencies"][i] = response["dependencies"][i].replace(".py", "")
+                if response["dependencies"][i].split("/")[-1]+".py" not in self.files:
+                    print(f"WARNING: {response['dependencies'][i]} not found in the project tree")
+                    response["dependencies"][i] = response["dependencies"][i].replace("int/", "ext/")
 
             directory["dependencies"] = response["dependencies"]
             directory["explanation"] = response["explanation"]
@@ -329,5 +354,7 @@ class Report:
 
 
 if __name__ == "__main__":
-    report = Report(f"{PROJECTS_PATH}Arquitectura")
+    report = Report(f"{PROJECTS_PATH}simpleModuleWithScreenRawMaticas")
     report.complete_report()
+    # report.find_all_files()
+    # print(report.files)

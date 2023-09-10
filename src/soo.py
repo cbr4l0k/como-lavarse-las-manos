@@ -27,8 +27,6 @@ def main():
         print("Usage: python3 main.py <project_name>")
         return
     project_name = sys.argv[1]
-    # set PROJECTS_PATH = project_name
-
     report = Report(project_name)
     report.complete_report()
     PORT = 8004

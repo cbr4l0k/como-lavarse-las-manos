@@ -1,0 +1,302 @@
+[
+    {
+        "type": "directory",
+        "name": "src",
+        "explanation": "The folder contains several files, each with their own explanations. The 'FileHandler.py' file handles individual files and imports various external libraries such as json, os, logging, typing.List, and dotenv.load_dotenv. It also imports internal libraries from langchain.text_splitter (RecursiveCharacterTextSplitter, Language) and langchain.schema.document (Document). The 'LLMManager.py' file is a wrapper for the langchain library and has methods for loading the langchain model and chain, generating responses and explanations, and checking the response of the langchain model. The 'prompt_handler.py' file handles prompts for generating code using the GPT-3 model and includes methods for setting output paths, loading initial files reports, and getting prompts. The 'Report.py' file generates a report of the project tree and imports modules such as json, os, datetime, LLMManager, and dotenv. Finally, the 'soo.py' file imports dependencies such as shutil, Report, sys, os, load_dotenv, http.server, and socketserver, and starts a server on port 8004.",
+        "children": [
+            {
+                "type": "file",
+                "name": "FileHandler",
+                "full_path": "src/FileHandler",
+                "id": "int/FileHandler",
+                "dependencies": [
+                    "ext/json",
+                    "ext/os",
+                    "ext/logging",
+                    "ext/typing/List",
+                    "ext/dotenv/load_dotenv",
+                    "ext/langchain/text_splitter/RecursiveCharacterTextSplitter",
+                    "ext/langchain/text_splitter/Language",
+                    "ext/langchain/schema/document/Document"
+                ],
+                "explanation": "This file contains the FileHandler class, which is responsible for handling individual files. It imports various external libraries such as json, os, logging, typing.List, and dotenv.load_dotenv. Additionally, it imports internal libraries from langchain.text_splitter (RecursiveCharacterTextSplitter, Language) and langchain.schema.document (Document). The class has methods for loading a JSON report, generating a JSON report, reading files from a project tree, saving responses for files, inferring language from filenames, chunking documents, and getting responses from a directory.",
+                "times_called": 3
+            },
+            {
+                "type": "file",
+                "name": "LLMManager",
+                "full_path": "src/LLMManager",
+                "id": "int/LLMManager",
+                "dependencies": [
+                    "ext/json",
+                    "ext/os",
+                    "ext/dotenv",
+                    "ext/langchain/llms/openai",
+                    "ext/langchain",
+                    "ext/langchain/chains",
+                    "ext/langchain/memory",
+                    "ext/langchain/callbacks/manager",
+                    "ext/langchain/callbacks/streaming_stdout",
+                    "int/FileHandler",
+                    "int/prompt_handler"
+                ],
+                "explanation": "This file contains a class called LLM, which is a wrapper for the langchain library. It uses the langchain library to generate explanations for code and perform cohesion and coupling analysis on projects. The class has methods for loading the langchain model and chain, generating responses and explanations, setting the context window size, and checking the response of the langchain model.",
+                "times_called": 2
+            },
+            {
+                "type": "file",
+                "name": "prompt_handler",
+                "full_path": "src/prompt_handler",
+                "id": "int/prompt_handler",
+                "dependencies": [
+                    "ext/os",
+                    "ext/json",
+                    "ext/tiktoken",
+                    "ext/hashlib",
+                    "ext/dotenv",
+                    "ext/tiktoken",
+                    "int/FileHandler",
+                    "int/LLMManager",
+                    "int/prompt_handler",
+                    "int/Report"
+                ],
+                "explanation": "The code imports the 'os', 'json', 'tiktoken', 'hashlib', and 'dotenv' external libraries. It also imports the 'load_dotenv' function from the 'dotenv' library. The code then uses the 'load_dotenv' function to load environment variables and assigns the value of the 'OUTPUTS_PATH' variable from the loaded environment variables. The file contains a class called 'PromptHandler' that handles prompts for generating code using the GPT-3 model. It has methods to set the output path, load the initial files report, set the largest prompt token length, set the model name and encoding, get raw templates, get prompts, get prompt token length, and set token length. The file also contains helper methods for setting the projects path and getting the white-spaced template.",
+                "times_called": 3
+            },
+            {
+                "type": "file",
+                "name": "Report",
+                "full_path": "src/Report",
+                "id": "int/Report",
+                "dependencies": [
+                    "ext/json",
+                    "ext/os",
+                    "ext/datetime",
+                    "int/LLMManager",
+                    "ext/dotenv"
+                ],
+                "explanation": "This file contains the Report class, which is responsible for generating a report of the project tree. It imports modules such as json, os, datetime, LLMManager (internal), and dotenv (external). The Report class has methods for loading file content, finding all files in the project tree, generating an initial report, handling dependencies, adding internal and external dependencies to the report, completing the report with additional information, and saving the report.",
+                "times_called": 2
+            },
+            {
+                "type": "file",
+                "name": "soo",
+                "full_path": "src/soo",
+                "id": "int/soo",
+                "dependencies": [
+                    "ext/shutil",
+                    "int/Report",
+                    "ext/sys",
+                    "ext/os",
+                    "ext/dotenv",
+                    "ext/http.server",
+                    "ext/socketserver"
+                ],
+                "explanation": "The code imports the following dependencies: shutil, Report from the internal library 'Report', sys, os, load_dotenv from the external library 'dotenv', http.server, and socketserver. The main function checks if the 'tree' command is installed, takes a project name as an argument, creates a report using the Report class, and starts a server on port 8004."
+            },
+            {
+                "type": "file",
+                "name": "test",
+                "full_path": "src/test",
+                "id": "int/test",
+                "dependencies": [
+                    "ext/os",
+                    "ext/dotenv",
+                    "ext/langchain/llms/openai",
+                    "ext/langchain",
+                    "ext/langchain/chains",
+                    "ext/langchain/memory",
+                    "ext/langchain/callbacks/manager",
+                    "ext/langchain/callbacks/streaming_stdout",
+                    "int/FileHandler",
+                    "int/prompt_handler"
+                ],
+                "explanation": "The code imports modules and scripts from both external libraries (such as os and dotenv) and internal libraries (langchain, langchain.chains, langchain.memory, langchain.callbacks.manager, langchain.callbacks.streaming_stdout, FileHandler, prompt_handler). The main features of the code include loading an LLama model, loading a chain with a template, chunking documents based on token size, running the LLama chain on the documents, and saving the responses."
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/json",
+                "times_called": 4,
+                "full_path": "src/ext/json",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/os",
+                "times_called": 6,
+                "full_path": "src/ext/os",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/logging",
+                "times_called": 1,
+                "full_path": "src/ext/logging",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/typing/List",
+                "times_called": 1,
+                "full_path": "src/ext/typing/List",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/dotenv/load_dotenv",
+                "times_called": 1,
+                "full_path": "src/ext/dotenv/load_dotenv",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/text_splitter/RecursiveCharacterTextSplitter",
+                "times_called": 1,
+                "full_path": "src/ext/langchain/text_splitter/RecursiveCharacterTextSplitter",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/text_splitter/Language",
+                "times_called": 1,
+                "full_path": "src/ext/langchain/text_splitter/Language",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/schema/document/Document",
+                "times_called": 1,
+                "full_path": "src/ext/langchain/schema/document/Document",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/dotenv",
+                "times_called": 5,
+                "full_path": "src/ext/dotenv",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/llms/openai",
+                "times_called": 2,
+                "full_path": "src/ext/langchain/llms/openai",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain",
+                "times_called": 2,
+                "full_path": "src/ext/langchain",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/chains",
+                "times_called": 2,
+                "full_path": "src/ext/langchain/chains",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/memory",
+                "times_called": 2,
+                "full_path": "src/ext/langchain/memory",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/callbacks/manager",
+                "times_called": 2,
+                "full_path": "src/ext/langchain/callbacks/manager",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/langchain/callbacks/streaming_stdout",
+                "times_called": 2,
+                "full_path": "src/ext/langchain/callbacks/streaming_stdout",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/tiktoken",
+                "times_called": 2,
+                "full_path": "src/ext/tiktoken",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/hashlib",
+                "times_called": 1,
+                "full_path": "src/ext/hashlib",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/datetime",
+                "times_called": 1,
+                "full_path": "src/ext/datetime",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/shutil",
+                "times_called": 1,
+                "full_path": "src/ext/shutil",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/sys",
+                "times_called": 1,
+                "full_path": "src/ext/sys",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/http.server",
+                "times_called": 1,
+                "full_path": "src/ext/http.server",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/socketserver",
+                "times_called": 1,
+                "full_path": "src/ext/socketserver",
+                "dependencies": [],
+                "explanation": ""
+            }
+        ]
+    },
+    {
+        "type": "report",
+        "directories": 1,
+        "files": 6,
+        "coupling": "medium",
+        "cohesion": "high",
+        "explanation": "The project has a medium level of coupling because there are multiple files that import external libraries and internal libraries from different modules. This indicates some interdependence between the files. The project has a high level of cohesion because each file has a clear purpose and handles specific tasks related to the overall functionality of the project. This is a good thing as it promotes modular design and maintainability."
+    }
+]

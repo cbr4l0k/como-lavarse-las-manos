@@ -209,7 +209,8 @@ def default_llm(projects_path : str):
     model_name = DEFAULT_LLM
 
     llm = LLM(
-        {
+        projects_path=projects_path,
+        options={
             "openai_api_key": OPEN_AI_API_KEY,
             "model_name": model_name,
             "temperature": 0.1,
@@ -218,7 +219,7 @@ def default_llm(projects_path : str):
             "callback_manager": CallbackManager([StreamingStdOutCallbackHandler()]),
             "verbose": True,
         },
-        projects_path = projects_path
+
     )
 
     return llm

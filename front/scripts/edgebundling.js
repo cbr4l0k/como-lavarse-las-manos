@@ -58,7 +58,7 @@ function extractLeafNodes(tree) {
 function draw_graph(data) {
     // console.log(data);
     // Random tree
-    const N = 300;
+    const N = 100;
     const gData = {
       nodes: [...Array(N).keys()].map(i => ({
           id: i,
@@ -72,6 +72,25 @@ function draw_graph(data) {
         }))
     };
 
+    // cross-link node objects
+    gData.links.forEach(link => {
+        const a = gData.nodes[link.source];
+        const b = gData.nodes[link.target];
+        !a.neighbors && (a.neighbors = []);
+        !b.neighbors && (b.neighbors = []);
+        a.neighbors.push(b);
+        b.neighbors.push(a);
+
+        !a.links && (a.links = []);
+        !b.links && (b.links = []);
+        a.links.push(link);
+        b.links.push(link);
+    });
+
+    const highlightNodes = new Set();
+    const highlightLinks = new Set();
+    let hoverNode = null;
+
     const Graph = ForceGraph3D({
       times_called: [new CSS2DRenderer()]
     })
@@ -80,15 +99,46 @@ function draw_graph(data) {
         .backgroundColor(DK_BG)
         .nodeVal('times_called')
         .nodeLabel('id')
-        .nodeThreeObject(node => {
-            console.log(node)
-            const nodeEl = document.createElement('div');
-            nodeEl.textContent = `uWu ${node.id}`;
-            nodeEl.style.color = node.color;
-            nodeEl.className = 'node-label';
-            return new CSS2DObject(nodeEl);
+        .nodeColor(node => highlightNodes.has(node) ? node === hoverNode ? LG_GREEN : LG_YELLOW : LG_GRAY)
+        .linkWidth(link => highlightLinks.has(link) ? 4 : 1)
+        .linkDirectionalParticles(link => highlightLinks.has(link) ? 4 : 0)
+        .linkDirectionalParticleWidth(4)
+        .onNodeHover(node => {
+            // no state change
+            if ((!node && !highlightNodes.size) || (node && hoverNode === node)) return;
+
+            highlightNodes.clear();
+            highlightLinks.clear();
+            if (node) {
+                highlightNodes.add(node);
+                node.neighbors.forEach(neighbor => highlightNodes.add(neighbor));
+                node.links.forEach(link => highlightLinks.add(link));
+            }
+
+            hoverNode = node || null;
+
+            updateHighlight();
         })
-        .nodeThreeObjectExtend(true)
+        .onLinkHover(link => {
+            highlightNodes.clear();
+            highlightLinks.clear();
+
+            if (link) {
+                highlightLinks.add(link);
+                highlightNodes.add(link.source);
+                highlightNodes.add(link.target);
+            }
+
+            updateHighlight();
+        });
+
+    function updateHighlight() {
+        // trigger update of highlighted objects in scene
+        Graph
+            .nodeColor(Graph.nodeColor())
+            .linkWidth(Graph.linkWidth())
+            .linkDirectionalParticles(Graph.linkDirectionalParticles());
+    }
 
 }
 

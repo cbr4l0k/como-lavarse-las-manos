@@ -20,16 +20,58 @@ DEFAULT_LLM = os.getenv("DEFAULT_LLM")
 
 
 class LLM:
-    def __init__(self, options: dict) -> None:
+
+    """
+        This class is a wrapper for the langchain library.
+        It is used to generate explainations for code.
+        It uses the langchain library to generate the explainations.
+
+        It is also used to generate cohesion and coupling analysis for a project.
+        It also produces explainations for the folders in the project.
+        It is also used to generate explainations for a directory.
+        It is also used to generate explainations for a file.
+
+
+        Attributes:
+            model: The langchain model used to generate the explainations.
+            llm_chain: The langchain chain used to generate the explainations.
+            context_window_size: The size of the context window used to generate the explainations.
+            options: The options used to initialize the langchain model.
+            prompt_handler: The prompt handler used to generate the prompts for the langchain model.
+            file_handler: The file handler used to handle the files in the project.
+        
+        Methods:
+            load_model: Loads the langchain model.
+            load_chain: Loads the langchain chain.
+            generate_response: Generates an explaination for a file.
+            generate_explaination_for_directory: Generates an explaination for a directory.
+            generate_cohesion_coupling_analysis: Generates a cohesion and coupling analysis for a project.
+            set_context_window_size: Sets the context window size for the langchain model.
+            _check_response: Checks the response of the langchain model.
+    """
+
+    projects_path = ''
+
+    def __init__(self, projects_path: str, options: dict) -> None:
         self.model = None
         self.llm_chain = None
         self.context_window_size = None
         self.options = options
         self.prompt_handler = PromptHandler(model_name=self.options["model_name"])
+        
+        self.prompt_handler.set_projects_path(projects_path)
+        self.set_projects_path(projects_path)
 
         self.load_model()
         self.file_handler = FileHandler()
         self.context_window_size = 16e3
+
+    @staticmethod
+    def set_projects_path(outputs_path: str) -> None:
+        """
+            Sets the outputs path for the LLMManager.
+        """
+        LLM.outputs_path = outputs_path
 
     def set_context_window_size(self, context_window_size: int) -> None:
         self.context_window_size = context_window_size
@@ -158,7 +200,7 @@ class LLM:
         
 
 
-def default_llm():
+def default_llm(projects_path : str):
     average_number_of_tokens_per_sentence = 27
     desired_number_of_sentences_per_file = 30
     max_tokens = desired_number_of_sentences_per_file * average_number_of_tokens_per_sentence
@@ -166,15 +208,19 @@ def default_llm():
 
     model_name = DEFAULT_LLM
 
-    llm = LLM({
-        "openai_api_key": OPEN_AI_API_KEY,
-        "model_name": model_name,
-        "temperature": 0.1,
-        "max_tokens": max_tokens,
-        "presence_penalty": 2,
-        "callback_manager": CallbackManager([StreamingStdOutCallbackHandler()]),
-        "verbose": True,
-    })
+    llm = LLM(
+        {
+            "openai_api_key": OPEN_AI_API_KEY,
+            "model_name": model_name,
+            "temperature": 0.1,
+            "max_tokens": max_tokens,
+            "presence_penalty": 2,
+            "callback_manager": CallbackManager([StreamingStdOutCallbackHandler()]),
+            "verbose": True,
+        },
+        projects_path = projects_path
+    )
+
     return llm
 
 
@@ -201,7 +247,7 @@ def main():
 
     #file = f"{PROJECTS_PATH}/simpleModuleWithScreenRawMaticas/dependencies/writer.py"
     #file = f"{OUTPUTS_PATH}/filesreport.json"
-    file = f"{OUTPUTS_PATH}/reports/filesreport_Arquitectura_09_07_19_21.json"
+    file = f"{LLM.outputs_path}/reports/filesreport_Arquitectura_09_07_19_21.json"
 
     with open(file, "r") as f:
         code = f.read()

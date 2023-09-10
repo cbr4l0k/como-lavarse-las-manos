@@ -17,26 +17,32 @@ load_dotenv()
 
 
 def main():
+    RED = '\033[91m'
+    BLUE = '\033[94m'
+    END = '\033[0m'
 
     # check if tree is installed
     if not shutil.which("tree"):
-        print("Please install tree")
+        print(RED + "Please install tree" + END)
         return
 
     if len(sys.argv) < 2:
-        print("Usage: python3 main.py <project_name>")
+        print(RED + "Usage: python3 main.py <project_name>" + END)
         return
+
     project_name = sys.argv[1]
+    print(BLUE + "Generating report for project", project_name + END)
+
     report = Report(project_name)
     report.complete_report()
     PORT = 8004
-    #
+
     try:
         with socketserver.TCPServer(("", PORT), Handler) as httpd:
-            print("serving at port", PORT)
+            print(BLUE + "serving at port" + END, PORT)
             httpd.serve_forever()
     except KeyboardInterrupt:
-        print("Stopping the server...")
+        print(BLUE + "Stopping the server..." + END)
         httpd.server_close()
 
 

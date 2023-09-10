@@ -173,8 +173,10 @@ class Report:
             # print("---------------response-----------------")
             # print(response)
             # response = {"dependencies": "dependencies", "explanation": "explanation"}
-            for dep in response["dependencies"]:
-                dep.replace(".py", "")
+            for i in range(len(response["dependencies"])):
+                # remove the .py extension
+                response["dependencies"][i] = response["dependencies"][i].replace(".py", "")
+
             directory["dependencies"] = response["dependencies"]
             directory["explanation"] = response["explanation"]
             self.dependencies_response_handler(response["dependencies"])

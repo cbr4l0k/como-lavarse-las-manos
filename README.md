@@ -57,6 +57,8 @@ pip install -r requirements.txt
 
 ## Side notes
 
-_Our solution has been tested on Linux only, so we recommend sticking to this operating system, particularly in Arch-based distributions. This should also work without effort in other kinds of Linux distributions._
+- _Our solution has been tested on Linux only, so we recommend sticking to this operating system, particularly in Arch-based distributions. This should also work without effort in other kinds of Linux distributions._
 
-_We recommend visualizing this program in Google Chrome due to the fact that different browsers may change the HTML layout. We've developed this web interface with Google Chrome in mind. We do not guarantee a good layout if viewed in other browsers._
+- _We recommend visualizing this program in Google Chrome due to the fact that different browsers may change the HTML layout. We've developed this web interface with Google Chrome in mind. We do not guarantee a good layout if viewed in other browsers._
+
+- _It's MANDATORY to have a .gitignore file in the project in order to avoid spending computing power on analizing files inside the '\_\_pycache\_\_' folder, for example, the rule is to add eveything you do not want to be analized inside the .gitignore file_.

@@ -22,11 +22,7 @@ class FileHandler:
 
         Attributes:
         ----------
-
-        - py_files_paths: List[str]
-            The list of paths to the python files.
-        - json: dict
-            The json report of the files, containing the information about the files, and the chunks.
+        - None 
         
         Methods:
         ----------
@@ -43,12 +39,12 @@ class FileHandler:
             If it does not find it, it will return None.
     """
 
-    def __init__(self, json_path: str = None) -> None:
-        self.py_files_paths = []
-        self.json = None
+    def __init__(self) -> None:
+        """
+            The constructor for the FileHandler class.
+        """
+        pass 
 
-        if json_path is not None:
-            self.load_json_report(json_path)
 
     @staticmethod
     def from_filename_to_lang(filename: str):

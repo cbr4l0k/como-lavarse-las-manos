@@ -45,7 +45,7 @@ class Report:
         self.generate_initial_report()
         self.ext_dependencies: dict = {}
         self.int_dependencies: dict = {}
-        self.LLM = default_llm()
+        self.LLM = default_llm(self.project_path)
 
     def load_file_content(self, file_path: str) -> str:
         """

@@ -9,20 +9,20 @@ OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
 PROJECTS_PATH = os.getenv("PROJECTS_PATH")
 
 
-def load_file_content(file_path: str) -> str:
-    """
-        Loads the content of a file.
-
-        Args:
-        ------
-            file_path: str
-
-        Returns:
-        --------
-            str
-    """
-    with open(PROJECTS_PATH + file_path, "r") as f:
-        return f.read()
+# def load_file_content(file_path: str) -> str:
+#     """
+#         Loads the content of a file.
+#
+#         Args:
+#         ------
+#             file_path: str
+#
+#         Returns:
+#         --------
+#             str
+#     """
+#     with open(PROJECTS_PATH + file_path, "r") as f:
+#         return f.read()
 
 
 class Report:
@@ -46,6 +46,24 @@ class Report:
         self.ext_dependencies: dict = {}
         self.int_dependencies: dict = {}
         self.LLM = default_llm()
+
+    def load_file_content(self, file_path: str) -> str:
+        """
+            Loads the content of a file.
+
+            Args:
+            ------
+                file_path: str
+
+            Returns:
+            --------
+                str
+        """
+        fp_list = file_path.split("/")
+        fp_list.pop(0)
+        file_path = "/".join(fp_list)
+        with open(self.project_path + "/" + file_path, "r") as f:
+            return f.read()
 
     def find_all_files(self):
         """
@@ -191,7 +209,7 @@ class Report:
             file_id[0] = "int"
             file_id = "/".join(file_id)
             directory["id"] = file_id
-            response = self.LLM.generate_response(directory["full_path"], load_file_content(directory["full_path"]))
+            response = self.LLM.generate_response(directory["full_path"], self.load_file_content(directory["full_path"]))
             # print("---------------response-----------------")
             # print(response)
             # response = {"dependencies": "dependencies", "explanation": "explanation"}
@@ -357,7 +375,7 @@ class Report:
 
 
 if __name__ == "__main__":
-    report = Report(f"{PROJECTS_PATH}simpleModuleWithScreenRawMaticas")
+    report = Report(f"{PROJECTS_PATH}Arquitectura")
     report.complete_report()
     # report.find_all_files()
     # print(report.files)

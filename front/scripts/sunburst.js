@@ -112,6 +112,6 @@ function draw_sun(data) {
 }
 
 
-fetch('../reports/filesreport_Arquitectura_09_08_16_17.json')
+fetch('../reports/filesreport_Arquitectura_09_08_21_05.json')
     .then(response => response.json())
     .then(data => draw_sun(data)[0]);

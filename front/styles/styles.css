@@ -25,6 +25,10 @@ h1 {
     text-decoration: underline;
 }
 
+canvas {
+    width: 90%;
+}
+
 code {
     border: 1px solid var(--LG_GRAY);
     border-radius: 5px;

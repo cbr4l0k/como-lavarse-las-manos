@@ -76,7 +76,7 @@ class PromptHandler:
                                     your own class from the same file.
 
                                  give me the json only, give me a well formated json, be short and concise, don't forget,
-                                 the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.
+                                 the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explanation.
                                  Code received: 
                                  
                                  {code}
@@ -125,7 +125,7 @@ class PromptHandler:
                                     your own class from the same file.
 
                                     give me the json only, give me a well formated json, be short and concise, don't forget,
-                                    the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.
+                                    the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explanation.
                                     Code received: 
 
                                     {code}
@@ -147,11 +147,11 @@ class PromptHandler:
                                            if 'from lib import something' write it as '(int or ext)/lib', 
                                            if 'from lib.sublib import something' write it as '(int or ext)/lib.sublib' and so on],
                                            "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
-                                           and methods, if makes sense infer behavior from method names. This explaination condenses the
-                                           other explainations and takes the knowledge of all of them.'""
+                                           and methods, if makes sense infer behavior from method names. This explanation condenses the
+                                           other explanations and takes the knowledge of all of them.'""
 
                                            Make sure to give the dependencies in the desired form '(int or ext)/dependency'.
-                                           Check for errors and fix them. Maximum of 60 words as explaination.
+                                           Check for errors and fix them. Maximum of 60 words as explanation.
                                            Jsons reports received: 
                                            
                                            {json_reports}
@@ -176,9 +176,9 @@ class PromptHandler:
                             "input_variables": ["json_reports", ],
                             "prompt_token_lenght": -1
                             }, 
-                         4: {"template": """You've been given a json with the fields 'dependencies' and 'explaination', your
+                         4: {"template": """You've been given a json with the fields 'dependencies' and 'explanation', your
                                             work is to correct the json response if needed and return it, you only have to change
-                                            the 'dependencies' field, the 'explaination' field is correct.
+                                            the 'dependencies' field, the 'explanation' field is correct.
                              
                                             You must return a json with this fields:
 
@@ -216,25 +216,25 @@ class PromptHandler:
                                             'yada/yada/yodo' is correct. 
 
                                             Give me the json only, give me a well formated json, be short and concise, don't forget to leave
-                                            the 'explaination' field as it is. Change the dependencies which end with '.file_extension' 
+                                            the 'explanation' field as it is. Change the dependencies which end with '.file_extension' 
                                             to the correct form, delete the '.file_extension' part. 
 
                                             JSON GOES HERE: \n {json_reports}""",
                                             "input_variables": ["json_reports", ],
                                             "prompt_token_lenght": -1
                          },
-                         5: {"template": """You've been given a json file with fields 'dependencies' and 'explaination' for a folder in a project,
-                                            your task is to retrieve an explaination this is what the 'explaination' should look like:
+                         5: {"template": """You've been given a json file with fields 'dependencies' and 'explanation' for a folder in a project,
+                                            your task is to retrieve an explanation this is what the 'explanation' should look like:
                              
-                                            "explanation": 'short folder explaination condensing the logic, purpose and explainations of all the 
+                                            "explanation": 'short folder explanation condensing the logic, purpose and explanations of all the 
                                             files inside the folder, including other folders inside the json. Infer behavior from file names and
-                                            explainations.'""
+                                            explanations.'""
 
                                             {json_reports} 
                              
-                                            Remember to give back an explaination only, and the other existing fields.
-                                            Maximum of 90 words as explaination. Give it as raw text.
-                                            'explaination':
+                                            Remember to give back an explanation only, and the other existing fields.
+                                            Maximum of 90 words as explanation. Give it as raw text.
+                                            'explanation':
                                             """,    
                              "input_variables": ["json_reports", ],
                              "prompt_token_lenght": -1

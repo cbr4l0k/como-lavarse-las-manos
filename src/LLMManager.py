@@ -67,11 +67,11 @@ class LLM:
         self.context_window_size = 16e3
 
     @staticmethod
-    def set_projects_path(outputs_path: str) -> None:
+    def set_projects_path(projects_path: str) -> None:
         """
             Sets the outputs path for the LLMManager.
         """
-        LLM.outputs_path = outputs_path
+        LLM.projects_path = projects_path
 
     def set_context_window_size(self, context_window_size: int) -> None:
         self.context_window_size = context_window_size

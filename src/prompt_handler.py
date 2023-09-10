@@ -33,7 +33,7 @@ class PromptHandler:
             - white_spaced_template: Returns the template with all the input variables replaced by an empty string.
     """
 
-    outputs_path = ''
+    projects_path = ''
 
     def __init__(self, model_name: str):
         self.initial_files_report = None
@@ -247,7 +247,7 @@ class PromptHandler:
 
 
     @staticmethod
-    def set_projects_path(output_path: str) -> None:
+    def set_projects_path(projects_path: str) -> None:
         """
             Sets the output path for the prompt handler class.
 
@@ -259,7 +259,7 @@ class PromptHandler:
             ---------
                 None
         """
-        PromptHandler.outputs_path = output_path
+        PromptHandler.projects_path = projects_path
 
     def load_initial_filesreport(self) -> None:
         """

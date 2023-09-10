@@ -58,9 +58,12 @@ code#desc_tree {
     height: 28vw;
     width: 22vw;
 }
+
 code#desc_eb {
     margin-right: 2vw;
     margin-bottom: 2em;
+    height: 28vw;
+    width: 22vw;
 }
 
 div#container_tree {

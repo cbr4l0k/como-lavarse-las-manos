@@ -100,9 +100,14 @@ function draw_graph(gData) {
 
     const container = document.getElementById('container_eb');
 
+    const height = window.screen.availHeight * 0.41;
+    const width = window.screen.availWidth * 0.59;
+    console.log(width)
+    console.log(`${width} x ${height}`)
+
     const Graph = ForceGraph3D({times_called:[new CSS2DRenderer()]})(container)
-        .width(800)
-        .height(300)
+        .width(width)
+        .height(height)
         .graphData(gData)
         .backgroundColor(DK_BG)
         .nodeVal('times_called')

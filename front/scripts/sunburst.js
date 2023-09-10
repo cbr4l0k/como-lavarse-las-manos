@@ -20,17 +20,19 @@ const LG_ORANGE =    '#fe8019';
 function draw_sun(data) {
     // Specify the chart’s dimensions.
     const width = 650;
-    const height = 600;
+    const height = window.screen.availHeight * 0.75;
+    console.log()
 
     // Create the color scale.
     const color = d3.scaleOrdinal(d3.quantize(d3.interpolate(LG_YELLOW, LG_GREEN), data.children.length + 1));
 
     // Compute the layout.
     const hierarchy = d3.hierarchy(data)
-        .sum(d => d.value)
-        .sort((a, b) => b.height - a.height || b.value - a.value);
+        .sum(d => {return d.times_called;})
+        .sort((a, b) => b.height - a.height || b.times_called - a.times_called);
     const root = d3.partition()
-        .size([height, (hierarchy.height + 1) * width / 3])(hierarchy);
+        .size([height, (hierarchy.height + 1) * width / 3])
+    (hierarchy);
 
     // Create the SVG container.
     const svg = d3.select("svg#svg_sb")
@@ -54,7 +56,7 @@ function draw_sun(data) {
     const rect = cell.append("rect")
         .attr("width", d => d.y1 - d.y0 - 1)
         .attr("height", d => rectHeight(d))
-        .attr("fill-opacity", 1)
+        .attr("fill-opacity", 0.6)
         .attr("fill", d => {
             if (!d.depth) return DK_YELLOW;
             while (d.depth > 1) d = d.parent;
@@ -79,7 +81,9 @@ function draw_sun(data) {
         .text(d => ` ${format(d.value)}`);
 
     cell.append("title")
-        .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
+        .text(d => {
+            return `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`;
+        });
 
     // On click, change the focus and transitions it into view.
     let focus = root;
@@ -108,10 +112,7 @@ function draw_sun(data) {
     function labelVisible(d) {
         return d.y1 <= width && d.y0 >= 0 && d.x1 - d.x0 > 16;
     }
-
 }
-
-
-fetch('../reports/filesreport_Arquitectura_09_08_21_05.json')
+fetch('../reports/filesreport_simpleModuleWithScreenRawMaticas_09_10_01_10.json')
     .then(response => response.json())
-    .then(data => draw_sun(data)[0]);
+    .then(data => draw_sun(data[0]));

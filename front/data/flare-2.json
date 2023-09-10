@@ -7,26 +7,26 @@
     {
      "name": "cluster",
      "children": [
-      {"name": "AgglomerativeCluster", "value": 3938},
-      {"name": "CommunityStructure", "value": 3812},
-      {"name": "HierarchicalCluster", "value": 6714},
-      {"name": "MergeEdge", "value": 743}
+      {"name": "AgglomerativeCluster", "times_called": 3938},
+      {"name": "CommunityStructure", "times_called": 3812},
+      {"name": "HierarchicalCluster", "times_called": 6714},
+      {"name": "MergeEdge", "times_called": 743}
      ]
     },
     {
      "name": "graph",
      "children": [
-      {"name": "BetweennessCentrality", "value": 3534},
-      {"name": "LinkDistance", "value": 5731},
-      {"name": "MaxFlowMinCut", "value": 7840},
-      {"name": "ShortestPaths", "value": 5914},
-      {"name": "SpanningTree", "value": 3416}
+      {"name": "BetweennessCentrality", "times_called": 3534},
+      {"name": "LinkDistance", "times_called": 5731},
+      {"name": "MaxFlowMinCut", "times_called": 7840},
+      {"name": "ShortestPaths", "times_called": 5914},
+      {"name": "SpanningTree", "times_called": 3416}
      ]
     },
     {
      "name": "optimization",
      "children": [
-      {"name": "AspectRatioBanker", "value": 7074}
+      {"name": "AspectRatioBanker", "times_called": 7074}
      ]
     }
    ]
@@ -34,31 +34,31 @@
   {
    "name": "animate",
    "children": [
-    {"name": "Easing", "value": 17010},
-    {"name": "FunctionSequence", "value": 5842},
+    {"name": "Easing", "times_called": 17010},
+    {"name": "FunctionSequence", "times_called": 5842},
     {
      "name": "interpolate",
      "children": [
-      {"name": "ArrayInterpolator", "value": 1983},
-      {"name": "ColorInterpolator", "value": 2047},
-      {"name": "DateInterpolator", "value": 1375},
-      {"name": "Interpolator", "value": 8746},
-      {"name": "MatrixInterpolator", "value": 2202},
-      {"name": "NumberInterpolator", "value": 1382},
-      {"name": "ObjectInterpolator", "value": 1629},
-      {"name": "PointInterpolator", "value": 1675},
-      {"name": "RectangleInterpolator", "value": 2042}
+      {"name": "ArrayInterpolator", "times_called": 1983},
+      {"name": "ColorInterpolator", "times_called": 2047},
+      {"name": "DateInterpolator", "times_called": 1375},
+      {"name": "Interpolator", "times_called": 8746},
+      {"name": "MatrixInterpolator", "times_called": 2202},
+      {"name": "NumberInterpolator", "times_called": 1382},
+      {"name": "ObjectInterpolator", "times_called": 1629},
+      {"name": "PointInterpolator", "times_called": 1675},
+      {"name": "RectangleInterpolator", "times_called": 2042}
      ]
     },
-    {"name": "ISchedulable", "value": 1041},
-    {"name": "Parallel", "value": 5176},
-    {"name": "Pause", "value": 449},
-    {"name": "Scheduler", "value": 5593},
-    {"name": "Sequence", "value": 5534},
-    {"name": "Transition", "value": 9201},
-    {"name": "Transitioner", "value": 19975},
-    {"name": "TransitionEvent", "value": 1116},
-    {"name": "Tween", "value": 6006}
+    {"name": "ISchedulable", "times_called": 1041},
+    {"name": "Parallel", "times_called": 5176},
+    {"name": "Pause", "times_called": 449},
+    {"name": "Scheduler", "times_called": 5593},
+    {"name": "Sequence", "times_called": 5534},
+    {"name": "Transition", "times_called": 9201},
+    {"name": "Transitioner", "times_called": 19975},
+    {"name": "TransitionEvent", "times_called": 1116},
+    {"name": "Tween", "times_called": 6006}
    ]
   },
   {
@@ -67,177 +67,177 @@
     {
      "name": "converters",
      "children": [
-      {"name": "Converters", "value": 721},
-      {"name": "DelimitedTextConverter", "value": 4294},
-      {"name": "GraphMLConverter", "value": 9800},
-      {"name": "IDataConverter", "value": 1314},
-      {"name": "JSONConverter", "value": 2220}
+      {"name": "Converters", "times_called": 721},
+      {"name": "DelimitedTextConverter", "times_called": 4294},
+      {"name": "GraphMLConverter", "times_called": 9800},
+      {"name": "IDataConverter", "times_called": 1314},
+      {"name": "JSONConverter", "times_called": 2220}
      ]
     },
-    {"name": "DataField", "value": 1759},
-    {"name": "DataSchema", "value": 2165},
-    {"name": "DataSet", "value": 586},
-    {"name": "DataSource", "value": 3331},
-    {"name": "DataTable", "value": 772},
-    {"name": "DataUtil", "value": 3322}
+    {"name": "DataField", "times_called": 1759},
+    {"name": "DataSchema", "times_called": 2165},
+    {"name": "DataSet", "times_called": 586},
+    {"name": "DataSource", "times_called": 3331},
+    {"name": "DataTable", "times_called": 772},
+    {"name": "DataUtil", "times_called": 3322}
    ]
   },
   {
    "name": "display",
    "children": [
-    {"name": "DirtySprite", "value": 8833},
-    {"name": "LineSprite", "value": 1732},
-    {"name": "RectSprite", "value": 3623},
-    {"name": "TextSprite", "value": 10066}
+    {"name": "DirtySprite", "times_called": 8833},
+    {"name": "LineSprite", "times_called": 1732},
+    {"name": "RectSprite", "times_called": 3623},
+    {"name": "TextSprite", "times_called": 10066}
    ]
   },
   {
    "name": "flex",
    "children": [
-    {"name": "FlareVis", "value": 4116}
+    {"name": "FlareVis", "times_called": 4116}
    ]
   },
   {
    "name": "physics",
    "children": [
-    {"name": "DragForce", "value": 1082},
-    {"name": "GravityForce", "value": 1336},
-    {"name": "IForce", "value": 319},
-    {"name": "NBodyForce", "value": 10498},
-    {"name": "Particle", "value": 2822},
-    {"name": "Simulation", "value": 9983},
-    {"name": "Spring", "value": 2213},
-    {"name": "SpringForce", "value": 1681}
+    {"name": "DragForce", "times_called": 1082},
+    {"name": "GravityForce", "times_called": 1336},
+    {"name": "IForce", "times_called": 319},
+    {"name": "NBodyForce", "times_called": 10498},
+    {"name": "Particle", "times_called": 2822},
+    {"name": "Simulation", "times_called": 9983},
+    {"name": "Spring", "times_called": 2213},
+    {"name": "SpringForce", "times_called": 1681}
    ]
   },
   {
    "name": "query",
    "children": [
-    {"name": "AggregateExpression", "value": 1616},
-    {"name": "And", "value": 1027},
-    {"name": "Arithmetic", "value": 3891},
-    {"name": "Average", "value": 891},
-    {"name": "BinaryExpression", "value": 2893},
-    {"name": "Comparison", "value": 5103},
-    {"name": "CompositeExpression", "value": 3677},
-    {"name": "Count", "value": 781},
-    {"name": "DateUtil", "value": 4141},
-    {"name": "Distinct", "value": 933},
-    {"name": "Expression", "value": 5130},
-    {"name": "ExpressionIterator", "value": 3617},
-    {"name": "Fn", "value": 3240},
-    {"name": "If", "value": 2732},
-    {"name": "IsA", "value": 2039},
-    {"name": "Literal", "value": 1214},
-    {"name": "Match", "value": 3748},
-    {"name": "Maximum", "value": 843},
+    {"name": "AggregateExpression", "times_called": 1616},
+    {"name": "And", "times_called": 1027},
+    {"name": "Arithmetic", "times_called": 3891},
+    {"name": "Average", "times_called": 891},
+    {"name": "BinaryExpression", "times_called": 2893},
+    {"name": "Comparison", "times_called": 5103},
+    {"name": "CompositeExpression", "times_called": 3677},
+    {"name": "Count", "times_called": 781},
+    {"name": "DateUtil", "times_called": 4141},
+    {"name": "Distinct", "times_called": 933},
+    {"name": "Expression", "times_called": 5130},
+    {"name": "ExpressionIterator", "times_called": 3617},
+    {"name": "Fn", "times_called": 3240},
+    {"name": "If", "times_called": 2732},
+    {"name": "IsA", "times_called": 2039},
+    {"name": "Literal", "times_called": 1214},
+    {"name": "Match", "times_called": 3748},
+    {"name": "Maximum", "times_called": 843},
     {
      "name": "methods",
      "children": [
-      {"name": "add", "value": 593},
-      {"name": "and", "value": 330},
-      {"name": "average", "value": 287},
-      {"name": "count", "value": 277},
-      {"name": "distinct", "value": 292},
-      {"name": "div", "value": 595},
-      {"name": "eq", "value": 594},
-      {"name": "fn", "value": 460},
-      {"name": "gt", "value": 603},
-      {"name": "gte", "value": 625},
-      {"name": "iff", "value": 748},
-      {"name": "isa", "value": 461},
-      {"name": "lt", "value": 597},
-      {"name": "lte", "value": 619},
-      {"name": "max", "value": 283},
-      {"name": "min", "value": 283},
-      {"name": "mod", "value": 591},
-      {"name": "mul", "value": 603},
-      {"name": "neq", "value": 599},
-      {"name": "not", "value": 386},
-      {"name": "or", "value": 323},
-      {"name": "orderby", "value": 307},
-      {"name": "range", "value": 772},
-      {"name": "select", "value": 296},
-      {"name": "stddev", "value": 363},
-      {"name": "sub", "value": 600},
-      {"name": "sum", "value": 280},
-      {"name": "update", "value": 307},
-      {"name": "variance", "value": 335},
-      {"name": "where", "value": 299},
-      {"name": "xor", "value": 354},
-      {"name": "_", "value": 264}
+      {"name": "add", "times_called": 593},
+      {"name": "and", "times_called": 330},
+      {"name": "average", "times_called": 287},
+      {"name": "count", "times_called": 277},
+      {"name": "distinct", "times_called": 292},
+      {"name": "div", "times_called": 595},
+      {"name": "eq", "times_called": 594},
+      {"name": "fn", "times_called": 460},
+      {"name": "gt", "times_called": 603},
+      {"name": "gte", "times_called": 625},
+      {"name": "iff", "times_called": 748},
+      {"name": "isa", "times_called": 461},
+      {"name": "lt", "times_called": 597},
+      {"name": "lte", "times_called": 619},
+      {"name": "max", "times_called": 283},
+      {"name": "min", "times_called": 283},
+      {"name": "mod", "times_called": 591},
+      {"name": "mul", "times_called": 603},
+      {"name": "neq", "times_called": 599},
+      {"name": "not", "times_called": 386},
+      {"name": "or", "times_called": 323},
+      {"name": "orderby", "times_called": 307},
+      {"name": "range", "times_called": 772},
+      {"name": "select", "times_called": 296},
+      {"name": "stddev", "times_called": 363},
+      {"name": "sub", "times_called": 600},
+      {"name": "sum", "times_called": 280},
+      {"name": "update", "times_called": 307},
+      {"name": "variance", "times_called": 335},
+      {"name": "where", "times_called": 299},
+      {"name": "xor", "times_called": 354},
+      {"name": "_", "times_called": 264}
      ]
     },
-    {"name": "Minimum", "value": 843},
-    {"name": "Not", "value": 1554},
-    {"name": "Or", "value": 970},
-    {"name": "Query", "value": 13896},
-    {"name": "Range", "value": 1594},
-    {"name": "StringUtil", "value": 4130},
-    {"name": "Sum", "value": 791},
-    {"name": "Variable", "value": 1124},
-    {"name": "Variance", "value": 1876},
-    {"name": "Xor", "value": 1101}
+    {"name": "Minimum", "times_called": 843},
+    {"name": "Not", "times_called": 1554},
+    {"name": "Or", "times_called": 970},
+    {"name": "Query", "times_called": 13896},
+    {"name": "Range", "times_called": 1594},
+    {"name": "StringUtil", "times_called": 4130},
+    {"name": "Sum", "times_called": 791},
+    {"name": "Variable", "times_called": 1124},
+    {"name": "Variance", "times_called": 1876},
+    {"name": "Xor", "times_called": 1101}
    ]
   },
   {
    "name": "scale",
    "children": [
-    {"name": "IScaleMap", "value": 2105},
-    {"name": "LinearScale", "value": 1316},
-    {"name": "LogScale", "value": 3151},
-    {"name": "OrdinalScale", "value": 3770},
-    {"name": "QuantileScale", "value": 2435},
-    {"name": "QuantitativeScale", "value": 4839},
-    {"name": "RootScale", "value": 1756},
-    {"name": "Scale", "value": 4268},
-    {"name": "ScaleType", "value": 1821},
-    {"name": "TimeScale", "value": 5833}
+    {"name": "IScaleMap", "times_called": 2105},
+    {"name": "LinearScale", "times_called": 1316},
+    {"name": "LogScale", "times_called": 3151},
+    {"name": "OrdinalScale", "times_called": 3770},
+    {"name": "QuantileScale", "times_called": 2435},
+    {"name": "QuantitativeScale", "times_called": 4839},
+    {"name": "RootScale", "times_called": 1756},
+    {"name": "Scale", "times_called": 4268},
+    {"name": "ScaleType", "times_called": 1821},
+    {"name": "TimeScale", "times_called": 5833}
    ]
   },
   {
    "name": "util",
    "children": [
-    {"name": "Arrays", "value": 8258},
-    {"name": "Colors", "value": 10001},
-    {"name": "Dates", "value": 8217},
-    {"name": "Displays", "value": 12555},
-    {"name": "Filter", "value": 2324},
-    {"name": "Geometry", "value": 10993},
+    {"name": "Arrays", "times_called": 8258},
+    {"name": "Colors", "times_called": 10001},
+    {"name": "Dates", "times_called": 8217},
+    {"name": "Displays", "times_called": 12555},
+    {"name": "Filter", "times_called": 2324},
+    {"name": "Geometry", "times_called": 10993},
     {
      "name": "heap",
      "children": [
-      {"name": "FibonacciHeap", "value": 9354},
-      {"name": "HeapNode", "value": 1233}
+      {"name": "FibonacciHeap", "times_called": 9354},
+      {"name": "HeapNode", "times_called": 1233}
      ]
     },
-    {"name": "IEvaluable", "value": 335},
-    {"name": "IPredicate", "value": 383},
-    {"name": "IValueProxy", "value": 874},
+    {"name": "IEvaluable", "times_called": 335},
+    {"name": "IPredicate", "times_called": 383},
+    {"name": "IValueProxy", "times_called": 874},
     {
      "name": "math",
      "children": [
-      {"name": "DenseMatrix", "value": 3165},
-      {"name": "IMatrix", "value": 2815},
-      {"name": "SparseMatrix", "value": 3366}
+      {"name": "DenseMatrix", "times_called": 3165},
+      {"name": "IMatrix", "times_called": 2815},
+      {"name": "SparseMatrix", "times_called": 3366}
      ]
     },
-    {"name": "Maths", "value": 17705},
-    {"name": "Orientation", "value": 1486},
+    {"name": "Maths", "times_called": 17705},
+    {"name": "Orientation", "times_called": 1486},
     {
      "name": "palette",
      "children": [
-      {"name": "ColorPalette", "value": 6367},
-      {"name": "Palette", "value": 1229},
-      {"name": "ShapePalette", "value": 2059},
-      {"name": "SizePalette", "value": 2291}
+      {"name": "ColorPalette", "times_called": 6367},
+      {"name": "Palette", "times_called": 1229},
+      {"name": "ShapePalette", "times_called": 2059},
+      {"name": "SizePalette", "times_called": 2291}
      ]
     },
-    {"name": "Property", "value": 5559},
-    {"name": "Shapes", "value": 19118},
-    {"name": "Sort", "value": 6887},
-    {"name": "Stats", "value": 6557},
-    {"name": "Strings", "value": 22026}
+    {"name": "Property", "times_called": 5559},
+    {"name": "Shapes", "times_called": 19118},
+    {"name": "Sort", "times_called": 6887},
+    {"name": "Stats", "times_called": 6557},
+    {"name": "Strings", "times_called": 22026}
    ]
   },
   {
@@ -246,66 +246,66 @@
     {
      "name": "axis",
      "children": [
-      {"name": "Axes", "value": 1302},
-      {"name": "Axis", "value": 24593},
-      {"name": "AxisGridLine", "value": 652},
-      {"name": "AxisLabel", "value": 636},
-      {"name": "CartesianAxes", "value": 6703}
+      {"name": "Axes", "times_called": 1302},
+      {"name": "Axis", "times_called": 24593},
+      {"name": "AxisGridLine", "times_called": 652},
+      {"name": "AxisLabel", "times_called": 636},
+      {"name": "CartesianAxes", "times_called": 6703}
      ]
     },
     {
      "name": "controls",
      "children": [
-      {"name": "AnchorControl", "value": 2138},
-      {"name": "ClickControl", "value": 3824},
-      {"name": "Control", "value": 1353},
-      {"name": "ControlList", "value": 4665},
-      {"name": "DragControl", "value": 2649},
-      {"name": "ExpandControl", "value": 2832},
-      {"name": "HoverControl", "value": 4896},
-      {"name": "IControl", "value": 763},
-      {"name": "PanZoomControl", "value": 5222},
-      {"name": "SelectionControl", "value": 7862},
-      {"name": "TooltipControl", "value": 8435}
+      {"name": "AnchorControl", "times_called": 2138},
+      {"name": "ClickControl", "times_called": 3824},
+      {"name": "Control", "times_called": 1353},
+      {"name": "ControlList", "times_called": 4665},
+      {"name": "DragControl", "times_called": 2649},
+      {"name": "ExpandControl", "times_called": 2832},
+      {"name": "HoverControl", "times_called": 4896},
+      {"name": "IControl", "times_called": 763},
+      {"name": "PanZoomControl", "times_called": 5222},
+      {"name": "SelectionControl", "times_called": 7862},
+      {"name": "TooltipControl", "times_called": 8435}
      ]
     },
     {
      "name": "data",
      "children": [
-      {"name": "Data", "value": 20544},
-      {"name": "DataList", "value": 19788},
-      {"name": "DataSprite", "value": 10349},
-      {"name": "EdgeSprite", "value": 3301},
-      {"name": "NodeSprite", "value": 19382},
+      {"name": "Data", "times_called": 20544},
+      {"name": "DataList", "times_called": 19788},
+      {"name": "DataSprite", "times_called": 10349},
+      {"name": "EdgeSprite", "times_called": 3301},
+      {"name": "NodeSprite", "times_called": 19382},
       {
        "name": "render",
        "children": [
-        {"name": "ArrowType", "value": 698},
-        {"name": "EdgeRenderer", "value": 5569},
-        {"name": "IRenderer", "value": 353},
-        {"name": "ShapeRenderer", "value": 2247}
+        {"name": "ArrowType", "times_called": 698},
+        {"name": "EdgeRenderer", "times_called": 5569},
+        {"name": "IRenderer", "times_called": 353},
+        {"name": "ShapeRenderer", "times_called": 2247}
        ]
       },
-      {"name": "ScaleBinding", "value": 11275},
-      {"name": "Tree", "value": 7147},
-      {"name": "TreeBuilder", "value": 9930}
+      {"name": "ScaleBinding", "times_called": 11275},
+      {"name": "Tree", "times_called": 7147},
+      {"name": "TreeBuilder", "times_called": 9930}
      ]
     },
     {
      "name": "events",
      "children": [
-      {"name": "DataEvent", "value": 2313},
-      {"name": "SelectionEvent", "value": 1880},
-      {"name": "TooltipEvent", "value": 1701},
-      {"name": "VisualizationEvent", "value": 1117}
+      {"name": "DataEvent", "times_called": 2313},
+      {"name": "SelectionEvent", "times_called": 1880},
+      {"name": "TooltipEvent", "times_called": 1701},
+      {"name": "VisualizationEvent", "times_called": 1117}
      ]
     },
     {
      "name": "legend",
      "children": [
-      {"name": "Legend", "value": 20859},
-      {"name": "LegendItem", "value": 4614},
-      {"name": "LegendRange", "value": 10530}
+      {"name": "Legend", "times_called": 20859},
+      {"name": "LegendItem", "times_called": 4614},
+      {"name": "LegendRange", "times_called": 10530}
      ]
     },
     {
@@ -314,66 +314,66 @@
       {
        "name": "distortion",
        "children": [
-        {"name": "BifocalDistortion", "value": 4461},
-        {"name": "Distortion", "value": 6314},
-        {"name": "FisheyeDistortion", "value": 3444}
+        {"name": "BifocalDistortion", "times_called": 4461},
+        {"name": "Distortion", "times_called": 6314},
+        {"name": "FisheyeDistortion", "times_called": 3444}
        ]
       },
       {
        "name": "encoder",
        "children": [
-        {"name": "ColorEncoder", "value": 3179},
-        {"name": "Encoder", "value": 4060},
-        {"name": "PropertyEncoder", "value": 4138},
-        {"name": "ShapeEncoder", "value": 1690},
-        {"name": "SizeEncoder", "value": 1830}
+        {"name": "ColorEncoder", "times_called": 3179},
+        {"name": "Encoder", "times_called": 4060},
+        {"name": "PropertyEncoder", "times_called": 4138},
+        {"name": "ShapeEncoder", "times_called": 1690},
+        {"name": "SizeEncoder", "times_called": 1830}
        ]
       },
       {
        "name": "filter",
        "children": [
-        {"name": "FisheyeTreeFilter", "value": 5219},
-        {"name": "GraphDistanceFilter", "value": 3165},
-        {"name": "VisibilityFilter", "value": 3509}
+        {"name": "FisheyeTreeFilter", "times_called": 5219},
+        {"name": "GraphDistanceFilter", "times_called": 3165},
+        {"name": "VisibilityFilter", "times_called": 3509}
        ]
       },
-      {"name": "IOperator", "value": 1286},
+      {"name": "IOperator", "times_called": 1286},
       {
        "name": "label",
        "children": [
-        {"name": "Labeler", "value": 9956},
-        {"name": "RadialLabeler", "value": 3899},
-        {"name": "StackedAreaLabeler", "value": 3202}
+        {"name": "Labeler", "times_called": 9956},
+        {"name": "RadialLabeler", "times_called": 3899},
+        {"name": "StackedAreaLabeler", "times_called": 3202}
        ]
       },
       {
        "name": "layout",
        "children": [
-        {"name": "AxisLayout", "value": 6725},
-        {"name": "BundledEdgeRouter", "value": 3727},
-        {"name": "CircleLayout", "value": 9317},
-        {"name": "CirclePackingLayout", "value": 12003},
-        {"name": "DendrogramLayout", "value": 4853},
-        {"name": "ForceDirectedLayout", "value": 8411},
-        {"name": "IcicleTreeLayout", "value": 4864},
-        {"name": "IndentedTreeLayout", "value": 3174},
-        {"name": "Layout", "value": 7881},
-        {"name": "NodeLinkTreeLayout", "value": 12870},
-        {"name": "PieLayout", "value": 2728},
-        {"name": "RadialTreeLayout", "value": 12348},
-        {"name": "RandomLayout", "value": 870},
-        {"name": "StackedAreaLayout", "value": 9121},
-        {"name": "TreeMapLayout", "value": 9191}
+        {"name": "AxisLayout", "times_called": 6725},
+        {"name": "BundledEdgeRouter", "times_called": 3727},
+        {"name": "CircleLayout", "times_called": 9317},
+        {"name": "CirclePackingLayout", "times_called": 12003},
+        {"name": "DendrogramLayout", "times_called": 4853},
+        {"name": "ForceDirectedLayout", "times_called": 8411},
+        {"name": "IcicleTreeLayout", "times_called": 4864},
+        {"name": "IndentedTreeLayout", "times_called": 3174},
+        {"name": "Layout", "times_called": 7881},
+        {"name": "NodeLinkTreeLayout", "times_called": 12870},
+        {"name": "PieLayout", "times_called": 2728},
+        {"name": "RadialTreeLayout", "times_called": 12348},
+        {"name": "RandomLayout", "times_called": 870},
+        {"name": "StackedAreaLayout", "times_called": 9121},
+        {"name": "TreeMapLayout", "times_called": 9191}
        ]
       },
-      {"name": "Operator", "value": 2490},
-      {"name": "OperatorList", "value": 5248},
-      {"name": "OperatorSequence", "value": 4190},
-      {"name": "OperatorSwitch", "value": 2581},
-      {"name": "SortOperator", "value": 2023}
+      {"name": "Operator", "times_called": 2490},
+      {"name": "OperatorList", "times_called": 5248},
+      {"name": "OperatorSequence", "times_called": 4190},
+      {"name": "OperatorSwitch", "times_called": 2581},
+      {"name": "SortOperator", "times_called": 2023}
      ]
     },
-    {"name": "Visualization", "value": 16540}
+    {"name": "Visualization", "times_called": 16540}
    ]
   }
  ]

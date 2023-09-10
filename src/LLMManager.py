@@ -53,18 +53,17 @@ class LLM:
     projects_path = ''
 
     def __init__(self, projects_path: str, options: dict) -> None:
-        self.model = None
-        self.llm_chain = None
-        self.context_window_size = None
-        self.options = options
-        self.prompt_handler = PromptHandler(model_name=self.options["model_name"])
+        self.model : OpenAI = None
+        self.llm_chain : LLMChain = None
+        self.context_window_size : int = None
+        self.options : dict = options
+        self.prompt_handler : PromptHandler = PromptHandler(model_name=self.options["model_name"])
         
         self.prompt_handler.set_projects_path(projects_path)
         self.set_projects_path(projects_path)
 
         self.load_model()
-        self.file_handler = FileHandler()
-        self.context_window_size = 16e3
+        self.file_handler : FileHandler = FileHandler()
 
     @staticmethod
     def set_projects_path(projects_path: str) -> None:

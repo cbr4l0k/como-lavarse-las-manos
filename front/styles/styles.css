@@ -30,7 +30,7 @@ code {
     border-radius: 5px;
     overflow-y: scroll;
     padding: 2em;
-    font-size: 10px;
+    font-size: 12px;
     display: block;
 }
 
@@ -54,7 +54,7 @@ div.container_horizontal {
 /* ID SPECIFIC BLOCKS */
 code#desc_tree {
     margin-right: 2vw;
-    height: 15vw;
+    height: 28vw;
     width: 22vw;
 }
 

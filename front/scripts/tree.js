@@ -172,6 +172,6 @@ function draw_tree(data) {
 
 }
 
-fetch('./data/arc.json')
+fetch('../reports/filesreport_Arquitectura_09_08_16_17.json')
     .then(response => response.json())
     .then(data => draw_tree(data[0]));

@@ -62,6 +62,7 @@ class Report:
         fp_list = file_path.split("/")
         fp_list.pop(0)
         file_path = "/".join(fp_list)
+        print("Parsing file: ", file_path, "...")
         with open(self.project_path + "/" + file_path, "r") as f:
             return f.read()
 
@@ -217,7 +218,7 @@ class Report:
                 # remove the .py extension
                 response["dependencies"][i] = response["dependencies"][i].replace(".py", "")
                 if response["dependencies"][i].split("/")[-1]+".py" not in self.files:
-                    print(f"WARNING: {response['dependencies'][i]} not found in the project tree")
+                    # print(f"WARNING: {response['dependencies'][i]} not found in the project tree")
                     response["dependencies"][i] = response["dependencies"][i].replace("int/", "ext/")
 
             directory["dependencies"] = response["dependencies"]
@@ -365,6 +366,7 @@ class Report:
             --------
                 None
         """
+        print("Saving report...")
         with open(
                 f"{OUTPUTS_PATH}reports/filesreport_{self.project_path.split('/')[-1]}_{datetime.now().strftime('%m_%d_%H_%M')}.json",
                 "w") as f:

@@ -27,7 +27,7 @@ def main():
         return
 
     if len(sys.argv) < 2:
-        print(RED + "Usage: python3 main.py <project_name>" + END)
+        print(RED + "Usage: python3 snoo.py <project_name>" + END)
         return
 
     project_name = sys.argv[1]
@@ -41,6 +41,8 @@ def main():
         with socketserver.TCPServer(("", PORT), Handler) as httpd:
             print(BLUE + "serving at port" + END, PORT)
             httpd.serve_forever()
+        # start google chrome
+        os.system(f"google-chrome http://localhost:{PORT}")
     except KeyboardInterrupt:
         print(BLUE + "Stopping the server..." + END)
         httpd.server_close()

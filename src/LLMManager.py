@@ -18,6 +18,9 @@ OPEN_AI_API_KEY = os.getenv("OPEN_AI_API_KEY")
 OUTPUTS_PATH = os.getenv("OUTPUTS_PATH")
 DEFAULT_LLM = os.getenv("DEFAULT_LLM")
 
+import warnings
+warnings.filterwarnings("ignore")
+
 
 class LLM:
 
@@ -129,7 +132,7 @@ class LLM:
         llm_chain: LLMChain = LLMChain(
             llm=self.model,
             prompt=prompt,
-            verbose=True,
+            verbose=self.options["verbose"]
         )
 
         self.llm_chain = llm_chain
@@ -183,7 +186,7 @@ class LLM:
 
             response = self.llm_chain.run(responses)
 
-        print(response)
+        # print(response)
         
         return self._check_response(response)
     
@@ -230,7 +233,7 @@ class LLM:
         self.load_chain(template=template)
         response = self.llm_chain.run(directory_contents)
 
-        print(response)
+        # print(response)
         return response
 
     
@@ -259,7 +262,7 @@ class LLM:
         # the gpt which has a bigger context window size
 
         if prompt_len > self.context_window_size:
-            print("prompt is too big, loading gpt-3.5-turbo-16k")
+            # print("prompt is too big, loading gpt-3.5-turbo-16k")
             self.options["model_name"] = "gpt-3.5-turbo-16k"
             self.load_model()
             self.set_context_window_size(16e3)
@@ -268,7 +271,7 @@ class LLM:
             response = self.llm_chain.run(prompt)
         
         else:
-            print("prompt is not too big, loading gpt-3.5-turbo-16k")
+            # print("prompt is not too big, loading gpt-3.5-turbo-16k")
             self.options["model_name"] = "gpt-3.5-turbo-16k"
             self.load_model()
             self.set_context_window_size(16e3)
@@ -315,11 +318,11 @@ def default_llm(projects_path : str):
         options={
             "openai_api_key": OPEN_AI_API_KEY,
             "model_name": model_name,
-            "temperature": 0.1,
+            "temperature": 0,
             "max_tokens": max_tokens,
             "presence_penalty": 2,
             "callback_manager": CallbackManager([StreamingStdOutCallbackHandler()]),
-            "verbose": True,
+            "verbose": False
         },
 
     )

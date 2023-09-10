@@ -41,13 +41,14 @@ class PromptHandler:
                                 """                          
                                 You must return a json with this fields:
                                     "dependencies": [list of dependencies names, external libraries as 'ext/library' and internal
-                                    libraries as 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter'],
+                                    libraries 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter'. Dependencies
+                                    are the libraries which the code uses and imports.],
                                     "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
                                     and methods, if makes sense infer behavior from method names'""
 
                                 For identifying the dependencies you must:
                                     1. Look at the context of the file tree.
-                                    2. Idenfitify the dependencies of the file.
+                                    2. Idenfitify the dependencies of the code, this is modules or scripts it imports.
                                     3. Check if any identified dependency in the code is or not in the file tree. 
                                        A dependency is internal if for example the code says: 'from my_library.sub_lib import module' 
                                        and there is a folder named 'my_library' in the file tree and a folder or file named 'sub_lib'.
@@ -74,22 +75,23 @@ class PromptHandler:
                                            {}
                                 """.format(self.initial_files_report) +
                                 """
-                                    You must return a json with this fields:
-                                        "dependencies": [list of dependencies names, external libraries as 'ext/library' and internal
-                                        libraries as 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter'],
-                                        "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
-                                        and methods, if makes sense infer behavior from method names'""
+                                You must return a json with this fields:
+                                    "dependencies": [list of dependencies names, external libraries as 'ext/library' and internal
+                                    libraries 'int/library' are accepted, for example: 'ext/numpy', 'int/my_library/plotter'. Dependencies
+                                    are the libraries which the code uses and imports.],
+                                    "explanation": 'short code explanation highlighting ONLY: main features, key classes, functions 
+                                    and methods, if makes sense infer behavior from method names'""
 
-                                    For identifying the dependencies you must:
-                                        1. Look at the context of the file tree.
-                                        2. Idenfitify the dependencies of the file.
-                                        3. Check if any identified dependency in the code is or not in the file tree. 
-                                        A dependency is internal if for example the code says: 'from my_library.sub_lib import module' 
-                                        and there is a folder named 'my_library' in the file tree and a folder or file named 'sub_lib'.
-                                        4. If the dependency is not in the file tree, it's external and shuld be written as 'ext/library'
-                                        or 'ext/library/sublibrary' and so on. 
-                                        5. If the dependency is in the file tree, it's internal and should be written as 'int/library'
-                                        or 'int/library/sublibrary' and so on.
+                                For identifying the dependencies you must:
+                                    1. Look at the context of the file tree.
+                                    2. Idenfitify the dependencies of the code, this is modules or scripts it imports.
+                                    3. Check if any identified dependency in the code is or not in the file tree. 
+                                       A dependency is internal if for example the code says: 'from my_library.sub_lib import module' 
+                                       and there is a folder named 'my_library' in the file tree and a folder or file named 'sub_lib'.
+                                    4. If the dependency is not in the file tree, it's external and shuld be written as 'ext/library'
+                                       or 'ext/library/sublibrary' and so on. 
+                                    5. If the dependency is in the file tree, it's internal and should be written as 'int/library'
+                                       or 'int/library/sublibrary' and so on.
 
                                     give me the json only, give me a well formated json, be short and concise, don't forget,
                                     the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.

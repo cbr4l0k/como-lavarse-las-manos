@@ -73,7 +73,9 @@ class PromptHandler:
 
                                     6. DONT INVENT THINGS, IF THE CODE IS NOT IMPORTING SOMETHING DONT ADD IT AS DEPENDENCY. OTHERWISE 
                                     YOU WILL BE PENALIZED, FIRED, AND YOUR FAMILY WILL BE ASHAMED OF YOU. for example, you can not import
-                                    your own class from the same file.
+                                    your own class from the same file. Don't change the file names, for example if there is a folder or 
+                                    file named 'my_library' don't change it to 'my_lib' or 'my_libs' or something different from the tree 
+                                    name.
 
                                  give me the json only, give me a well formated json, be short and concise, don't forget,
                                  the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explanation.
@@ -122,7 +124,9 @@ class PromptHandler:
 
                                     6. DONT INVENT THINGS, IF THE CODE IS NOT IMPORTING SOMETHING DONT ADD IT AS DEPENDENCY. OTHERWISE 
                                     YOU WILL BE PENALIZED, FIRED, AND YOUR FAMILY WILL BE ASHAMED OF YOU. for example, you can not import
-                                    your own class from the same file.
+                                    your own class from the same file. Don't change the file names, for example if there is a folder or 
+                                    file named 'my_library' don't change it to 'my_lib' or 'my_libs' or something different from the tree 
+                                    name.
 
                                     give me the json only, give me a well formated json, be short and concise, don't forget,
                                     the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explanation.
@@ -204,7 +208,9 @@ class PromptHandler:
 
                                                 6. DONT INVENT THINGS, IF THE CODE IS NOT IMPORTING SOMETHING DONT ADD IT AS DEPENDENCY. OTHERWISE 
                                                 YOU WILL BE PENALIZED, FIRED, AND YOUR FAMILY WILL BE ASHAMED OF YOU. for example, you can not import
-                                                your own class from the same file.
+                                                your own class from the same file. Don't change the file names, for example if there is a folder or 
+                                                file named 'my_library' don't change it to 'my_lib' or 'my_libs' or something different from the tree 
+                                                name.
 
 
                                             The file tree is:

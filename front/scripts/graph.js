@@ -80,8 +80,10 @@ function draw_graph(gData) {
             return link.source === item.id;
         })];
         const b = gData.nodes[gData.nodes.findIndex(item => {
+            console.log(`${link.target} === ${item.id} => ${link.target === item.id}`)
             return link.target === item.id;
         })];
+        console.log(b)
 
         !a.neighbors && (a.neighbors = []);
         !b.neighbors && (b.neighbors = []);

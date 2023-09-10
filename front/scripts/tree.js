@@ -180,6 +180,6 @@ function draw_tree(data) {
 
 }
 
-fetch('../reports/filesreport_simpleModuleWithScreenRawMaticas_09_10_01_10.json')
+fetch('../reports/finalreport.json')
     .then(response => response.json())
     .then(data => draw_tree(data[0]));

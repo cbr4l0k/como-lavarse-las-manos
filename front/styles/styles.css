@@ -45,11 +45,16 @@ div.container_general {
 div.container_vertical {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 div.container_horizontal {
     display: flex;
     flex-direction: row;
+}
+
+p.desc {
+    width:80%
 }
 
 /* ID SPECIFIC BLOCKS */

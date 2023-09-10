@@ -1,4 +1,0 @@
-- The predictor scheme is the initial step in an iterative process.
-- It estimates the next value or state based on the current information and the known behavior of the system.
-- The predictor scheme uses simple calculations or extrapolation techniques to make a prediction for the next iteration.
-- It is a forward-looking step that provides an initial approximation for the iterative process.

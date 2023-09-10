@@ -156,7 +156,7 @@ function draw_graph(gData) {
 }
 
 
-fetch('../reports/filesreport_simpleModuleWithScreenRawMaticas_09_10_01_10.json')
+fetch('../reports/finalreport.json')
     .then(res => res.json())
     .then(data => extractLeafNodes(data[0]))
     .then(data => draw_graph(data))

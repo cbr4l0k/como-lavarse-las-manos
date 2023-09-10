@@ -40,6 +40,8 @@ function add_text(data) {
         )
 }
 
-fetch('../reports/filesreport_simpleModuleWithScreenRawMaticas_09_10_01_10.json')
+
+
+fetch('../reports/finalreport.json')
     .then(response => response.json())
     .then(data => add_text(data[1]));

@@ -113,6 +113,6 @@ function draw_sun(data) {
         return d.y1 <= width && d.y0 >= 0 && d.x1 - d.x0 > 16;
     }
 }
-fetch('../reports/filesreport_simpleModuleWithScreenRawMaticas_09_10_01_10.json')
+fetch('../reports/finalreport.json')
     .then(response => response.json())
     .then(data => draw_sun(data[0]));

@@ -22,6 +22,7 @@
         <h2>Index Tree of the Project</h2>
         <div class="container_general" id="tree">
             <div class="container_vertical">
+                <p class="desc">This section serves as an overview of the project's file hierarchy. Its primary purpose is to help users understand the organization of files within the project. By hovering over leaf nodes, users can access file descriptions, aiding in quick identification and comprehension of individual files. This graph simplifies project navigation and is particularly useful for gaining a high-level understanding of the project's file structure. </p>
                 <div class="container_horizontal">
                     <code id="desc_tree">
                         <b>HOVER OVER THE BRANCHES TO GET THE DESCRIPTION.</b>
@@ -38,6 +39,7 @@
         <h2>Coupling &amp; Cohesion</h2>
         <div class="container_general">
             <div class="container_vertical">
+                <p class="desc">This section delves into the project's dependencies and relationships between files. It shows which files import others and vice versa, emphasizing the direction of these imports. The size of nodes reflects the number of files that depend on a particular file, making it easy to identify critical and frequently referenced components. The informational panel, and the fact hovering over nodes reveals information about both incoming and outgoing dependencies, aids in identifying coupling and cohesion patterns within the project. </p>
                 <div class="container_horizontal">
                     <code id="desc_eb"></code>
                     <div id="container_eb" style="width: 100%; height: 100%;">
@@ -48,11 +50,14 @@
 
         <h2>Usage Percentage</h2>
         <div class="container_general">
+        <div class="container_vertical">
+            <p class="desc">This section provides a comprehensive view of import statistics for all files in the project. It visualizes the amount of imports each file has, allowing users to quickly spot files with numerous dependencies. This graph is particularly helpful for identifying potential bottlenecks or areas with high coupling, where many files rely on a single component. Users can zoom in and out to focus on specific sections of the project, facilitating a more detailed analysis of import patterns. </p>
             <div class="container_vertical">
                 <div id="container_sb">
                     <svg id="svg_sb"></svg> 
                 </div>
             </div> 
+        </div>
         </div>
 
     </body>

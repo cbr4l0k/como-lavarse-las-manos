@@ -289,6 +289,7 @@ class Report:
                 return
             directory["name"] = directory["name"].replace(".py", "")
             directory["full_path"] = directory["full_path"].replace(".py", "")
+            directory["id"] = directory["id"].replace(".py", "")
 
     def add_aditional_info(self):
         """

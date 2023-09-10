@@ -352,7 +352,7 @@ class Report:
                 "w") as f:
             json.dump(self.report, f, indent=4)
 
-        with open(f"{OUTPUTS_PATH}finalreport.json", "w") as f
+        with open(f"{OUTPUTS_PATH}finalreport.json", "w") as f:
             json.dump(self.report, f, indent=4)
 
 

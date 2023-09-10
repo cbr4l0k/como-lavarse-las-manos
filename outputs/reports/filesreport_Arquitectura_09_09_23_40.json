@@ -1,0 +1,180 @@
+[
+    {
+        "type": "directory",
+        "name": "Arquitectura",
+        "explanation": "The folder \"Arquitectura\" contains two files: \"ALU.py\" and \"Calculator.py\". The \"ALU.py\" file imports external libraries such as numpy, pandas, matplotlib.pyplot, and seaborn. It also imports internal modules from the Operations package, including Sum, Subtract, Multiply, Divide, Power, and IntDivide. The ALU class represents an Arithmetic Logic Unit and performs calculations based on user input. The \"Calculator.py\" file imports the ALU module from the internal library. The Calculator class has a menu method that alternates between processing operators and operands using the ALU object. The main method initializes an instance of the Calculator class and calls the menu method.",
+        "children": [
+            {
+                "type": "file",
+                "name": "ALU",
+                "full_path": "Arquitectura/ALU",
+                "id": "int/ALU",
+                "dependencies": [
+                    "ext/numpy",
+                    "ext/pandas",
+                    "ext/matplotlib/pyplot",
+                    "ext/seaborn",
+                    "int/Operations/Sum",
+                    "int/Operations/Subtract",
+                    "int/Operations/Multiply",
+                    "int/Operations/Divide",
+                    "int/Operations/Power",
+                    "int/Operations/IntDivide"
+                ],
+                "explanation": "The code imports external libraries such as numpy, pandas, matplotlib.pyplot, and seaborn. It also imports internal modules from the Operations package, including Sum, Subtract, Multiply, Divide, Power, and IntDivide. The ALU class represents an Arithmetic Logic Unit and performs calculations based on user input.",
+                "times_called": 1
+            },
+            {
+                "type": "file",
+                "name": "Calculator",
+                "full_path": "Arquitectura/Calculator",
+                "id": "int/Calculator",
+                "dependencies": [
+                    "int/ALU"
+                ],
+                "explanation": "The code imports the ALU module from the internal library. The Calculator class has a menu method that alternates between processing operators and operands using the ALU object. The main method initializes an instance of the Calculator class and calls the menu method."
+            },
+            {
+                "type": "directory",
+                "name": "Operations",
+                "explanation": "The folder \"Arquitectura/Operations\" contains several files related to mathematical operations. Each file represents a different operation, such as division, integer division, multiplication, power, subtraction, and addition. These files import the \"Operation\" module from the internal library and define classes that inherit from the \"Operation\" class. Each class overrides the \"calculate\" method to perform its specific operation. Some classes also include error handling for special cases, such as dividing by zero. The folder's purpose is to provide a collection of reusable mathematical operation functions.",
+                "children": [
+                    {
+                        "type": "file",
+                        "name": "Divide",
+                        "full_path": "Arquitectura/Operations/Divide",
+                        "id": "int/Operations/Divide",
+                        "dependencies": [
+                            "int/Operations/Operation"
+                        ],
+                        "explanation": "The code imports the 'Operation' module from the internal library. It defines a class 'Divide' that inherits from 'Operation'. The 'calculate' method performs division between two numbers, raising an error if the second number is zero.",
+                        "times_called": 1
+                    },
+                    {
+                        "type": "file",
+                        "name": "IntDivide",
+                        "full_path": "Arquitectura/Operations/IntDivide",
+                        "id": "int/Operations/IntDivide",
+                        "dependencies": [
+                            "int/Operations/Operation"
+                        ],
+                        "explanation": "The code imports the 'Operation' module from the internal library. The 'IntDivide' class inherits from the 'Operation' class and overrides the 'calculate' method to perform integer division. If the second operand is 0, a ValueError is raised. The result of the division is returned.",
+                        "times_called": 1
+                    },
+                    {
+                        "type": "file",
+                        "name": "Multiply",
+                        "full_path": "Arquitectura/Operations/Multiply",
+                        "id": "int/Operations/Multiply",
+                        "dependencies": [
+                            "int/Operations/Operation"
+                        ],
+                        "explanation": "The code imports the 'Operation' module from the internal library. The 'Multiply' class inherits from the 'Operation' class and overrides the 'calculate' method to perform multiplication of two numbers.",
+                        "times_called": 1
+                    },
+                    {
+                        "type": "file",
+                        "name": "Operation",
+                        "full_path": "Arquitectura/Operations/Operation",
+                        "id": "int/Operations/Operation",
+                        "dependencies": [
+                            "ext/abc",
+                            "ext/library"
+                        ],
+                        "explanation": "The code imports the ABC class from the abc module. The Operation class is an abstract base class that defines a constructor and an abstract method called calculate().",
+                        "times_called": 6
+                    },
+                    {
+                        "type": "file",
+                        "name": "Power",
+                        "full_path": "Arquitectura/Operations/Power",
+                        "id": "int/Operations/Power",
+                        "dependencies": [
+                            "int/Operations/Operation"
+                        ],
+                        "explanation": "The Power class is a subclass of the Operation class. It takes two float numbers as input and calculates the power of the first number raised to the second number.",
+                        "times_called": 1
+                    },
+                    {
+                        "type": "file",
+                        "name": "Subtract",
+                        "full_path": "Arquitectura/Operations/Subtract",
+                        "id": "int/Operations/Subtract",
+                        "dependencies": [
+                            "int/Operations/Operation"
+                        ],
+                        "explanation": "The code imports the 'Operation' module from the internal library. It defines a class 'Subtract' that inherits from 'Operation'. The 'calculate' method subtracts two numbers.",
+                        "times_called": 1
+                    },
+                    {
+                        "type": "file",
+                        "name": "Sum",
+                        "full_path": "Arquitectura/Operations/Sum",
+                        "id": "int/Operations/Sum",
+                        "dependencies": [
+                            "int/Operations/Operation"
+                        ],
+                        "explanation": "The code imports the 'Operation' class from the internal library 'Operations'. The 'Sum' class inherits from the 'Operation' class and overrides the 'calculate' method to return the sum of two numbers.",
+                        "times_called": 1
+                    }
+                ]
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/numpy",
+                "times_called": 1,
+                "full_path": "Arquitectura/ext/numpy",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/pandas",
+                "times_called": 1,
+                "full_path": "Arquitectura/ext/pandas",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/matplotlib/pyplot",
+                "times_called": 1,
+                "full_path": "Arquitectura/ext/matplotlib/pyplot",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/seaborn",
+                "times_called": 1,
+                "full_path": "Arquitectura/ext/seaborn",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/abc",
+                "times_called": 1,
+                "full_path": "Arquitectura/ext/abc",
+                "dependencies": [],
+                "explanation": ""
+            },
+            {
+                "type": "External dependency",
+                "name": "ext/library",
+                "times_called": 1,
+                "full_path": "Arquitectura/ext/library",
+                "dependencies": [],
+                "explanation": ""
+            }
+        ]
+    },
+    {
+        "type": "report",
+        "directories": 2,
+        "files": 9,
+        "coupling": "medium",
+        "cohesion": "high",
+        "explanation": "The project has a medium level of coupling because there are dependencies between different modules and external libraries. The ALU module depends on external libraries such as numpy, pandas, matplotlib.pyplot, and seaborn, as well as internal modules from the Operations package. The Calculator module also depends on the ALU module. However, the project has a high level of cohesion because the files within the Operations package have a clear and specific purpose related to mathematical operations. Each file represents a different operation and they all share a common base class. This promotes code reusability and maintainability."
+    }
+]

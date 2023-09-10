@@ -165,6 +165,10 @@ class Report:
             if not directory["name"].endswith(".py"):
                 return
             directory["full_path"] = f"{root}{directory['name']}"
+            file_id = directory["full_path"].split("/")
+            file_id[0] = "int"
+            file_id = "/".join(file_id)
+            directory["id"] = file_id
             response = self.LLM.generate_response(directory["full_path"], load_file_content(directory["full_path"]))
             # print("---------------response-----------------")
             # print(response)

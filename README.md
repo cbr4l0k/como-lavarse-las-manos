@@ -1,14 +1,22 @@
 # Snoo.py
 
-Our solution has been tested in linux only, so we recommend sticking to this operating systems, particularly in arch based distributions, this should also work without effort in other kinds of linux
-distributions.
+_Our solution has been tested in linux only, so we recommend sticking to this operating systems, particularly in arch based distributions, this should also work without effort in other kinds of linux
+distributions._
+
+## Table of contents
+- [Run project](#run-project)
+- [Requirements](#requirements)
+- [Installation and setup](#installation-and-setup)
+    - [Enviroment variables](#environment-variables)
+
+
+## Run project 
 
 This is how you can run our project:
 
 ```python 
 python3 src/snoo.py
 ```
-
 
 ## Requirements
 - Python 3.11 or higher.
@@ -28,7 +36,7 @@ pip install -r requirements.txt
 ### Environment variables
 
 
-| Field Name       | Path                                                           |
+| Field Name       | Explaination                                                   |
 |------------------|----------------------------------------------------------------|
 | OUTPUTS_PATH     | `Folder containing the outputs`  |
 | PROJECTS_PATH    | `Folder containing the projects that are available for analys. Insert yours here.`|

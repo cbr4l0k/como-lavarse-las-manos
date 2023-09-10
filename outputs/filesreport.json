@@ -1,47 +1,133 @@
 [
     {
         "type": "directory",
-        "name": "/home/dleyvacastro/Documents/devsavant/Langchain/testing_projects/Arquitectura",
+        "name": "/home/dleyvacastro/Documents/devsavant/Langchain/testing_projects/simpleModuleWithScreenRawMaticas",
         "contents": [
             {
                 "type": "file",
-                "name": "ALU.py"
-            },
-            {
-                "type": "file",
-                "name": "Calculator.py"
+                "name": "boot.py"
             },
             {
                 "type": "directory",
-                "name": "Operations",
+                "name": "dependencies",
                 "contents": [
                     {
                         "type": "file",
-                        "name": "Divide.py"
+                        "name": "font10.py"
                     },
                     {
                         "type": "file",
-                        "name": "IntDivide.py"
+                        "name": "ssd1306.py"
                     },
                     {
                         "type": "file",
-                        "name": "Multiply.py"
+                        "name": "urequests.py"
                     },
                     {
                         "type": "file",
-                        "name": "Operation.py"
+                        "name": "writer.py"
+                    }
+                ]
+            },
+            {
+                "type": "directory",
+                "name": "html",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "a.html"
                     },
                     {
                         "type": "file",
-                        "name": "Power.py"
+                        "name": "albahaca_maticas_v3_heavy_v2_adobe_express.bin"
                     },
                     {
                         "type": "file",
-                        "name": "Subtract.py"
+                        "name": "b.html"
                     },
                     {
                         "type": "file",
-                        "name": "Sum.py"
+                        "name": "pages.py"
+                    },
+                    {
+                        "type": "file",
+                        "name": "parsers.py"
+                    }
+                ]
+            },
+            {
+                "type": "file",
+                "name": "main.py"
+            },
+            {
+                "type": "directory",
+                "name": "modules",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "actuators_module.py"
+                    },
+                    {
+                        "type": "file",
+                        "name": "database.py"
+                    },
+                    {
+                        "type": "file",
+                        "name": "initialize_database.py"
+                    },
+                    {
+                        "type": "file",
+                        "name": "initialize_modules.py"
+                    },
+                    {
+                        "type": "file",
+                        "name": "screen_module.py"
+                    },
+                    {
+                        "type": "file",
+                        "name": "sensors_module.py"
+                    },
+                    {
+                        "type": "file",
+                        "name": "web_module.py"
+                    }
+                ]
+            },
+            {
+                "type": "file",
+                "name": "scheduler.py"
+            },
+            {
+                "type": "file",
+                "name": "upload_files"
+            },
+            {
+                "type": "directory",
+                "name": "utils",
+                "contents": [
+                    {
+                        "type": "file",
+                        "name": "a2.pbm"
+                    },
+                    {
+                        "type": "file",
+                        "name": "config.json"
+                    },
+                    {
+                        "type": "file",
+                        "name": "internet_connection.py"
+                    },
+                    {
+                        "type": "file",
+                        "name": "json_related.py"
+                    },
+                    {
+                        "type": "file",
+                        "name": "metrics.py"
+                    },
+                    {
+                        "type": "file",
+                        "name": "time_management_module.py"
                     }
                 ]
             }
@@ -49,7 +135,7 @@
     },
     {
         "type": "report",
-        "directories": 2,
-        "files": 9
+        "directories": 5,
+        "files": 26
     }
 ]

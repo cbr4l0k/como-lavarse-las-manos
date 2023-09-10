@@ -1,13 +1,33 @@
-/home/dleyvacastro/Documents/devsavant/Langchain/testing_projects/Arquitectura
-├── ALU.py
-├── Calculator.py
-└── Operations
-    ├── Divide.py
-    ├── IntDivide.py
-    ├── Multiply.py
-    ├── Operation.py
-    ├── Power.py
-    ├── Subtract.py
-    └── Sum.py
+/home/dleyvacastro/Documents/devsavant/Langchain/testing_projects/simpleModuleWithScreenRawMaticas
+├── boot.py
+├── dependencies
+│   ├── font10.py
+│   ├── ssd1306.py
+│   ├── urequests.py
+│   └── writer.py
+├── html
+│   ├── a.html
+│   ├── albahaca_maticas_v3_heavy_v2_adobe_express.bin
+│   ├── b.html
+│   ├── pages.py
+│   └── parsers.py
+├── main.py
+├── modules
+│   ├── actuators_module.py
+│   ├── database.py
+│   ├── initialize_database.py
+│   ├── initialize_modules.py
+│   ├── screen_module.py
+│   ├── sensors_module.py
+│   └── web_module.py
+├── scheduler.py
+├── upload_files
+└── utils
+    ├── a2.pbm
+    ├── config.json
+    ├── internet_connection.py
+    ├── json_related.py
+    ├── metrics.py
+    └── time_management_module.py
 
-2 directories, 9 files
+5 directories, 26 files

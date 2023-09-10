@@ -74,15 +74,53 @@ class LLM:
         LLM.projects_path = projects_path
 
     def set_context_window_size(self, context_window_size: int) -> None:
+        """
+            Sets the context window size for the langchain model.
+
+            Args:
+            ----------
+            context_window_size: int
+                The size of the context window to use.
+
+            Returns:
+            ----------
+            None
+        """
         self.context_window_size = context_window_size
 
     def load_model(self) -> None:
-        """Loads LLama model"""
+        """
+            Loads the OpenAI langchain model.
+            
+            Args:
+            ----------
+            None
+
+            Returns:
+            ----------
+            None
+        """
         model = OpenAI(**self.options)
         self.prompt_handler.set_model(model_name=self.options["model_name"])
         self.model = model
 
     def load_chain(self, template: dict[str, any], requires_memory: bool = False) -> None:
+        """
+            Loads the langchain chain.
+
+            Args:
+            ----------
+            template: dict[str, any]
+                The template to use for the langchain chain.
+            requires_memory: bool
+                Whether the langchain chain requires memory or not.
+            
+            Returns:
+            ----------
+            None
+            
+        """
+        
         self.load_model()
         prompt: PromptTemplate = PromptTemplate(
             input_variables=template["input_variables"],
@@ -98,6 +136,21 @@ class LLM:
         self.llm_chain = llm_chain
 
     def generate_response(self, file_full_path: str, code: str) -> str:
+        """
+            Generates an explaination for a file.
+
+            Args:
+            ----------
+            file_full_path: str
+                The full path to the file.
+            code: str
+                The code to generate the explaination for.
+            
+            Returns:
+            ----------
+            str
+                The explaination for the file.
+        """
 
         # estimate the number of tokens for the code
         code_token_size = (self.context_window_size - self.prompt_handler.longest_prompt_lenght)
@@ -137,6 +190,20 @@ class LLM:
     
     def _check_response(self, response: str) -> str:
 
+        """
+            Checks the response of the langchain model.
+
+            Args:
+            ----------
+            response: str
+                The response to check.
+            
+            Returns:
+            ----------
+            str
+                The checked response.
+        """
+
         template = self.prompt_handler.get_raw_template(template=4)
         self.load_chain(template=template)
         response = self.llm_chain.run(response)
@@ -147,7 +214,18 @@ class LLM:
 
     def generate_explaination_for_directory(self, directory_contents: str) -> str:
         """
-            Given a directory with it's contents, generate an explaination for it.
+            Generates an explaination for a directory.
+            It is used to generate explainations for the folders in the project.
+
+            Args:
+            ----------
+            directory_contents: str
+                The contents of the directory.
+            
+            Returns:
+            ----------
+            str
+                The explaination for the directory.
         """
         template = self.prompt_handler.get_raw_template(template=5)
         self.load_chain(template=template)
@@ -160,8 +238,18 @@ class LLM:
     def generate_cohesion_coupling_analysis(self, json_report: str) -> str:
 
         """
-            Given a json report of a project, with the parcial dependencies and explainations.
-            generate a cohesion and coupling analysis.
+            Generates a cohesion and coupling analysis for a project.
+            It is used to generate cohesion and coupling analysis for a project.
+
+            Args:
+            ----------
+            json_report: str
+                The json report of the project.
+            
+            Returns:
+            ----------
+            str
+                The cohesion and coupling analysis for the project.
         """
 
         template = self.prompt_handler.get_raw_template(template=3)
@@ -201,10 +289,25 @@ class LLM:
 
 
 def default_llm(projects_path : str):
+    """
+        Returns the default langchain model.
+        It is used to generate explainations for the files in the project.
+
+        Args:
+        ----------
+        projects_path: str
+            The path to the projects.
+        
+        Returns:
+        ----------
+        LLM
+            The default langchain model.
+    """    
+
     average_number_of_tokens_per_sentence = 27
     desired_number_of_sentences_per_file = 30
     max_tokens = desired_number_of_sentences_per_file * average_number_of_tokens_per_sentence
-    context_window_size = 4e3
+    context_window_size = 16e3
 
     model_name = DEFAULT_LLM
 
@@ -222,45 +325,5 @@ def default_llm(projects_path : str):
 
     )
 
+    llm.set_context_window_size(context_window_size)
     return llm
-
-
-def main():
-    average_number_of_tokens_per_sentence = 27
-    desired_number_of_sentences_per_file = 50
-    max_tokens = desired_number_of_sentences_per_file * average_number_of_tokens_per_sentence
-    context_window_size = 16e3
-
-    model_name = DEFAULT_LLM
-
-    llm = LLM({
-        "openai_api_key": OPEN_AI_API_KEY,
-        "model_name": model_name,
-        "temperature": 0.0,
-        "max_tokens": max_tokens,
-        "presence_penalty": 2,
-        "callback_manager": CallbackManager([StreamingStdOutCallbackHandler()]),
-        "verbose": True,
-    })
-
-    # read a document from the project path
-    # and test running the process_code function
-
-    #file = f"{PROJECTS_PATH}/simpleModuleWithScreenRawMaticas/dependencies/writer.py"
-    #file = f"{OUTPUTS_PATH}/filesreport.json"
-    file = f"{LLM.outputs_path}/reports/filesreport_Arquitectura_09_07_19_21.json"
-
-    with open(file, "r") as f:
-        code = f.read()
-        #response = llm.generate_response(file, code)
-        #response = llm.generate_cohesion_coupling_analysis(code)
-        response = llm.generate_explaination_for_directory(code)
-
-        #save response as json
-        with open(f"{OUTPUTS_PATH}/output_test.json", "w") as f:
-            json.dump(response, f, indent=4)
-
-        print(response)
-
-if __name__ == "__main__":
-    main()

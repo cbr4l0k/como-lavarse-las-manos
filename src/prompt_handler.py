@@ -267,22 +267,6 @@ class PromptHandler:
         """
         PromptHandler.projects_path = projects_path
 
-    def load_initial_filesreport(self) -> None:
-        """
-            Loads the initial files report. This filesreport.txt is the initial files report.
-            The 'filesreport.txt' contains the tree output of the 'tree' command runned over
-            the folder of interest.
-
-            Args:
-            ---------
-                None
-
-            Returns:
-            ---------
-                None
-        """
-        with open(f"{OUTPUTS_PATH}filesreport.txt", "r") as f:
-            self.initial_files_report = f.read()
 
     def set_largest_prompt_token_lenght(self) -> None:
         """
@@ -320,6 +304,25 @@ class PromptHandler:
         self.model_name = model_name
         self.encoding = tiktoken.encoding_for_model(self.model_name)
         self.set_token_lenght()
+
+    def set_token_lenght(self) -> None:
+        """
+            Sets the token lenght for all the templates using the current model encoding.
+            For that the function assumes that the inputs needed for the templates are
+            empty strings.
+
+            Args:
+            ---------
+                None
+            
+            Returns:
+            ---------
+                None
+        """
+
+        for template in self.prompts:
+            white_spaced_template = self.white_spaced_template(template=template)
+            self.prompts[template]["prompt_token_lenght"] = len(self.encoding.encode(white_spaced_template))
 
     def get_raw_template(self, template: int = 0) -> dict:
         """
@@ -368,24 +371,24 @@ class PromptHandler:
         """
         return len(self.encoding.encode(prompt))
 
-    def set_token_lenght(self) -> None:
+
+    def load_initial_filesreport(self) -> None:
         """
-            Sets the token lenght for all the templates using the current model encoding.
-            For that the function assumes that the inputs needed for the templates are
-            empty strings.
+            Loads the initial files report. This filesreport.txt is the initial files report.
+            The 'filesreport.txt' contains the tree output of the 'tree' command runned over
+            the folder of interest.
 
             Args:
             ---------
                 None
-            
+
             Returns:
             ---------
                 None
         """
+        with open(f"{OUTPUTS_PATH}filesreport.txt", "r") as f:
+            self.initial_files_report = f.read()
 
-        for template in self.prompts:
-            white_spaced_template = self.white_spaced_template(template=template)
-            self.prompts[template]["prompt_token_lenght"] = len(self.encoding.encode(white_spaced_template))
 
     def white_spaced_template(self, template: int = 0) -> str:
         """

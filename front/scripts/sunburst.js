@@ -1,3 +1,21 @@
+const DK_BG =        '#282828';
+const DK_RED =       '#cc241d';
+const DK_GREEN =     '#98971a';
+const DK_YELLOW =    '#d79921';
+const DK_BLUE =      '#458588';
+const DK_PURPLE =    '#b16286';
+const DK_AQUA =      '#689d6a';
+const DK_GRAY =      '#928374';
+const DK_ORANGE =    '#d65d0e';
+const LG_BG =        '#ebdbb22'
+const LG_RED =       '#fb4934';
+const LG_GREEN =     '#b8bb26';
+const LG_YELLOW =    '#fabd2f';
+const LG_BLUE =      '#83a598';
+const LG_PURPLE =    '#d3869b';
+const LG_AQUA =      '#8ec07c';
+const LG_GRAY =      '#a89984';
+const LG_ORANGE =    '#fe8019';
 
 function draw_sun(data) {
     // Specify the chart’s dimensions.
@@ -94,6 +112,6 @@ function draw_sun(data) {
 }
 
 
-fetch("../data/flare-2.json")
+fetch('../reports/filesreport_Arquitectura_09_08_16_17.json')
     .then(response => response.json())
-    .then(data => draw_sun(data));
+    .then(data => draw_sun(data)[0]);

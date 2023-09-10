@@ -9,7 +9,6 @@ const DK_PURPLE =    '#b16286';
 const DK_AQUA =      '#689d6a';
 const DK_GRAY =      '#928374';
 const DK_ORANGE =    '#d65d0e';
-
 const LG_BG =        '#ebdbb22'
 const LG_RED =       '#fb4934';
 const LG_GREEN =     '#b8bb26';
@@ -25,6 +24,7 @@ const COLOR = (d) => d._children ? LG_GREEN : LG_YELLOW;
 function draw_tree(data) {
 
     data.children = data.children.filter((c)=> c.type != 'External dependency');
+
 
     const width = 928;
     const marginTop = 100;

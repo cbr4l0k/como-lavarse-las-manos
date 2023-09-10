@@ -62,11 +62,13 @@ class PromptHandler:
                                         |   |---sub_lib
                                         |       |---module.py
                                         |---file.py
-                                    6. DONT INVENT THINGS, IF THE CODE IS NOT IMPORTING SOMETHING DONT ADD IT AS DEPENDENCY. OTHERWISE 
-                                       YOU WILL BE PENALIZED, FIRED, AND YOUR FAMILY WILL BE ASHAMED OF YOU.
 
                                         and the file.py says: 'from lib.sub_lib import module', the dependency is internal and should be
                                         written as 'int/lib/sub_lib/module'.
+
+                                    6. DONT INVENT THINGS, IF THE CODE IS NOT IMPORTING SOMETHING DONT ADD IT AS DEPENDENCY. OTHERWISE 
+                                    YOU WILL BE PENALIZED, FIRED, AND YOUR FAMILY WILL BE ASHAMED OF YOU. for example, you can not import
+                                    your own class from the same file.
 
                                  give me the json only, give me a well formated json, be short and concise, don't forget,
                                  the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.
@@ -109,11 +111,13 @@ class PromptHandler:
                                         |   |---sub_lib
                                         |       |---module.py
                                         |---file.py
-                                    6. DONT INVENT THINGS, IF THE CODE IS NOT IMPORTING SOMETHING DONT ADD IT AS DEPENDENCY. OTHERWISE 
-                                       YOU WILL BE PENALIZED, FIRED, AND YOUR FAMILY WILL BE ASHAMED OF YOU.
 
                                         and the file.py says: 'from lib.sub_lib import module', the dependency is internal and should be
                                         written as 'int/lib/sub_lib/module'.
+
+                                    6. DONT INVENT THINGS, IF THE CODE IS NOT IMPORTING SOMETHING DONT ADD IT AS DEPENDENCY. OTHERWISE 
+                                    YOU WILL BE PENALIZED, FIRED, AND YOUR FAMILY WILL BE ASHAMED OF YOU. for example, you can not import
+                                    your own class from the same file.
 
                                     give me the json only, give me a well formated json, be short and concise, don't forget,
                                     the (int or ext)/lib structure, use the file tree as context. Maximum of 60 words as explaination.
@@ -189,6 +193,10 @@ class PromptHandler:
                                                     |   |---sub_lib
                                                     |       |---module.py
                                                     |---file.py
+
+                                                and the file.py says: 'from lib.sub_lib import module', the dependency is internal and should be
+                                                written as 'int/lib/sub_lib/module'.
+
                                                 6. DONT INVENT THINGS, IF THE CODE IS NOT IMPORTING SOMETHING DONT ADD IT AS DEPENDENCY. OTHERWISE 
                                                 YOU WILL BE PENALIZED, FIRED, AND YOUR FAMILY WILL BE ASHAMED OF YOU. for example, you can not import
                                                 your own class from the same file.

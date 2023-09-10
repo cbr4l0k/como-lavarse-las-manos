@@ -172,6 +172,6 @@ function draw_tree(data) {
 
 }
 
-fetch('../reports/filesreport_Arquitectura_09_08_21_05.json')
+fetch('../reports/filesreport_simpleModuleWithScreenRawMaticas_09_10_01_10.json')
     .then(response => response.json())
     .then(data => draw_tree(data[0]));

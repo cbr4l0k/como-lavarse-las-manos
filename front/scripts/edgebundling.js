@@ -19,26 +19,42 @@ const LG_AQUA =      '#8ec07c';
 const LG_GRAY =      '#a89984';
 const LG_ORANGE =    '#fe8019';
 
+const BLACKLIST =  [
+    // "int/abc",
+]
+
 function extractLeafNodes(tree) {
-    console.log(tree)
     const leafNodes = [];
     const leafConections = [];
 
     function traverse(node) {
-        // console.log(node);
-        if (!node.children || node.children.length === 0) {
-            const { full_path, ...newNode } = node;
-            const updatedNode = { ...newNode, id: full_path };
+        if ( !node.hasOwnProperty('dependencies')) {
+            if (node.type === "directory") {
+                for (const child of node.children) {
+                    traverse(child);
+                }
 
+            }
+            return;
+        }
+        if (!node.children || node.children.length === 0 ) {
+            if (node.type === "External dependency") {
+                node.id = node.name
+            }
 
-            const links = updatedNode.dependencies.map( elem =>{
-                return {
-                    source: full_path, target: elem
+            const links = node.dependencies.map( elem =>{
+                if (BLACKLIST.indexOf(elem) > -1) {
+                    return ;
+                } else {
+                    return {
+                        source: node.id , target: elem
+                    }
                 }
             });
             leafConections.push(...links);
-            leafNodes.push(updatedNode);
+            leafNodes.push(node);
             return;
+
         }
         for (const child of node.children) {
             traverse(child);
@@ -46,36 +62,27 @@ function extractLeafNodes(tree) {
     }
 
     traverse(tree);
-
-    return {
+    const obj = {
         nodes: leafNodes,
-        links: leafConections,
+        links: leafConections.filter(item => item !== undefined),
     };
+    return obj;
 }
 
 
 
-function draw_graph(data) {
-    // console.log(data);
-    // Random tree
-    const N = 100;
-    const gData = {
-      nodes: [...Array(N).keys()].map(i => ({
-          id: i,
-          times_called: Math.round(Math.random() * (i-1)),
-      })),
-      links: [...Array(N).keys()]
-        .filter(id => id)
-        .map(id => ({
-          source: id,
-          target: Math.round(Math.random() * (id-1))
-        }))
-    };
+function draw_graph(gData) {
+
 
     // cross-link node objects
     gData.links.forEach(link => {
-        const a = gData.nodes[link.source];
-        const b = gData.nodes[link.target];
+        const a = gData.nodes[gData.nodes.findIndex(item => {
+            return link.source === item.id;
+        })];
+        const b = gData.nodes[gData.nodes.findIndex(item => {
+            return link.target === item.id;
+        })];
+
         !a.neighbors && (a.neighbors = []);
         !b.neighbors && (b.neighbors = []);
         a.neighbors.push(b);
@@ -91,14 +98,15 @@ function draw_graph(data) {
     const highlightLinks = new Set();
     let hoverNode = null;
 
-    const Graph = ForceGraph3D({
-      times_called: [new CSS2DRenderer()]
-    })
-      (document.getElementById('container_eb'))
+    const container = document.getElementById('container_eb');
+
+    const Graph = ForceGraph3D({times_called:[new CSS2DRenderer()]})(container)
+        .width(800)
+        .height(300)
         .graphData(gData)
         .backgroundColor(DK_BG)
         .nodeVal('times_called')
-        .nodeLabel('id')
+        .nodeLabel('name')
         .nodeColor(node => highlightNodes.has(node) ? node === hoverNode ? LG_GREEN : LG_YELLOW : LG_GRAY)
         .linkWidth(link => highlightLinks.has(link) ? 4 : 1)
         .linkDirectionalParticles(link => highlightLinks.has(link) ? 4 : 0)
@@ -143,7 +151,7 @@ function draw_graph(data) {
 }
 
 
-fetch('../reports/filesreport_Arquitectura_09_08_21_05.json')
+fetch('../reports/filesreport_simpleModuleWithScreenRawMaticas_09_10_01_10.json')
     .then(res => res.json())
     .then(data => extractLeafNodes(data[0]))
-    .then(data => draw_graph(data));/**/
+    .then(data => draw_graph(data))

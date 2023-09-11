@@ -17,7 +17,11 @@ const LG_AQUA =      '#8ec07c';
 const LG_GRAY =      '#a89984';
 const LG_ORANGE =    '#fe8019';
 
-function draw_sun(data) {
+/**
+ * Function to draw a icicle chart.
+ * @param {Object} data - The data to be used for the chart.
+ */
+function draw_icicle(data) {
     // Specify the chart’s dimensions.
     const width = 650;
     const height = window.screen.availHeight * 0.75;
@@ -113,6 +117,8 @@ function draw_sun(data) {
         return d.y1 <= width && d.y0 >= 0 && d.x1 - d.x0 > 16;
     }
 }
+
+// Fetch the data and then draw the chart
 fetch('../reports/finalreport.json')
     .then(response => response.json())
-    .then(data => draw_sun(data[0]));
+    .then(data => draw_icicle(data[0]));

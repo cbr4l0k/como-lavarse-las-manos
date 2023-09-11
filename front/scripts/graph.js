@@ -23,6 +23,12 @@ const BLACKLIST =  [
     // "int/abc",
 ]
 
+/**
+ * This function traverses the provided tree structure and extracts leaf nodes.
+ * It also gathers connections between nodes.
+ * @param {Object} tree - The root of the tree to be traversed.
+ * @returns {Object} - An object containing an array of leaf nodes and their connections.
+ */
 function extractLeafNodes(tree) {
     const leafNodes = [];
     const leafConections = [];
@@ -71,6 +77,10 @@ function extractLeafNodes(tree) {
 
 
 
+/**
+ * This function uses the provided graph data to draw a 3D force graph.
+ * @param {Object} gData - Graph data containing nodes and their connections.
+ */
 function draw_graph(gData) {
 
 
@@ -157,7 +167,7 @@ function draw_graph(gData) {
 
 }
 
-
+// Fetch data from a JSON file, extract leaf nodes, and draw the graph
 fetch('../reports/finalreport.json')
     .then(res => res.json())
     .then(data => extractLeafNodes(data[0]))

@@ -17,9 +17,19 @@ const LG_AQUA =      '#8ec07c';
 const LG_GRAY =      '#a89984';
 const LG_ORANGE =    '#fe8019';
 
+/**
+ * Selects color based on whether the input object has children.
+ * @param {Object} d - The input object.
+ * @returns {string} The selected color.
+ */
 const COLOR = (d) => d._children ? LG_GREEN : LG_YELLOW;
 
 
+/**
+ * Provides a description for the input object
+ * @param {Object} d - The input object.
+ * @returns {string} The description of the input object.
+ */
 function descc(d) {
     if (d === undefined ) {
         return "Not a <u>python file</u> or <u>folder</u>!";
@@ -28,7 +38,10 @@ function descc(d) {
     }
 }
 
-
+/**
+ * Draws a tree visualization based on the input data.
+ * @param {Object} data - The data to be visualized.
+ */
 function draw_tree(data) {
 
     data.children = data.children.filter((c)=> c.type != 'External dependency');
@@ -180,6 +193,9 @@ function draw_tree(data) {
 
 }
 
+/**
+ * Fetches data from a JSON file and draws a tree visualization based on it.
+ */
 fetch('../reports/finalreport.json')
     .then(response => response.json())
     .then(data => draw_tree(data[0]));

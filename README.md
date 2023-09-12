@@ -15,7 +15,6 @@
 
 
 ## Table of contents
-- [Run project](#run-project)
 - [Requirements](#requirements)
 - [Installation and setup](#installation-and-setup)
     - [Enviroment variables](#environment-variables)

@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Formato Postulación</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ab006d82-c9d0-4b4b-bd42-f47db28e54e2" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📄</span></div><h1 class="page-title">Formato Postulación</h1><p class="page-description"></p></header><div class="page-body"><div id="b2734b51-6cf4-4d3f-8445-f44d13a4802e" class="column-list"><div id="60e447d2-2cbe-4ad2-b356-63410a28e32d" style="width:75%" class="column"><table id="d91b6b2e-eba2-4739-8b04-b6ba444b5536" class="simple-table"><tbody><tr id="17b9e709-be55-46e1-a7d7-8c48d04fb357"><th id="dkM&lt;" class="simple-table-header-color simple-table-header"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Nombre del proyecto</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></th><td id="VOuy" class="">Snoo.py</td></tr><tr id="189e7593-4443-4589-b339-67bca9acb582"><th id="dkM&lt;" class="simple-table-header-color simple-table-header"><strong><strong><strong><strong><strong><strong>Nombre del equipo</strong></strong></strong></strong></strong></strong></th><td id="VOuy" class="">Peppy</td></tr><tr id="df9208db-2e65-4019-870d-df45a17ef73d"><th id="dkM&lt;" class="simple-table-header-color simple-table-header"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Universidad</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></th><td id="VOuy" class="">Universidad del Rosario</td></tr><tr id="0717ba2b-f3c2-4ee2-9a14-a58d831b4834"><th id="dkM&lt;" class="simple-table-header-color simple-table-header"><strong><strong>Líder del equipo</strong></strong></th><td id="VOuy" class="">David Santiago Flórez Alsina</td></tr><tr id="92bca802-be80-43a8-9a98-aed47bdcc4fd"><th id="dkM&lt;" class="simple-table-header-color simple-table-header"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Correo electrónico (del lider)</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></th><td id="VOuy" class="">davidsa.florez@urosario.edu.co</td></tr><tr id="6320b260-8fdc-4520-be37-fa9a2d299c9c"><th id="dkM&lt;" class="simple-table-header-color simple-table-header"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Télefono de contacto (del lider)</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></th><td id="VOuy" class="">3212585695</td></tr></tbody></table><p id="65ee768b-7cfc-492a-8c1e-05c7c9fa5941" class="">
+</p></div><div id="fade8ea1-8600-4eb6-ae98-a5ff8301dd16" style="width:24.999999999999993%" class="column"><figure id="099931a1-43e7-41a4-85f7-afd810646518" class="image" style="text-align:center"><a href="download_(8).jpeg"><img style="width:512px" src="download_(8).jpeg"/></a></figure><p id="55355a7b-c4cd-42ca-a80c-db8f10b3ba12" class=""><code><em>Snoo.py</em></code><em> es nuestro fiel y leal amigo en nuestro camino 😃.</em></p></div></div><h2 id="f7f1463c-98b5-4589-810c-a8fd4417e8ac" class="">Integrantes del equipo</h2><table id="1765ba6f-a231-4d9f-b4d7-326c321a5e61" class="simple-table"><thead class="simple-table-header"><tr id="394e6158-3251-40ae-801a-745c4609c698"><th id="{A}]" class="simple-table-header-color simple-table-header" style="width:89px"><strong>Nombres</strong></th><th id="DDw}" class="simple-table-header-color simple-table-header" style="width:87px"><strong>Apellidos</strong></th><th id="&lt;gEB" class="simple-table-header-color simple-table-header" style="width:96.875px"><strong>Cédula </strong></th><th id="moM?" class="simple-table-header-color simple-table-header" style="width:104px"><strong>Universidad</strong></th><th id="fZ_E" class="simple-table-header-color simple-table-header" style="width:227px"><strong>Correos electrónicos</strong></th><th id="z~X]" class="simple-table-header-color simple-table-header" style="width:101px"><strong>Teléfono</strong></th><th id="H~:d" class="simple-table-header-color simple-table-header" style="width:73px"><strong>Talla de Camisa</strong></th></tr></thead><tbody><tr id="049600f0-adc8-4824-8dcd-0b093be68d41"><th id="{A}]" class="simple-table-header-color simple-table-header" style="width:89px">Isabela</th><td id="DDw}" class="" style="width:87px">Cáceres Palma</td><td id="&lt;gEB" class="" style="width:96.875px">1193473751</td><td id="moM?" class="" style="width:104px">Universidad del Rosario</td><td id="fZ_E" class="" style="width:227px">isabela.caceres@urosario.edu.co</td><td id="z~X]" class="" style="width:101px">3152277872</td><td id="H~:d" class="" style="width:73px">6XL</td></tr><tr id="829262cf-a359-4532-a28c-bf9f032c08a7"><th id="{A}]" class="simple-table-header-color simple-table-header" style="width:89px">Juan Pablo</th><td id="DDw}" class="" style="width:87px">Sierra Useche</td><td id="&lt;gEB" class="" style="width:96.875px">1020825806</td><td id="moM?" class="" style="width:104px">Universidad del Rosario</td><td id="fZ_E" class="" style="width:227px">juanpab.sierra@urosario.edu.co</td><td id="z~X]" class="" style="width:101px">3016536093</td><td id="H~:d" class="" style="width:73px">6XL</td></tr><tr id="403e56a8-387a-4e0d-b30a-027e2e237726"><th id="{A}]" class="simple-table-header-color simple-table-header" style="width:89px">Daniel </th><td id="DDw}" class="" style="width:87px">Leyva Castro</td><td id="&lt;gEB" class="" style="width:96.875px">1193575736</td><td id="moM?" class="" style="width:104px">Universidad del Rosario</td><td id="fZ_E" class="" style="width:227px">daniel.leyva@urosario.edu.co</td><td id="z~X]" class="" style="width:101px">3057111282</td><td id="H~:d" class="" style="width:73px">6XL</td></tr><tr id="a4dca483-3a25-495c-a555-9cf0537913bd"><th id="{A}]" class="simple-table-header-color simple-table-header" style="width:89px">David Santiago</th><td id="DDw}" class="" style="width:87px">Flórez Alsina</td><td id="&lt;gEB" class="" style="width:96.875px">1005061442</td><td id="moM?" class="" style="width:104px">Universidad del Rosario</td><td id="fZ_E" class="" style="width:227px">davidsa.florez@urosario.edu.co</td><td id="z~X]" class="" style="width:101px">3212585695</td><td id="H~:d" class="" style="width:73px">6XL</td></tr><tr id="47c551f7-8b8c-48e0-a355-c6600848df66"><th id="{A}]" class="simple-table-header-color simple-table-header" style="width:89px">Rodrigo</th><td id="DDw}" class="" style="width:87px">Castillo Camargo</td><td id="&lt;gEB" class="" style="width:96.875px">1022416224</td><td id="moM?" class="" style="width:104px">Universidad del Rosario</td><td id="fZ_E" class="" style="width:227px">rodrigo.castillo@urosario.edu.co</td><td id="z~X]" class="" style="width:101px">3152277872</td><td id="H~:d" class="" style="width:73px">6XL</td></tr></tbody></table><h1 id="e424ccf7-4266-4400-a02d-806ed0a373db" class="">Abstract</h1><p id="86b38ad1-e015-4c65-8eae-7cbe4be00f71" class="">La propuesta presentada aborda de manera efectiva desafíos críticos en la industria del desarrollo de software, como la escasa documentación, la complejidad de la arquitectura y la falta de uniformidad en la presentación de información. Al proporcionar un documento detallado y estructurado, que incluye un diagrama de arquitectura de software completo y actualizado, este proyecto ofrece una solución escalable y automatizada para empresas y desarrolladores. Con un enfoque basado en LLM&#x27;s, la propuesta permite una comprensión más clara y rápida de la estructura del software, facilitando la integración de nuevos desarrolladores y mejorando la colaboración entre equipos, impulsando así la eficiencia y la calidad en el desarrollo de proyectos tecnológicos.</p><h1 id="ee93c4a7-f554-41bd-8319-e7d0a30853d8" class="">Propuesta</h1><h2 id="caa51e20-ce6d-4aa9-9cdb-95ef51432828" class="">Historias de Usuario</h2><ul id="33b4baf4-574c-4a45-aec7-b687ae6a99a8" class="bulleted-list"><li style="list-style-type:disc">Un nuevo desarrollador llega a la empresa y debe trabajar en el código, sin documentación general, de un desarrollador que ya no trabaja en la empresa.</li></ul><ul id="ffc70c30-5259-4cdb-ac3e-87f37ff511aa" class="bulleted-list"><li style="list-style-type:disc">Se desea generar una refactorización del backend de la compañía, pero el código actual tiene altos niveles de &quot;<em>coupling</em>&quot;. Entender la estructura del backend es una tarea muy compleja en sí misma.</li></ul><ul id="db011d1c-57c9-4e08-a5f1-4d2b759587e8" class="bulleted-list"><li style="list-style-type:disc">El equipo de QA no tiene experiencia con la arquitectura de software que está utilizando el equipo de desarrollo. Sería útil que el equipo tuviera una visión general de cómo se estructura el proyecto.</li></ul><h2 id="ec098c47-58e0-4ba9-a93c-b05c42f42d6b" class="">Objetivo de Desarrollo</h2><p id="48c0d04a-29df-40af-a623-853ba15b26d2" class="">El objetivo de este proyecto es generar un documento (html) que describa de manera clara y concisa la arquitectura del sistema que se está documentando. Para lograr esto, se deben abordar las siguientes necesidades:</p><ol type="1" id="6424116e-2fca-412d-895c-8a2ee30161f9" class="numbered-list" start="1"><li>Identificación de los componentes principales: Se deben identificar los componentes clave del sistema, como módulos, subsistemas o capas. Estos componentes representarán las diferentes partes del software y su funcionalidad.</li></ol><ol type="1" id="80ad9e07-5c53-409f-a488-0662b938356a" class="numbered-list" start="2"><li>Definición de las relaciones y conexiones: Es importante describir las relaciones y conexiones existentes entre los componentes. Esto in<a href="https://www.educative.io/answers/what-is-the-astparse-method-in-python">https://www.educative.io/answers/what-is-the-astparse-method-in-python</a>cluye las conexiones de comunicación, las dependencias o las interacciones entre los módulos.</li></ol><ol type="1" id="82305651-32bb-4738-ae94-33744c97aee6" class="numbered-list" start="3"><li>Detalles de los componentes: Para cada componente, se deben agregar detalles importantes, como el nombre, la descripción y las funcionalidades principales que ofrece. Esto permitirá a los nuevos desarrolladores entender rápidamente cada componente y su propósito en el sistema.</li></ol><ol type="1" id="7124fdcf-00ea-4bb3-817a-8d6d25e49e77" class="numbered-list" start="4"><li>Base de datos y API: En caso de que el software utilice interfaces o una API para la comunicación entre componentes, se muestra claramente esta interacción en el diagrama. Además, si el proyecto implica una base de datos, se debe incluir el esquema correspondiente.</li></ol><ol type="1" id="8f4266e5-0c6e-4d29-a540-6d94c329b0ad" class="numbered-list" start="5"><li>Patrones arquitectónicos: Si el sistema sigue un patrón arquitectónico específico, como MVC o microservicios, es fundamental representar estos patrones en el diagrama. Esto ayudará a los nuevos desarrolladores a comprender la estructura general del sistema y cómo se organizan los diferentes componentes.</li></ol><ol type="1" id="95a439bb-405a-45a0-b79f-709f45eb1ecc" class="numbered-list" start="6"><li>Flujos de datos: Si es relevante para el sistema, se deben mostrar cómo fluyen los datos entre los componentes y cómo se manejan. Esto permitirá a los desarrolladores o equipos de QA comprender cómo interactúan los datos en el sistema y realizar pruebas más efectivas.</li></ol><p id="5988e930-f83c-4cb8-a91a-6d2d05d68a1f" class="">
+</p><h2 id="257f070f-b7d1-43a2-bd2b-c537b7733f23" class="">Inputs</h2><ol type="1" id="a9371748-2ec7-422d-9d06-b1cb9162eeac" class="numbered-list" start="1"><li>Requerimientos funcionales y no funcionales del proyecto, y restricciones.</li></ol><ol type="1" id="16e08f3a-bed9-491a-9cf2-e0af99b0696f" class="numbered-list" start="2"><li>Carpeta del software a analizar.</li></ol><ol type="1" id="41db90f5-494b-4dae-a264-6fd867b44f76" class="numbered-list" start="3"><li>Un <code>.fileignore</code>.</li></ol><ol type="1" id="2118b5ce-9aa3-4e20-9cac-4f89d0ede09c" class="numbered-list" start="4"><li>Opcional: qué arquitecturas están usando.</li></ol><p id="5e4241d5-0ea9-43af-ac2d-5d7495a3f829" class="">
+</p><h2 id="830df417-a868-4fb1-a145-41cbfdbcf46c" class="">1. ¿La propuesta está orientada con el objetivo planteado?</h2><p id="7f45c7d4-099d-4a02-ab50-cbe8278188b5" class="">Sí, nuestra propuesta está claramente orientada con el objetivo planteado de potencializar la realidad empresarial de la industria del desarrollo de software utilizando LLM&#x27;s . Para lograr este objetivo, la propuesta aborda varios desafíos comunes en el desarrollo de software relacionados con la falta de documentación, la complejidad de la arquitectura y la dificultad en el entendimiento del proyecto.</p><p id="69a93d5d-dab0-4fe5-8cb5-5da3d519681a" class="">Al proporcionar una documentación clara y estructurada, nuestro proyecto <code>snoo.py</code> aborda directamente los problemas planteados en las historias de usuario, como la llegada de un nuevo desarrollador sin documentación, la refactorización del backend y la falta de comprensión de la arquitectura por parte del equipo de QA, todas situaciones muy frecuentes en la industria.</p><p id="dfcd7733-5ebe-49d2-b26b-f9231637641e" class="">Además, esta es una herramienta que se puede correr múltiples veces contribuyendo a mantener las soluciones actualizadas sin consumir tiempo de los desarrolladores involucrados, dando una solución escalable y automatizada para las empresas y sus desarrolladores. Una ventaja extra que nuestra solución implica es que contribuye fuertemente a la estandarización de formatos de documentación, un problema latente en la industria.</p><h2 id="1b106835-6c4a-4c54-93d1-ac215e10f259" class="">2. ¿Resuelve un problema actual del desarrollo de software en la industria de la tecnología?</h2><p id="fa4c6ebb-fe4a-4456-866b-7ebced065fc8" class="">Sí, esta propuesta resuelve múltiples problemas actuales del desarrollo de software en la industria de la tecnología:</p><ol type="1" id="7c6a815f-33e4-4e12-b1b7-fbaecf7c982f" class="numbered-list" start="1"><li><strong>Documentación pobre</strong>: Uno de los problemas comunes en la industria de desarrollo de software es la falta de documentación adecuada. Con el alto ritmo en el que se desarrollan los proyectos y la concepción de la documentación como un entregable que no aporta mucho valor directo a la solución de objetivos, es común que la documentación quede rezagada. Esta propuesta busca abordar este problema proporcionando un documento de tipo markdown que incluye un diagrama de arquitectura de software bien estructurado y completo.</li></ol><ol type="1" id="0ec71f32-d34c-45c5-bb1a-47afe34aea3c" class="numbered-list" start="2"><li><strong>Documentación desactualizada</strong>: La falta de mantenimiento de la documentación puede conducir a que la información esté desactualizada y, como resultado, sea menos útil para el equipo de desarrollo y otros stakeholders. Al mantener el diagrama actualizado a medida que el sistema evoluciona y cambia con el tiempo, esta propuesta busca asegurar que la documentación esté siempre al día y refleje la versión más reciente del software.</li></ol><ol type="1" id="f35cda21-25cc-4031-acb9-4a752d4ee808" class="numbered-list" start="3"><li><strong>Falta de uniformidad en la documentación</strong>: La ausencia de estándares y guías para la documentación puede llevar a que cada proyecto tenga su propio estilo y formato, lo que dificulta la comprensión y mantenimiento del código para nuevos desarrolladores. Esta propuesta establece un formato y una estructura específica para el diagrama de arquitectura de software, lo que garantiza uniformidad en la presentación y facilita su comprensión para cualquier persona que lo vea.</li></ol><h2 id="2c0dcd30-fa05-4132-a262-cb966f175ba3" class="">Diagrama de flujo del proceso de solución e infraestructura</h2><p id="82259778-7478-42a5-87f3-ece1e8ea0f50" class="">
+</p><figure id="82171388-1098-4d68-b5ff-54fd4d477006" class="image"><a href="Formato%20Postulacio%CC%81n%20ab006d82c9d04b4bbd42f47db28e54e2/solucion.png"><img style="width:672px" src="Formato%20Postulacio%CC%81n%20ab006d82c9d04b4bbd42f47db28e54e2/solucion.png"/></a></figure><p id="e49de0cb-506e-4cb8-bd80-14583ce8e58f" class="">
+</p><h2 id="01ed8146-ba9f-4791-9758-638a82adc5c4" class="">Herramientas a usar y justificación</h2><p id="7754cffd-9156-442f-9bf3-88f1c13fe8d3" class="">Nuestra propuesta se basa en utilizar Python3 y la API de ChatGPT como las herramientas principales para abordar los desafíos relacionados con la generación de documentación para proyectos de desarrollo. Python3 nos proporciona un lenguaje de programación versátil y de fácil uso, mientras que la API de ChatGPT aprovecha la inteligencia artificial para generar automáticamente una documentación clara y concisa. Esta combinación nos permitirá procesar los requisitos del proyecto, analizar la estructura del software y generar un documento actualizado, abordando así los problemas de falta de documentación, complejidad de la arquitectura y comprensión del proyecto.</p><p id="66e7b3d1-b3a0-4879-8fda-65201c3bd168" class="">
+</p></div></article></body></html>

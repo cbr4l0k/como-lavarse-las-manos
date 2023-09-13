@@ -52,10 +52,9 @@ function extractLeafNodes(tree) {
                 if (BLACKLIST.indexOf(elem) > -1) {
                     return ;
                 } else {
-                    const D = {
+                    return {
                         target: node.id , source: elem
-                    }
-                    return D;
+                    };
                 }
             });
             leafConections.push(...links);

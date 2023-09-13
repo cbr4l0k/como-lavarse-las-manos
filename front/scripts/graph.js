@@ -52,9 +52,11 @@ function extractLeafNodes(tree) {
                 if (BLACKLIST.indexOf(elem) > -1) {
                     return ;
                 } else {
-                    return {
-                        source: node.id , target: elem
+                    const D = {
+                        target: node.id , source: elem
                     }
+                    // console.log(D);
+                    return D;
                 }
             });
             leafConections.push(...links);
@@ -90,10 +92,10 @@ function draw_graph(gData) {
             return link.source === item.id;
         })];
         const b = gData.nodes[gData.nodes.findIndex(item => {
-            console.log(`${link.target} === ${item.id} => ${link.target === item.id}`)
+            // console.log(`${link.target} === ${item.id} => ${link.target === item.id}`)
             return link.target === item.id;
         })];
-        console.log(b)
+        // console.log(b)
 
         !a.neighbors && (a.neighbors = []);
         !b.neighbors && (b.neighbors = []);
@@ -114,8 +116,8 @@ function draw_graph(gData) {
 
     const height = window.screen.availHeight * 0.41;
     const width = window.screen.availWidth * 0.59;
-    console.log(width)
-    console.log(`${width} x ${height}`)
+    // console.log(width)
+    // console.log(`${width} x ${height}`)
 
     const Graph = ForceGraph3D({times_called:[new CSS2DRenderer()]})(container)
         .width(width)
@@ -146,7 +148,7 @@ function draw_graph(gData) {
         })
         .onLinkHover(link => {
             highlightNodes.clear();
-            highlightLinks.clear();
+             highlightLinks.clear();
 
             if (link) {
                 highlightLinks.add(link);

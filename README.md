@@ -1,3 +1,6 @@
+
+<img src=".docs/logo.jpeg"></img>
+
 # Snoo.py
 
 
